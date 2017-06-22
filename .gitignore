@@ -1,0 +1,8 @@
+# Editor Working Files #
+*.*.swp
+
+# Python Compilation Cache #
+__pycache__/*
+
+# Vim Plugin Downloads (Managed by vim-plug)
+*.vim/plugged/*
