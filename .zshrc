@@ -103,7 +103,7 @@ alias reload="source ~/.zshrc"
 
 # Grep Aliases
 alias grep="grep -inT"
-alias grepc="grep -color=always"
+alias grepc="grep -color=auto"
 alias grepx="grep -C 2"
 
 # Navigation Aliases
