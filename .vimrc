@@ -52,6 +52,8 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
             \   '<Plug>ZVKeyDocset',
             \   '<Plug>ZVMotion'
             \ ]}
+Plug 'bagrat/vim-workspace'
+Plug 'ryanoasis/vim-devicons' "needs nerd-fonts-complete (inconsolataGo NerdFont)
 
 call plug#end()
 
@@ -460,4 +462,10 @@ autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
 " ASM Specific Options
 autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
+
+" Options for Vim-Workspace
+"let g:workspace_powerline_separators = 1
+"let g:workspace_tab_icon = "\uf00a"
+"let g:workspace_left_trunc_icon = "\uf0a8"
+"let g:workspace_right_trunc_icon = "\uf0a9"
 
