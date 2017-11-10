@@ -126,11 +126,8 @@ function redisp() {
     fi
 }
 
-# Clock Utility Functions
-function clock() {
-    sudo systemctl stop ntpd;
-    sudo systemctl start ntpd;
-}
+# PATH Changes
+export PATH=/home/ara/bin/:$PATH
 
 # Dircolors
 eval `dircolors ~/.dotfiles/dircolors-solarized/dircolors.256dark`
@@ -164,3 +161,4 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
