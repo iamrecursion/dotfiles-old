@@ -55,6 +55,8 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
 Plug 'bagrat/vim-workspace'
 Plug 'ryanoasis/vim-devicons' "needs nerd-fonts-complete (inconsolataGo NerdFont)
 
+" vim-dispatch
+
 call plug#end()
 
 " Helper Functions for Vim-Plug
