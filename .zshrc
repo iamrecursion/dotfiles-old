@@ -165,4 +165,5 @@ bindkey '^Z' fancy-ctrl-z
 
 # Setup SSH Agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+eval $(keychain --eval --noask ~/.ssh/ara_key)
 
