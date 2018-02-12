@@ -127,7 +127,8 @@ function redisp() {
 }
 
 # PATH Changes
-export PATH=/home/ara/bin/:$PATH
+export PATH=/home/ara/.local/bin:$PATH
+export PATH=/home/ara/bin:$PATH
 
 # Dircolors
 eval `dircolors ~/.dotfiles/dircolors-solarized/dircolors.256dark`

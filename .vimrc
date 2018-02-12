@@ -26,7 +26,6 @@ Plug 'jceb/vim-orgmode'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'christoomey/vim-tmux-navigator'
 "Plug 'vim-scripts/YankRing.vim'
-Plug 'eagletmt/ghcmod-vim'
 Plug 'b4winckler/vim-angry'
 Plug 'eagletmt/neco-ghc'
 Plug 'vimwiki/vimwiki'
@@ -54,8 +53,11 @@ Plug 'KabbAmine/zeavim.vim', {'on': [
             \ ]}
 Plug 'bagrat/vim-workspace'
 Plug 'ryanoasis/vim-devicons' "needs nerd-fonts-complete (inconsolataGo NerdFont)
+Plug 'tpope/vim-dispatch'
+Plug 'shougo/deoplete.nvim'
+Plug 'neovimhaskell/haskell-vim'
 
-" vim-dispatch
+Plug '/parsonsmatt/intero-neovim'
 
 call plug#end()
 
