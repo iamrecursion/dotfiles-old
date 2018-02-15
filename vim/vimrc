@@ -136,7 +136,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Paste Improvements
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
-nnoremap <silent> p p`]
 
 " Folding Configuration
 set foldmethod=manual
