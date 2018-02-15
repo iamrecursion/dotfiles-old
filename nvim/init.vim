@@ -5,6 +5,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -202,4 +209,28 @@ let g:airline_theme='molokai'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extentions#tabline#fnamemod=":t"
+
+" Vim-Easymotion Configuration
+nmap s <Plug>(easymotion-s)
+
+" Incsearch Configuration
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+function! s:config_easyfuzzymotion(...) abort
+return extend(copy({
+\   'converters': [incsearch#config#fuzzy#converter()],
+\   'modules': [incsearch#config#easymotion#module()],
+\   'keymap': {"\<CR>": '<Over>(easymotion)'},
+\   'is_expr': 0,
+\   'is_stay': 1
+\ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+map f/ <Plug>(incsearch-fuzzy-/)
+map f? <Plug>(incsearch-fuzzy-?)
+map fg/ <Plug>(incsearch-fuzzy-stay)
 
