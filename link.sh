@@ -6,18 +6,18 @@ status_prefix="INFO >>";
 # General Stuff
 echo "$status_prefix Linking user configuration"
 
-ln -s ~/.dotfiles/.profile ~/.profile
+ln -sf ~/.dotfiles/user_config/profile ~/.profile
 
 # Zsh Stuff
 echo "$status_prefix Linking ZSH configuration"
 
-ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -sf ~/.dotfiles/zsh_config/zshrc ~/.zshrc
 
 # Bash Stuff
 echo "$status_prefix Linking Bash configuration"
 
-ln -s ~/.dotfiles/.bashrc ~/.bashrc
-ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
+ln -sf ~/.dotfiles/bash_config/bashrc ~/.bashrc
+ln -sf ~/.dotfiles/bash_config/bash_profile ~/.bash_profile
 
 # Neovim Stuff
 echo "$status_prefix Linking Neovim configuration"
@@ -30,35 +30,33 @@ if [ ! -d  "$nvimrc_dir" ]; then
     mkdir -p "$nvimrc_dir"
 fi
 
-ln -s ~/.dotfiles/nvim/init.vim "$nvimrc_dir"/init.vim
+ln -sf ~/.dotfiles/nvim/init.vim "$nvimrc_dir"/init.vim
 
 if [ ! -d "$nvim_plugs_dir" ]; then
     echo "$status_prefix Creating directory "$nvim_plugs_dir" for Nvim plugins";
     mkdir -p "$nvim_plugs_dir"
 fi
 
-ln -s ~/.dotfiles/nvim/autoload "$nvim_plugs_dir"/autoload
+ln -sf ~/.dotfiles/nvim/autoload "$nvim_plugs_dir"/autoload
 
 # Vim Stuff
 echo "$status_prefix Linking Vim configuration"
 
-ln -s ~/.dotfiles/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/vim ~/.vim
-echo ~/.dotfiles/.vim/
-echo ~/.vim/
+ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 
-# Emacs Stuff
-echo "$status_prefix Linking Emacs configuration"
+vim_dir=~/.vim
 
-ln -s ~/.dotfiles/.emacs.d ~/.emacs.d/
+if [ ! -e "$vim_dir" ]; then
+    ln -s ~/.dotfiles/vim/vimplug ~/.vim
+fi
 
 # Tmux Stuff
 echo "$status_prefix Linking Tmux configuration"
 
-ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/tmux_config/tmux.conf ~/.tmux.conf
 
 # GDB Init
 echo "$status_prefix Linking GDB Configuration"
 
-ln -s ~/.dotfiles/.gdbinit ~/.gdbinit
+ln -sf ~/.dotfiles/tool_config/gdbinit ~/.gdbinit
 

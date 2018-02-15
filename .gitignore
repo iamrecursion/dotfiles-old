@@ -9,5 +9,5 @@ __pycache__/*
 *neovim/plugins/.netrwhist
 
 # Vim Plugin Downloads (Managed by vim-plug)
-*vim/plugged/*
+*vim/vimplug/plugged/*
 *vim/.netrwhist

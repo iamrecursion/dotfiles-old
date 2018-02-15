@@ -1,21 +1,18 @@
 [submodule "zplug"]
-	path = zplug
+	path = modules/zplug
 	url = https://github.com/zplug/zplug.git
 [submodule "vim-plug"]
-	path = vim-plug
+	path = modules/vim-plug
 	url = https://github.com/junegunn/vim-plug.git
 [submodule "tpm"]
-	path = tpm
+	path = modules/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "spacemacs"]
-	path = spacemacs
-	url = https://github.com/syl20bnr/spacemacs.git
 [submodule "dircolors-solarized"]
-	path = dircolors-solarized
+	path = modules/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
 [submodule "zsh-autosuggestions"]
-	path = zsh-autosuggestions
+	path = modules/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "gdb-dashboard"]
-	path = gdb-dashboard
+	path = modules/gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard.git
