@@ -1,18 +1,18 @@
-[submodule "zplug"]
-	path = modules/zplug
-	url = https://github.com/zplug/zplug.git
-[submodule "vim-plug"]
-	path = modules/vim-plug
-	url = https://github.com/junegunn/vim-plug.git
-[submodule "tpm"]
-	path = modules/tpm
-	url = https://github.com/tmux-plugins/tpm.git
-[submodule "dircolors-solarized"]
+[submodule "modules/dircolors-solarized"]
 	path = modules/dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized.git
-[submodule "zsh-autosuggestions"]
-	path = modules/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "gdb-dashboard"]
+	url = https://github.com/seebi/dircolors-solarized
+[submodule "modules/gdb-dashboard"]
 	path = modules/gdb-dashboard
-	url = https://github.com/cyrus-and/gdb-dashboard.git
+	url = https://github.com/cyrus-and/gdb-dashboard
+[submodule "modules/tpm"]
+	path = modules/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "modules/vim-plug"]
+	path = modules/vim-plug
+	url = https://github.com/junegunn/vim-plug
+[submodule "modules/zplug"]
+	path = modules/zplug
+	url = https://github.com/zplug/zplug
+[submodule "modules/zsh-autosuggestions"]
+	path = modules/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
