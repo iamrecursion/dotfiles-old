@@ -23,7 +23,7 @@ ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 echo "$status_prefix Linking Neovim configuration"
 
 nvimrc_dir=~/.config/nvim/
-nvim_plugs_dir=~/.local/share/nvim/
+nvim_plugs_dir=~/.local/share/nvim/site/
 
 if [ ! -d  "$nvimrc_dir" ]; then
     echo "$status_prefix Creating directory "$nvimrc_dir" for Nvim configuration";
@@ -37,7 +37,7 @@ if [ ! -d "$nvim_plugs_dir" ]; then
     mkdir -p "$nvim_plugs_dir"
 fi
 
-ln -s ~/.dotfiles/nvim/plugins "$nvim_plugs_dir"
+ln -s ~/.dotfiles/nvim/autoload "$nvim_plugs_dir"/autoload
 
 # Vim Stuff
 echo "$status_prefix Linking Vim configuration"

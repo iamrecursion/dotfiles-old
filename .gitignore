@@ -4,6 +4,10 @@
 # Python Compilation Cache #
 __pycache__/*
 
+# Neovim Plugin Downloads
+*neovim/plugins/plugged/
+*neovim/plugins/.netrwhist
+
 # Vim Plugin Downloads (Managed by vim-plug)
 *vim/plugged/*
 *vim/.netrwhist
