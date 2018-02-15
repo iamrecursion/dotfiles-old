@@ -94,6 +94,7 @@ export PAGER="less -R"
 
 # Vim Configuration
 alias vimrc="vim ~/.vimrc"
+alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias vi="vim"
 
 # Generic Utility Aliases
