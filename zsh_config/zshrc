@@ -15,9 +15,13 @@ file_being_sourced=$?
 source ~/.dotfiles/modules/zplug/init.zsh
 
 # Load Plugins (Handling some Crashes)
-zplug "zsh-users/zsh-syntax-highlighting", defer:1, if:"[[ $file_being_sourced != 0 ]]"
-zplug "zsh-users/zsh-history-substring-search", use:"./zsh-history-substring-search.zsh", on:"zsh-users/zsh-syntax-highlighting", if:"[[ $file_being_sourced != 0 ]]"
-zplug "~/.dotfiles/modules/zsh-autosuggestions", from:local, use:"./zsh-autosuggestions.zsh", defer:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:1, \
+    if:"[[ $file_being_sourced != 0 ]]"
+zplug "zsh-users/zsh-history-substring-search", \
+    use:"./zsh-history-substring-search.zsh", \
+    on:"zsh-users/zsh-syntax-highlighting", if:"[[ $file_being_sourced != 0 ]]"
+zplug "~/.dotfiles/modules/zsh-autosuggestions", from:local, \
+    use:"./zsh-autosuggestions.zsh", defer:2
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/compleat", from:oh-my-zsh
@@ -26,9 +30,12 @@ zplug "hchbaw/zce.zsh", from:github, use:"./zce.zsh"
 zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
 zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
 zplug "psprint/ztrace", from:github, use:"./ztrace.plugin.zsh"
-#zplug "psprint/zsh-editing-workbench", from:github, use:"./zsh-editing-workbench.plugin.zsh"
-#zplug "psprint/zsh-navigation-tools", from:github, use:"./zsh-navigation-tools.plugin.zsh"
-#zplug "psprint/zsh-cmd-architect", from:github, use:"./zsh-cmd-architect.plugin.zsh"
+#zplug "psprint/zsh-editing-workbench", from:github, \
+    #use:"./zsh-editing-workbench.plugin.zsh"
+#zplug "psprint/zsh-navigation-tools", from:github, \
+    #use:"./zsh-navigation-tools.plugin.zsh"
+#zplug "psprint/zsh-cmd-architect", from:github, \
+    #use:"./zsh-cmd-architect.plugin.zsh"
 zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
 zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
 
@@ -93,15 +100,18 @@ export EDITOR=nvim
 export PAGER="less -R"
 
 # Vim Configuration
-alias vimrc="vim ~/.vimrc"
-alias nvimrc="nvim ~/.config/nvim/init.vim"
+alias vimrc="vim ~/.dotfiles/vim/vimrc"
+alias nvimrc="nvim ~/.dotfiles/nvim/init.vim"
 alias vi="vim"
 alias nvi="nvim"
 
+# Tmux Configuration
+alias tmuxconf="nvim ~/.dotfiles/tmux_config/tmux.conf"
+
 # Generic Utility Aliases
 alias nettest="ping 8.8.8.8"
-alias zshrc="vim ~/.zshrc"
-alias reload="source ~/.zshrc"
+alias zshrc="nvim ~/.dotfiles/zsh_config/zshrc"
+alias reload="source ~/.dotfiles/zsh_config/zshrc"
 
 # Grep Aliases
 alias grep="grep -inT"
@@ -170,5 +180,3 @@ bindkey '^Z' fancy-ctrl-z
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 eval $(keychain --eval ~/.ssh/ara_key)
 
-
-export PATH=/home/ara/.local/bin/luna-studio:$PATH
