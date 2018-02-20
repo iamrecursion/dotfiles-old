@@ -89,7 +89,7 @@ source /usr/share/fzf/completion.zsh
 export TZ="Europe/London"
 
 # Basic Tool Setup
-export EDITOR=vim
+export EDITOR=nvim
 export PAGER="less -R"
 
 # Vim Configuration
@@ -131,6 +131,7 @@ function redisp() {
 # PATH Changes
 export PATH=/home/ara/.local/bin:$PATH
 export PATH=/home/ara/bin:$PATH
+export PATH=/home/ara/.gem/ruby/2.5.0/bin:$PATH
 
 # Dircolors
 eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
@@ -169,3 +170,5 @@ bindkey '^Z' fancy-ctrl-z
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 eval $(keychain --eval ~/.ssh/ara_key)
 
+
+export PATH=/home/ara/.local/bin/luna-studio:$PATH
