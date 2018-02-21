@@ -87,11 +87,11 @@ set scrolloff=10
 set wrap
 
 " Colour Schemes for Vim
-set t_Co=16
-syntax enable
-set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
+ set t_Co=16
+ syntax enable
+ set background=dark
+ let g:solarized_termtrans=1
+ colorscheme solarized
 
 " Font
 if has('unix')
@@ -135,7 +135,6 @@ set spell spelllang=en_gb
 
 " Undo Configuration
 if has("persistent_undo")
-    set undodir='~/.undodir/'
     set undofile
     set undolevels=1000
     set undoreload=10000
@@ -183,7 +182,8 @@ set wildmode=longest,list,full
 set wildmenu
 
 " Program Title String
-set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
+set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\
+            \%{v:servername}
 
 " Terminal Mode Changes
 tnoremap <C-h> <C-\><C-n><C-w>h
