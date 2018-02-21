@@ -106,12 +106,12 @@ alias vi="vim"
 alias nvi="nvim"
 
 # Tmux Configuration
-alias tmuxconf="nvim ~/.dotfiles/tmux_config/tmux.conf"
+alias tmuxconf="nvim ~/.dotfiles/tmux/tmux.conf"
 
 # Generic Utility Aliases
 alias nettest="ping 8.8.8.8"
-alias zshrc="nvim ~/.dotfiles/zsh_config/zshrc"
-alias reload="source ~/.dotfiles/zsh_config/zshrc"
+alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
+alias reload="source ~/.dotfiles/zsh/zshrc"
 
 # Grep Aliases
 alias grep="grep -inT"
