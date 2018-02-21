@@ -43,7 +43,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'parsonsmatt/intero-neovim', { 'do': 'stack install intero hdevtools' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'rust-lang/rust.vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -62,6 +61,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/vim-task-org'
 " Plug 'vim-syntastic/syntastic'
+
+" Non-Alphabetical as Load-Order Dependent
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -90,6 +92,13 @@ syntax enable
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
+
+" Font
+if has('unix')
+    set guifont=InconsolataGo\ Nerd\ Font\ Mono\ 12
+else
+    set guifont=InconsolataGo_Nerd_Font_Mono:h12
+endif
 
 " Splits Control
 set splitright
@@ -161,7 +170,7 @@ let g:python3_host_prog = '/usr/bin/python'
 set incsearch
 set hlsearch
 nnoremap <leader><space> :nohlsearch<CR>
-command H let @/=""
+command! H let @/=""
 nmap <space> zz
 nmap n nzz
 nmap N Nzz
@@ -205,10 +214,10 @@ function! FixSwap()
     set swapfile
 endfunction
 
-command FixSwap call FixSwap()
+command! FixSwap call FixSwap()
 
 " Reload Vim Configuration
-command Reload :so %
+command! Reload :so %
 
 " Prevent visual paste from overwriting paste buffer
 function! RestoreRegister()
@@ -250,12 +259,13 @@ endfun
 
 let blacklist = ['markdown', 'ruby', 'perl', 'javascript']
 
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * if index(blacklist, &ft) < 0 |
+            \:call <SID>StripTrailingWhitespaces()
 
 " Visual Range Selection by Typing
 command! -range Vis call setpos('.', [0,<line1>,0,0]) |
-                    \ exe "normal V" |
-                    \ call setpos('.', [0,<line2>,0,0])
+            \ exe "normal V" |
+            \ call setpos('.', [0,<line2>,0,0])
 
 " FILETYPE SPECIFIC OPTIONS ===================================================
 
@@ -331,7 +341,8 @@ augroup InteroMaps
     au BufWritePost *.hs InteroReload
 
     " Load individual modules
-    au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
+    au FileType haskell nnoremap <silent> <leader>il
+                \:InteroLoadCurrentModule<CR>
     au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
 
     " Type-related information
@@ -596,4 +607,12 @@ nmap gxx <Plug>(neoterm-repl-send-line)
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
+
+" Vim-Devicons Configuration
+let g:webdevicons_enable = 1
+
+let g:webdevicons_enable_denite = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_nerdtree = 1
 
