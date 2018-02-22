@@ -85,6 +85,7 @@ set smartindent
 set scrolloff=10
 set wrap
 set cursorline
+set cursorcolumn
 
 " Colour Schemes for Vim
  set t_Co=16
