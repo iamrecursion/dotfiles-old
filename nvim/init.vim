@@ -17,32 +17,32 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
-Plug 'alx741/vim-hindent', { 'do': 'stack install hindent' }
-Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell' }
+Plug 'alx741/vim-hindent', { 'do': 'stack install hindent', 'for': 'haskell' }
+Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell', 'for': 'haskell'}
 " Plug 'BurningEther/nvimux'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport' }
-Plug 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc', { 'do': 'stack install ghc-mod' }
+Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport', 'for': 'haskell'}
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'do': 'stack install ghc-mod', 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'idris-hackers/idris-vim'
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
-Plug 'mpickering/hlint-refactor-vim', { 'do': 'stack install hlint' }
+Plug 'mpickering/hlint-refactor-vim', { 'do': 'stack install hlint', 'for': 'haskell'}
 Plug 'neomake/neomake'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'parsonsmatt/intero-neovim', { 'do': 'stack install intero hdevtools' }
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'parsonsmatt/intero-neovim', { 'do': 'stack install intero hdevtools', 'for': 'haskell' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -60,7 +60,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/vim-task-org'
-" Plug 'vim-syntastic/syntastic'
 
 " Non-Alphabetical as Load-Order Dependent
 Plug 'ryanoasis/vim-devicons'
@@ -85,6 +84,7 @@ set autoindent
 set smartindent
 set scrolloff=10
 set wrap
+set cursorline
 
 " Colour Schemes for Vim
  set t_Co=16
@@ -512,11 +512,6 @@ let g:cabal_indent_section = 2
 " Denite.vim Configuration
 nnoremap <leader>e :Denite buffer<CR,
 nnoremap <C-p> :Denite buffer file_rec directory_rec line register<CR>
-
-" Syntastic Configuration
-let g:syntastic_aggregate_errors = 1
-
-let g:syntastic_haskell_checkers = []
 
 " Neomake Configuration
 call neomake#configure#automake('w')
