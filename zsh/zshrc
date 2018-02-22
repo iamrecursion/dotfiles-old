@@ -138,6 +138,12 @@ function redisp() {
     fi
 }
 
+# Mkdir Utility Function
+function mkcd() {
+    mkdir -p $1;
+    cd $1
+}
+
 # PATH Changes
 export PATH=/home/ara/.local/bin:$PATH
 export PATH=/home/ara/bin:$PATH
