@@ -80,7 +80,6 @@ set pumheight=10
 set ai
 set sw=4
 imap <S-Tab> <BS>
-set et
 set tabstop=4
 set softtabstop=4
 set expandtab
@@ -515,8 +514,74 @@ let g:haskell_indent_guard = 2
 let g:cabal_indent_section = 2
 
 " Denite.vim Configuration
-nnoremap <leader>e :Denite buffer<CR,
-nnoremap <C-p> :Denite buffer file_rec directory_rec line register<CR>
+augroup deniteresize
+  autocmd!
+  autocmd VimResized,VimEnter * call denite#custom#option('default',
+        \{'winheight': winheight(0) / 3})
+augroup end
+
+call denite#custom#option('default', {'winheight': winheight(0)/4})
+
+call denite#custom#option('default', {
+            \ 'prompt': '❯'
+            \ })
+
+call denite#custom#map(
+            \'insert',
+            \'<Esc>',
+            \'<denite:enter_mode:normal>',
+            \'noremap'
+            \)
+call denite#custom#map(
+            \'normal',
+            \'<Esc>',
+            \'<NOP>',
+            \'noremap'
+            \)
+call denite#custom#map(
+            \'insert',
+            \'<C-v>',
+            \'<denite:do_action:vsplit>',
+            \'noremap'
+            \)
+call denite#custom#map(
+            \'normal',
+            \'<C-v>',
+            \'<denite:do_action:vsplit>',
+            \'noremap'
+            \)
+call denite#custom#map(
+            \'normal',
+            \'dw',
+            \'<denite:delete_word_after_caret>',
+            \'noremap'
+            \)
+call denite#custom#map(
+            \ 'insert',
+            \ '<C-j>',
+            \ '<denite:move_to_next_line>',
+            \ 'noremap'
+            \)
+call denite#custom#map(
+            \ 'insert',
+            \ '<C-k>',
+            \ '<denite:move_to_previous_line>',
+            \ 'noremap'
+            \)
+
+call denite#custom#var('file_rec', 'command',
+            \ ['rg', '--files', '--glob', '!.git', '.'])
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts',
+            \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+nnoremap <leader>e :Denite buffer<CR>
+nnoremap <C-p> :Denite buffer file_rec directory_rec<CR>
+nnoremap <C-o> :Denite buffer line register<CR>
 
 " Neomake Configuration
 call neomake#configure#automake('w')
@@ -555,7 +620,6 @@ augroup IdrisMaps
                 \IdrisShowDoc()<CR>
     au FileType idris nnoremap <silent> <leader>ii :call IdrisResponseWin()<CR>
     au FileType idris nnoremap <silent> <leader>ir :call IdrisReload()<CR>
-
     " Interactive Editing
     au FileType idris nnoremap <silent> <leader>it :call IdrisShowType()<CR>
     au FileType idris nnoremap <silent> <leader>is :call IdrisCaseSplit()<CR>
