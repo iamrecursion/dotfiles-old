@@ -18,7 +18,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
 Plug 'alx741/vim-hindent', { 'do': 'stack install hindent', 'for': 'haskell' }
-Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell', 'for': 'haskell'}
+Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell',
+            \'for': 'haskell'}
 " Plug 'BurningEther/nvimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport', 'for': 'haskell'}
@@ -36,11 +37,14 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
-Plug 'mpickering/hlint-refactor-vim', { 'do': 'stack install hlint', 'for': 'haskell'}
+Plug 'mpickering/hlint-refactor-vim', { 'do': 'stack install hlint',
+            \'for': 'haskell'}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'parsonsmatt/intero-neovim', { 'do': 'stack install intero hdevtools', 'for': 'haskell' }
+Plug 'parsonsmatt/intero-neovim',
+            \{ 'do': 'stack build intero; stack install hdevtools',
+            \'for': 'haskell' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
