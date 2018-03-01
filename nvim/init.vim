@@ -30,6 +30,7 @@ Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'idanarye/vim-vebugger'
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
@@ -57,6 +58,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-surround'
 Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'vimwiki/vimwiki'
@@ -482,7 +484,7 @@ let g:ycm_auto_start_csharp_server = 1
 let g:ycm_auto_stop_csharp_server = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_max_diagnostics_to_display = 50
-let g:ycm_key_detailed_diagnostics = '<leader>d'
+let g:ycm_key_detailed_diagnostics = '<leader>yd'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_use_utilsnips_completer = 0
 
@@ -684,4 +686,10 @@ let g:webdevicons_enable_denite = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_nerdtree = 1
+
+" Vebugger Configuration
+let g:vebugger_leader='<leader>d'
+
+" Projectionist Configuration
+autocmd User ProjectionistActivate :Cd
 
