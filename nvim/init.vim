@@ -692,4 +692,3 @@ let g:vebugger_leader='<leader>d'
 
 " Projectionist Configuration
 autocmd User ProjectionistActivate :Cd
-
