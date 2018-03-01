@@ -126,6 +126,9 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" Clipboard
+set clipboard=unnamed
+
 " Leader Configuration
 let mapleader=","
 set timeout timeoutlen=1000
@@ -270,6 +273,8 @@ autocmd BufWritePre * if index(blacklist, &ft) < 0 |
 command! -range Vis call setpos('.', [0,<line1>,0,0]) |
             \ exe "normal V" |
             \ call setpos('.', [0,<line2>,0,0])
+
+command! Ses :source Session.vim
 
 " FILETYPE SPECIFIC OPTIONS ===================================================
 
@@ -580,7 +585,7 @@ call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
 nnoremap <leader>e :Denite buffer<CR>
-nnoremap <C-p> :Denite buffer file_rec directory_rec<CR>
+nnoremap <C-p> :Denite file_rec <CR>
 nnoremap <C-o> :Denite buffer line register<CR>
 
 " Neomake Configuration

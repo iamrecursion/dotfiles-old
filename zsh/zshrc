@@ -118,6 +118,12 @@ alias grep="grep -inT"
 alias grepc="grep -color=auto"
 alias grepx="grep -C 2"
 
+# Recursive grep utility: `grepr [File Pattern] [Pattern]`
+function grepr() {
+    # grep -r --include $1 "$2" .
+    grep -r --include $1 $2 .
+}
+
 # Navigation Aliases
 alias ll="ls -lh --color --group-directories-first"
 alias lll="ls -lah --color --group-directories-first"
