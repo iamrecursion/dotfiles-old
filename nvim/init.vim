@@ -589,6 +589,7 @@ call denite#custom#var('grep', 'final_opts', [])
 nnoremap <leader>e :Denite buffer<CR>
 nnoremap <C-p> :Denite file_rec <CR>
 nnoremap <C-o> :Denite buffer line register<CR>
+nnoremap <C-i> :Denite grep <CR>
 
 " Neomake Configuration
 call neomake#configure#automake('w')
