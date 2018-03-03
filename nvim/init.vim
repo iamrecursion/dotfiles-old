@@ -43,6 +43,7 @@ Plug 'mpickering/hlint-refactor-vim', { 'do': 'stack install hlint',
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'Olical/vim-enmasse'
 Plug 'parsonsmatt/intero-neovim',
             \{ 'do': 'stack build intero; stack install hdevtools',
             \'for': 'haskell' }
@@ -53,7 +54,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-expand-region'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -278,6 +278,14 @@ command! -range Vis call setpos('.', [0,<line1>,0,0]) |
 
 command! Ses :source Session.vim
 
+" Visual Macro Application
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
 " FILETYPE SPECIFIC OPTIONS ===================================================
 
 " Make
@@ -308,6 +316,15 @@ let g:airline#extentions#tabline#fnamemod=":t"
 
 " Vim-Easymotion Configuration
 nmap s <Plug>(easymotion-s)
+
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Incsearch Configuration
 map /  <Plug>(incsearch-forward)
