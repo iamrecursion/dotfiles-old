@@ -603,6 +603,7 @@ call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
+nnoremap <C-e> :Denite buffer<CR>
 nnoremap <leader>e :Denite buffer<CR>
 nnoremap <C-p> :Denite file_rec <CR>
 nnoremap <C-o> :Denite buffer line register<CR>
