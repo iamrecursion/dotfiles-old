@@ -661,7 +661,7 @@ augroup IdrisMaps
 augroup END
 
 " Neoterm Configuration
-let g:neoterm_position = 'horizontal'
+let g:neoterm_default_mod = ':botright'
 
 nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
