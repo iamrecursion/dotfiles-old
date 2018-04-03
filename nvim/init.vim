@@ -309,7 +309,8 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious <CR>
 " Vim Airline Configuration
 set laststatus=2
 " badwolf, solarized, molokai are all nice
-let g:airline_theme='molokai'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extentions#tabline#fnamemod=":t"
