@@ -527,7 +527,6 @@ let g:haskell_enable_typeroles = 1
 let g:haskell_enable_static_pointers = 1
 let g:haskell_backpack = 1
 
-let g:haskell_intent_disable = 1
 let g:haskell_indent_if = 4
 let g:haskell_indent_case = 4
 let g:haskell_indent_let = 4
@@ -538,6 +537,8 @@ let g:haskell_indent_do = 4
 let g:haskell_indent_in = 0
 let g:haskell_indent_guard = 2
 let g:cabal_indent_section = 2
+
+let g:haskell_indent_disable = 1
 
 " Denite.vim Configuration
 augroup deniteresize
