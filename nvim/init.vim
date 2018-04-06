@@ -36,7 +36,6 @@ Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'kana/vim-textobj-indent'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
