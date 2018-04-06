@@ -21,6 +21,7 @@ Plug 'alx741/vim-hindent', { 'do': 'stack install hindent', 'for': 'haskell' }
 Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell',
             \'for': 'haskell'}
 " Plug 'BurningEther/nvimux'
+Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport', 'for': 'haskell'}
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
@@ -35,6 +36,7 @@ Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'kana/vim-textobj-indent'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
@@ -61,11 +63,13 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-surround'
 Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/AdvancedSorters'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/vim-task-org'
+Plug 'vimwiki/vimwiki'
+Plug 'yaroot/vissort'
 
 " Non-Alphabetical as Load-Order Dependent
 Plug 'ryanoasis/vim-devicons'
