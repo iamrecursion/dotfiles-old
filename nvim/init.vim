@@ -352,7 +352,8 @@ map f? <Plug>(incsearch-fuzzy-?)
 map fg/ <Plug>(incsearch-fuzzy-stay)
 
 " Intero Neovim Configuration
-let g:intero_type_on_hover = 1
+let g:intero_type_on_hover = 0
+let g:intero_start_immediately = 0
 set updatetime=1000
 
 augroup InteroMaps
