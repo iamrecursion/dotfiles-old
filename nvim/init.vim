@@ -372,7 +372,8 @@ augroup InteroMaps
     au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
 
     " Automatically reload on save
-    au BufWritePost *.hs InteroReload
+    " au BufWritePost *.hs InteroReload
+    au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
 
     " Load individual modules
     au FileType haskell nnoremap <silent> <leader>il
