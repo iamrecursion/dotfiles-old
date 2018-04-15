@@ -67,7 +67,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/AdvancedSorters'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/vim-task-org'
-Plug 'vim-syntastic/syntastic', { 'for': 'haskell' }
 Plug 'vimwiki/vimwiki'
 Plug 'yaroot/vissort'
 
@@ -619,7 +618,9 @@ nnoremap <C-o> :Denite buffer line register<CR>
 nnoremap <C-i> :Denite grep <CR>
 
 " Neomake Configuration
-call neomake#configure#automake('w')
+call neomake#configure#automake('rnw', 500)
+
+let g:neomake_haskell_enabled_makers = ['hlint', 'hdevtools']
 
 " Vim-Hindent Configuration
 let g:hindent_on_save = 0
@@ -720,10 +721,4 @@ let g:vebugger_leader='<leader>d'
 
 " Projectionist Configuration
 autocmd User ProjectionistActivate :Cd
-
-" Syntastic Configuration
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
 
