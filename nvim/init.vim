@@ -20,7 +20,6 @@ Plug 'alvan/vim-closetag'
 Plug 'alx741/vim-hindent', { 'do': 'stack install hindent', 'for': 'haskell' }
 Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell',
             \'for': 'haskell'}
-" Plug 'BurningEther/nvimux'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport', 'for': 'haskell'}
@@ -618,7 +617,7 @@ nnoremap <C-o> :Denite buffer line register<CR>
 nnoremap <C-i> :Denite grep <CR>
 
 " Neomake Configuration
-call neomake#configure#automake('rnw', 500)
+call neomake#configure#automake('rnw', 250)
 
 let g:neomake_haskell_enabled_makers = ['hlint', 'hdevtools']
 
