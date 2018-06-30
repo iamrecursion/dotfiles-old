@@ -147,7 +147,7 @@ prompt_pure_preprompt_render() {
     # TODO Fix this and switch on the prompt length to decide how many extra dirs to display.
     FOO="%~"
     local zero='%([BSUbfksu]|([FBK]|){*})'
-    FOOLENGTH=${#${(S%%)FOO//$~zero/}} 
+    FOOLENGTH=${#${(S%%)FOO//$~zero/}}
 
 	# construct preprompt, beginning with path
     local preprompt="%F{blue}%(5~|%-1~/…/%50<…<%3~|%4~)%f"
@@ -381,13 +381,20 @@ prompt_pure_setup() {
 	# prompt turns red if the previous command didn't exit with 0
 	PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 
-	RPROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❮} %F{blue}%*"
+    RPROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❮} %F{blue}%*"
 }
 
-export TRAPALRM() {
-	zle && zle reset-prompt
+reset_prompt_and_accept_line() {
+    zle reset-prompt
+    zle .accept-line
 }
 
-TMOUT=1
+zle -N accept-line reset_prompt_and_accept_line
+
+# export TRAPALRM() {
+    # zle && zle reset-prompt
+# }
+#
+# TMOUT=1
 
 prompt_pure_setup "$@"
