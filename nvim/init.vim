@@ -719,5 +719,5 @@ let g:webdevicons_enable_nerdtree = 1
 let g:vebugger_leader='<leader>d'
 
 " Projectionist Configuration
-autocmd User ProjectionistActivate :Cd
+autocmd User ProjectionistActivate :Pcd
 
