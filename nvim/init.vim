@@ -353,6 +353,7 @@ map fg/ <Plug>(incsearch-fuzzy-stay)
 " Intero Neovim Configuration
 let g:intero_type_on_hover = 0
 let g:intero_start_immediately = 0
+let g:intero_window_size = 15
 set updatetime=1000
 
 augroup InteroMaps
@@ -370,12 +371,11 @@ augroup InteroMaps
     au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
 
     " Automatically reload on save
-    " au BufWritePost *.hs InteroReload
+    au BufWritePost *.hs InteroReload
     au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
 
     " Load individual modules
-    au FileType haskell nnoremap <silent> <leader>il
-                \:InteroLoadCurrentModule<CR>
+    au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
     au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
 
     " Type-related information
