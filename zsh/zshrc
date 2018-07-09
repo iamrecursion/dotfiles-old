@@ -155,6 +155,13 @@ export PATH=/home/ara/.local/bin:$PATH
 export PATH=/home/ara/bin:$PATH
 export PATH=/home/ara/.gem/ruby/2.5.0/bin:$PATH
 
+# Environment Variable Changes
+luna_lib_dir="/home/ara/development/luna/luna-core/stdlib"
+
+if [[ -d $luna_lib_dir ]]; then
+    export LUNA_LIBS_PATH=$luna_lib_dir
+fi
+
 # Dircolors
 eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
 
@@ -192,5 +199,3 @@ bindkey '^Z' fancy-ctrl-z
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 eval $(keychain --eval ~/.ssh/ara_github)
 
-
-export PATH=/home/ara/.local/bin/luna-studio:$PATH

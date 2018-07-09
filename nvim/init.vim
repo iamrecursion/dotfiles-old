@@ -23,6 +23,7 @@ Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell',
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport', 'for': 'haskell'}
+Plug 'danro/rename.vim'
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'do': 'stack install ghc-mod', 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
