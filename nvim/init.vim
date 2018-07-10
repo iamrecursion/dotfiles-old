@@ -620,7 +620,7 @@ nnoremap <C-i> :Denite grep <CR>
 " Neomake Configuration
 call neomake#configure#automake('rnw', 250)
 
-let g:neomake_haskell_enabled_makers = ['hlint', 'hdevtools']
+let g:neomake_haskell_enabled_makers = ['hlint']
 
 " Vim-Hindent Configuration
 let g:hindent_on_save = 0
