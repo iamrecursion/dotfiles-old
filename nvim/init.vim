@@ -355,7 +355,7 @@ map fg/ <Plug>(incsearch-fuzzy-stay)
 let g:intero_type_on_hover = 0
 let g:intero_start_immediately = 0
 let g:intero_window_size = 15
-set updatetime=1000
+set updatetime=10000
 
 augroup InteroMaps
     au!
