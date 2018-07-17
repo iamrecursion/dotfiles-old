@@ -48,6 +48,7 @@ Plug 'Olical/vim-enmasse'
 Plug 'parsonsmatt/intero-neovim',
             \{ 'do': 'stack build intero; stack install hdevtools',
             \'for': 'haskell' }
+Plug 'plasticboy/vim-markdown'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
@@ -721,4 +722,9 @@ let g:vebugger_leader='<leader>d'
 
 " Projectionist Configuration
 autocmd User ProjectionistActivate :Pcd
+
+" Vim-Markdown Configuration
+let g:vim_markdown_folding_disabled = 1
+
+au FileType markdown set conceallevel=2
 
