@@ -48,7 +48,7 @@ Plug 'Olical/vim-enmasse'
 Plug 'parsonsmatt/intero-neovim',
             \{ 'do': 'stack build intero; stack install hdevtools',
             \'for': 'haskell' }
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown' { 'for': 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
