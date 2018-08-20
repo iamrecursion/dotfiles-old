@@ -156,7 +156,7 @@ export PATH=/home/ara/bin:$PATH
 export PATH=/home/ara/.gem/ruby/2.5.0/bin:$PATH
 
 # Environment Variable Changes
-luna_lib_dir="/home/ara/development/luna/luna-core/stdlib"
+luna_lib_dir="/home/ara/development/luna/luna/stdlib"
 
 if [[ -d $luna_lib_dir ]]; then
     export LUNA_LIBS_PATH=$luna_lib_dir
