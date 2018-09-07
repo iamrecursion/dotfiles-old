@@ -165,7 +165,7 @@ fi
 nix_env_vars="/home/ara/.nix-profile/etc/profile.d/nix.sh"
 
 if [[ -e $nix_env_vars ]]; then
-    source $nix_env_vars
+    . $nix_env_vars
 fi
 
 # Dircolors
