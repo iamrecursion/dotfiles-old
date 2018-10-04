@@ -125,9 +125,9 @@ function grepr() {
 }
 
 # Navigation Aliases
-alias ll="ls -lh --color --group-directories-first"
-alias lll="ls -lah --color --group-directories-first"
-alias lld="ls -lah -d ./ --color --group-directories-first"
+alias ll="ls -lh --color=auto --group-directories-first"
+alias lll="ls -lah --color=auto --group-directories-first"
+alias lld="ls -lah -d ./ --color=auto --group-directories-first"
 alias cdh="cd ~/"
 alias cdo="cd ~/OneDrive"
 alias u="cd .."
