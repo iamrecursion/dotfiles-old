@@ -494,7 +494,7 @@ let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_open_loclist_on_ycm_diags = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_error_symbol = '❯'
-let g:ycm_warning_symbol = '⚠'
+let g:ycm_warning_symbol = '!'
 let g:ycm_register_as_syntastic_checker = 1
 let g:ycm_show_diagnostics_ui = 1
 let g:ycm_enable_diagnostic_signs = 1
@@ -621,6 +621,26 @@ nnoremap <C-i> :Denite grep <CR>
 
 " Neomake Configuration
 call neomake#configure#automake('rnw', 250)
+
+let g:neomake_error_sign = {
+    \ 'text': '❯',
+    \ 'texthl': 'helpSpecial',
+    \ }
+
+let g:neomake_warning_sign = {
+    \ 'text': '❯',
+    \ 'texthl': 'vimCommand',
+    \ }
+
+let g:neomake_message_sign = {
+    \ 'text': '❯',
+    \ 'texthl': 'helpOption',
+    \ }
+
+let g:neomake_info_sign = {
+    \ 'text': '❯',
+    \ 'texthl': 'vimIsCommand',
+    \ }
 
 let g:neomake_haskell_enabled_makers = ['hlint']
 
