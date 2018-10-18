@@ -10,6 +10,13 @@ file_being_sourced=$?
 #compinit
 # End of lines added by compinstall
 
+# Locale =====================================================================
+
+export LANG='en_GB.UTF-8'
+export LANGUAGE='en_GB.UTF-8'
+export LC_ALL='en_GB.UTF-8'
+export LC_MESSAGES='en_GB.UTF-8'
+
 # ZPlug ======================================================================
 
 source ~/.dotfiles/modules/zplug/init.zsh
