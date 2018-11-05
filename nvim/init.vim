@@ -359,6 +359,12 @@ let g:intero_use_neomake = 1
 let g:intero_window_size = 15
 let g:intero_ghci_options = '-fobject-code'
 
+" let g:intero_backend = {
+        " \ 'command': 'stack repl',
+        " \ 'options': '-Wall',
+        " \ 'cwd': expand('%:p:h')
+        " \ }
+
 augroup InteroMaps
     au!
 
