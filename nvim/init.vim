@@ -80,29 +80,29 @@ call plug#end()
 
 " Basic Nvim Configuration
 filetype plugin indent on
-set number
-set ruler
-set pumheight=10
-set ai
-set sw=4
 imap <S-Tab> <BS>
-set tabstop=4
-set softtabstop=4
-set expandtab
+set ai
 set autoindent
-set smartindent
-set scrolloff=10
-set wrap
-set cursorline
 set cursorcolumn
+set cursorline
+set expandtab
+set number
+set pumheight=10
+set ruler
 set scrollback=1000
+set scrolloff=10
+set smartindent
+set softtabstop=4
+set sw=4
+set tabstop=4
+set wrap
 
 " Colour Schemes for Vim
+ colorscheme solarized
+ let g:solarized_termtrans=1
+ set background=dark
  set t_Co=16
  syntax enable
- set background=dark
- let g:solarized_termtrans=1
- colorscheme solarized
 
 " Font
 if has('unix')
@@ -112,8 +112,8 @@ else
 endif
 
 " Splits Control
-set splitright
 set splitbelow
+set splitright
 
 " Folding Configuration
 set foldmethod=manual
