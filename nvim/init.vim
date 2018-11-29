@@ -649,7 +649,7 @@ let g:neomake_info_sign = {
     \ 'texthl': 'vimIsCommand',
     \ }
 
-let g:neomake_haskell_enabled_makers = ['hlint']
+let g:neomake_haskell_enabled_makers = ['']
 
 " Vim-Hindent Configuration
 let g:hindent_on_save = 0
