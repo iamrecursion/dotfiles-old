@@ -11,3 +11,6 @@ __pycache__/*
 # Vim Plugin Downloads (Managed by vim-plug)
 *vim/vimplug/plugged/*
 *vim/.netrwhist
+
+# Projectionist
+.projections.json
