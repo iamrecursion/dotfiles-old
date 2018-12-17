@@ -7,8 +7,7 @@ file_being_sourced=$?
 # The following lines were added by compinstall
 #zstyle :compinstall filename '/home/ara/.zshrc'
 #autoload -Uz compinit
-#compinit
-# End of lines added by compinstall
+#compinit End of lines added by compinstall
 
 # Locale =====================================================================
 
@@ -162,17 +161,17 @@ export PATH=/home/ara/.local/bin:$PATH
 export PATH=/home/ara/bin:$PATH
 export PATH=/home/ara/.gem/ruby/2.5.0/bin:$PATH
 
+luna_manager_dir="/home/ara/development/luna/luna-manager/executables"
+
+if [[ -d $luna_manager_dir ]]; then
+    export PATH=$luna_manager_dir:$PATH
+fi
+
 # Environment Variable Changes
 luna_lib_dir="/home/ara/development/luna/luna/stdlib"
 
 if [[ -d $luna_lib_dir ]]; then
     export LUNA_LIBS_PATH=$luna_lib_dir
-fi
-
-nix_env_vars="/home/ara/.nix-profile/etc/profile.d/nix.sh"
-
-if [[ -e $nix_env_vars ]]; then
-    . $nix_env_vars
 fi
 
 # Dircolors
