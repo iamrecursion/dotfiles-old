@@ -3,6 +3,13 @@
 # Script Configuration
 status_prefix="INFO >>";
 
+# Header
+cat << STATUS
+
+============================ SETTING UP ENVIRONMENT ===========================
+
+STATUS
+
 # Getting Script Directory
 SOURCE="${BASH_SOURCE[0]}"
 
@@ -80,4 +87,24 @@ ln -sf "$DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 echo "$status_prefix Linking GDB Configuration"
 
 ln -sf "$DIR/tools/gdbinit" "$HOME/.gdbinit"
+
+# User Reminders
+cat << EOM
+
+================================= PLEASE READ =================================
+
+If using TMUX, please start it and execute 'C-a' + 'I' to install plugins.
+
+If using zsh, please source '~/.zshrc' and execute 'zplug install'.
+
+If using nvim or vim, please open the respective editor and run ':PlugInstall'
+to install the plugin configuration. This step will likely require system
+dependencies for the various plugins. These include:
+
+  - libboost
+  - libclang
+  - rustc
+  - ghc
+  - stack
+EOM
 
