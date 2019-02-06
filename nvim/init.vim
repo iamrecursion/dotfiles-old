@@ -271,6 +271,8 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
+nnoremap <F12> :call <SID>StripTrailingWhitespaces() <CR>
+
 let blacklist = ['markdown', 'ruby', 'perl', 'javascript']
 
 autocmd BufWritePre * if index(blacklist, &ft) < 0 |
