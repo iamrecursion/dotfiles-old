@@ -167,13 +167,6 @@ if [[ -d $luna_manager_dir ]]; then
     export PATH=$luna_manager_dir:$PATH
 fi
 
-# Environment Variable Changes
-luna_lib_dir="/home/ara/development/luna/luna/stdlib"
-
-if [[ -d $luna_lib_dir ]]; then
-    export LUNA_LIBS_PATH=$luna_lib_dir
-fi
-
 # Dircolors
 eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
 
