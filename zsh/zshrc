@@ -143,6 +143,9 @@ alias gd="git diff"
 alias gdt="git difftool"
 alias gb="git branch -va"
 
+# Time Enhancement
+export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
+
 # Tmux Utility Functions
 function redisp() {
     if [ -n "$TMUX" ]; then
