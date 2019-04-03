@@ -162,7 +162,7 @@ function mkcd() {
 # PATH Changes
 export PATH=/home/ara/.local/bin:$PATH
 export PATH=/home/ara/bin:$PATH
-export PATH=/home/ara/.gem/ruby/2.5.0/bin:$PATH
+export PATH=/home/ara/.gem/ruby/2.6.0/bin:$PATH
 
 luna_manager_dir="/home/ara/development/luna/luna-manager/executables"
 

@@ -17,30 +17,23 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
-Plug 'alx741/vim-hindent', { 'do': 'stack install hindent', 'for': 'haskell' }
 Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell',
             \'for': 'haskell'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dan-t/vim-hsimport', { 'do': 'stack install hsimport', 'for': 'haskell'}
 Plug 'danro/rename.vim'
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'do': 'stack install ghc-mod', 'for': 'haskell' }
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'idanarye/vim-vebugger'
-Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
-Plug 'mpickering/hlint-refactor-vim', { 'do': 'stack install hlint',
-            \'for': 'haskell'}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -50,7 +43,6 @@ Plug 'parsonsmatt/intero-neovim',
             \'for': 'haskell' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -66,7 +58,6 @@ Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/AdvancedSorters'
-Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/vim-task-org'
 Plug 'vimwiki/vimwiki'
 Plug 'yaroot/vissort'
@@ -176,7 +167,7 @@ let &colorcolumn=join([81,101],",")
 highlight colorcolumn ctermbg=0
 
 " Python Support
-let g:loaded_python_provider = 1
+let g:loaded_python_provider = 1 " Disable Py2
 let g:python3_host_prog = '/usr/bin/python'
 
 " Search Configuration
@@ -315,8 +306,7 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious <CR>
 
 " Vim Airline Configuration
 set laststatus=2
-" badwolf, solarized, molokai are all nice
-let g:airline_theme='solarized'
+let g:airline_theme='solarized' " badwolf, solarized, molokai are all nice
 let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
@@ -450,25 +440,6 @@ nnoremap UL :later<CR>
 let g:undotree_WindowLayout = 1
 let g:undotree_DiffpanelHeight = 15
 
-" Closetag Configuration
-let g:closetag_filenames="*.html,*.xml,*.xsd,*.xhtml,*.phtml,*.cfg"
-
-" Multiple Cursors Configuration
-let g:multi_cursor_exit_from_visual_mode = 0
-let g:multi_cursor_exit_from_insert_mode = 1
-
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
-
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
-
 " Vim-Task-Org Configuration
 let g:vtoAuthorName = 'Ara Adkins'
 let g:vtoTokenList = [":BUG:", ":FIXME:", ":TODO:", ":TRICKY:", ":WARNING:",
@@ -530,10 +501,6 @@ nnoremap <leader>ycg :YcmCompleter GoTo<CR>
 nnoremap <leader>yct :YcmCompleter GetType<CR>
 nnoremap <leader>yci :YcmCompleter GetDoc<CR>
 
-" Neco-GHC Configuration
-let g:necoghc_use_stack = 0
-let g:necoghc_enable_detailed_browse = 1
-
 " Haskell-Vim Configuration
 let g:haskell_enable_quantification = 1
 let g:haskell_enable_recursivedo = 1
@@ -542,17 +509,6 @@ let g:haskell_enable_pattern_synonyms = 1
 let g:haskell_enable_typeroles = 1
 let g:haskell_enable_static_pointers = 1
 let g:haskell_backpack = 1
-
-let g:haskell_indent_if = 4
-let g:haskell_indent_case = 4
-let g:haskell_indent_let = 4
-let g:haskell_indent_where = 4
-let g:haskell_indent_before_where = 0
-let g:haskell_indent_after_bare_where = 4
-let g:haskell_indent_do = 4
-let g:haskell_indent_in = 0
-let g:haskell_indent_guard = 2
-let g:cabal_indent_section = 2
 
 let g:haskell_indent_disable = 1
 
@@ -671,68 +627,12 @@ let g:hlintRefactor#disableDefaultKeybindings = 1
 au FileType haskell nmap <leader>lo :call ApplyOneSuggestion()<CR>
 au FileType haskell nmap <leader>la :call ApplyAllSuggestions()<CR>
 
-" Idris Configuration
-let g:idris_indent_if = 4
-let g:idris_indent_case = 4
-let g:idris_indent_let = 4
-let g:idris_indent_where = 4
-let g:idris_indent_do = 4
-let g:idris_indent_rewrite = 8
-
-augroup IdrisMaps
-    au!
-
-    " Management
-    au FileType idris nnoremap <silent> <leader>id :call
-                \IdrisShowDoc()<CR>
-    au FileType idris nnoremap <silent> <leader>ii :call IdrisResponseWin()<CR>
-    au FileType idris nnoremap <silent> <leader>ir :call IdrisReload()<CR>
-    " Interactive Editing
-    au FileType idris nnoremap <silent> <leader>it :call IdrisShowType()<CR>
-    au FileType idris nnoremap <silent> <leader>is :call IdrisCaseSplit()<CR>
-    au FileType idris nnoremap <silent> <leader>ic :call IdrisAddClause(0)<CR>
-    au FileType idris nnoremap <silent> <leader>im :call IdrisAddMissing()<CR>
-    au FileType idris nnoremap <silent> <leader>if :call IdrisRefine()<CR>
-    au FileType idris nnoremap <silent> <leader>ip :call IdrisProofSearch(1)<CR>
-    au FileType idris nnoremap <silent> <leader>il :call IdrisMakeLemma()<CR>
-    au FileType idris nnoremap <silent> <leader>ie :call IdrisEval()<CR>
-    au FileType idris nnoremap <silent> <leader>iw 0:call IdrisMakeWith()<CR>
-    au FileType idris nnoremap <silent> <leader>imc :call IdrisMakeCase()<CR>
-
-augroup END
-
 " Neoterm Configuration
 let g:neoterm_default_mod = ':botright'
 
 nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
-
-" Nvimux Configuration
-" lua << EOF
-" local nvimux = require('nvimux')
-"
-" -- Nvimux configuration
-" nvimux.config.set_all{
-  " prefix = '<C-a>',
-  " open_term_by_default = true,
-  " new_window_buffer = 'single',
-  " quickterm_direction = 'botright',
-  " quickterm_orientation = 'vertical',
-  " -- Use 'g' for global quickterm
-  " quickterm_scope = 't',
-  " quickterm_size = '80',
-" }
-"
-" -- Nvimux custom bindings
-" nvimux.bindings.bind_all{
-  " {'s', ':NvimuxHorizontalSplit', {'n', 'v', 'i', 't'}},
-  " {'v', ':NvimuxVerticalSplit', {'n', 'v', 'i', 't'}},
-" }
-"
-" -- Required so nvimux sets the mappings correctly
-" nvimux.bootstrap()
-" EOF
 
 " Neovim Remote Configuration
 if has('nvim')
