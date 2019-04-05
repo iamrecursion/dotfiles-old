@@ -34,6 +34,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -568,7 +569,7 @@ call denite#custom#map(
             \ 'noremap'
             \)
 
-call denite#custom#var('file_rec', 'command',
+call denite#custom#var('file/rec', 'command',
             \ ['rg', '--files', '--glob', '!.git', '.'])
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
@@ -580,7 +581,7 @@ call denite#custom#var('grep', 'final_opts', [])
 
 nnoremap <C-e> :Denite buffer<CR>
 nnoremap <leader>e :Denite buffer<CR>
-nnoremap <C-p> :Denite file_rec <CR>
+nnoremap <C-p> :Denite file/rec <CR>
 nnoremap <C-o> :Denite buffer line register<CR>
 nnoremap <C-i> :Denite grep <CR>
 
