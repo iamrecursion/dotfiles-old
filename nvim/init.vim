@@ -17,8 +17,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
-Plug 'alx741/vim-stylishask', { 'do': 'stack install stylish-haskell',
-            \'for': 'haskell'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'danro/rename.vim'
@@ -34,6 +32,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
+Plug 'neoclide/coc-neco'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
@@ -47,6 +46,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-expand-region'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -55,7 +55,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-surround'
-" Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/AdvancedSorters'
@@ -301,7 +300,7 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " Installed Language Servers (Most from AUR)
 " - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
 " - [CCLS](https://github.com/MaskRay/ccls/)
-" -
+" - [Bash Language Server](https://github.com/mads-hartmann/bash-language-server)
 " - coc-rls
 " - coc-python
 
@@ -333,6 +332,8 @@ autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 let g:coc_start_at_startup = 1
 let g:coc_status_error_sign = '❯'
 let g:coc_status_warning_sign = '❯'
+let g:coc_status_info_sign = '❯'
+let g:coc_status_message_sign = '❯'
 
 " Vim Tmux Navigator Configuration
 let g:tmux_navigator_save_on_switch = 1
@@ -398,6 +399,12 @@ let g:intero_ghci_options = '-fobject-code'
         " \ 'cwd': expand('%:p:h')
         " \ }
 
+function InteroAutoReload()
+    if g:intero_started
+        :InteroReload
+    endif
+endfunction
+
 augroup InteroMaps
     au!
 
@@ -413,7 +420,7 @@ augroup InteroMaps
     au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
 
     " Automatically reload on save
-    au BufWritePost *.hs InteroReload
+    au BufWritePost *.hs :call InteroAutoReload()
     au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
 
     " Load individual modules
