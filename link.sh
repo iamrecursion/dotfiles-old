@@ -57,6 +57,7 @@ configuration";
 fi
 
 ln -sf "$DIR/nvim/init.vim" "$nvimrc_dir/init.vim"
+ln -sf "$DIR/nvim/coc-settings.json" "$nvimrc_dir/coc-settings.json"
 
 if [ ! -d "$nvim_plugs_dir" ]; then
     echo "$status_prefix Creating directory "$nvim_plugs_dir" for Nvim plugins";

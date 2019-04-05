@@ -34,7 +34,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -55,7 +55,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-surround'
-Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" Plug 'valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/AdvancedSorters'
@@ -295,7 +295,46 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 
 " VIM PLUGIN CONFIGURATION ====================================================
 
-" Vim Tmux Navigator
+" Coc.nvim Configuration
+"
+" Needs Node and Yarn installed.
+" Installed Language Servers (Most from AUR)
+" - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
+" - [CCLS](https://github.com/MaskRay/ccls/)
+" -
+" - coc-rls
+" - coc-python
+
+set hidden
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+nn <silent> K :call CocActionAsync('doHover')<CR>
+
+nn <silent> <leader><leader>l :CocList<CR>
+
+nn <silent> <leader><leader>crs :call CocActionAsync('rename')<CR>
+nn <silent> <leader><leader>css :call CocActionAsync('sourceStat')<CR>
+nn <silent> <leader><leader>cld :call CocActionAsync('diagnosticList')<CR>
+nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
+nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
+nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
+nn <silent> <leader><leader>csl :call CocActionAsync('documentSymbols')<CR>
+nn <silent> <leader><leader>cf :call CocActionAsync('formatSelected')<CR>
+nn <silent> <leader><leader>cca :call CocActionAsync('codeAction')<CR>
+nn <silent> <leader><leader>cla :call CocActionAsync('codeLensAction')<CR>
+nn <silent> <leader><leader>clc :call CocActionAsync('commands')<CR>
+nn <silent> <leader><leader>crc :call CocActionAsync('runCommand')<CR>
+nn <silent> <leader><leader>cqf :call CocActionAsync('quickfixes')<CR>
+nn <silent> <leader><leader>cfi :call CocActionAsync('doQuickfix')<CR>
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+let g:coc_start_at_startup = 1
+let g:coc_status_error_sign = '❯'
+let g:coc_status_warning_sign = '❯'
+
+" Vim Tmux Navigator Configuration
 let g:tmux_navigator_save_on_switch = 1
 let g:tmux_nagigator_no_mappings = 1
 
@@ -570,7 +609,7 @@ call denite#custom#map(
             \)
 
 call denite#custom#var('file/rec', 'command',
-            \ ['rg', '--files', '--glob', '!.git', '.'])
+            \ ['rg', '--files', '--glob', '!.git'])
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
             \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
