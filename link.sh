@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Create the symlinks for all files in the repo
 
 # Script Configuration
@@ -107,5 +109,10 @@ dependencies for the various plugins. These include:
   - rustc
   - ghc
   - stack
+
+For IDE functionality in neovim, you will likely need to install the various
+language servers. These are listed in `nvim/init.vim` in the section entitled
+'Coc.nvim Configuration'. Nvim will still work without these installed, but none
+of the IDE functionality will be available.
 EOM
 

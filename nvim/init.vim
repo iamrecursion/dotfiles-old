@@ -301,8 +301,8 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
 " - [CCLS](https://github.com/MaskRay/ccls/)
 " - [Bash Language Server](https://github.com/mads-hartmann/bash-language-server)
-" - coc-rls
-" - coc-python
+" - coc-rls (coc extension)
+" - coc-python (coc extension)
 
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
