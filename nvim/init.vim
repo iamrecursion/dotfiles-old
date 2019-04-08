@@ -318,13 +318,11 @@ nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
 nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
 nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
 nn <silent> <leader><leader>csl :call CocActionAsync('documentSymbols')<CR>
-nn <silent> <leader><leader>cf :call CocActionAsync('formatSelected')<CR>
+nn <silent> <leader><leader>ccf :call CocActionAsync('formatSelected')<CR>
 nn <silent> <leader><leader>cca :call CocActionAsync('codeAction')<CR>
 nn <silent> <leader><leader>cla :call CocActionAsync('codeLensAction')<CR>
 nn <silent> <leader><leader>clc :call CocActionAsync('commands')<CR>
 nn <silent> <leader><leader>crc :call CocActionAsync('runCommand')<CR>
-nn <silent> <leader><leader>cqf :call CocActionAsync('quickfixes')<CR>
-nn <silent> <leader><leader>cfi :call CocActionAsync('doQuickfix')<CR>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
