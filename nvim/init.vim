@@ -211,6 +211,9 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" Help Configuration
+:cnoreabbrev <expr> h getcmdtype() == ":" && getcmdline() == "h" ? "vert h" : "h"
+
 " USEFUL FUNCTIONS ============================================================
 
 " Fixing swapfile issues in VMs with slow memory updates
@@ -397,7 +400,7 @@ let g:intero_ghci_options = '-fobject-code'
         " \ 'cwd': expand('%:p:h')
         " \ }
 
-function InteroAutoReload()
+function! InteroAutoReload()
     if g:intero_started
         :InteroReload
     endif
