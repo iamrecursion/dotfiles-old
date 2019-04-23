@@ -310,7 +310,7 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-nn <silent> K :call CocActionAsync('doHover')<CR>
+nn <silent> J :call CocActionAsync('doHover')<CR>
 
 nn <silent> <leader><leader>l :CocList<CR>
 
