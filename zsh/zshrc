@@ -36,12 +36,6 @@ zplug "hchbaw/zce.zsh", from:github, use:"./zce.zsh"
 zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
 zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
 zplug "psprint/ztrace", from:github, use:"./ztrace.plugin.zsh"
-#zplug "psprint/zsh-editing-workbench", from:github, \
-    #use:"./zsh-editing-workbench.plugin.zsh"
-#zplug "psprint/zsh-navigation-tools", from:github, \
-    #use:"./zsh-navigation-tools.plugin.zsh"
-#zplug "psprint/zsh-cmd-architect", from:github, \
-    #use:"./zsh-cmd-architect.plugin.zsh"
 zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
 zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
 
@@ -91,7 +85,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 # ZSH Autosuggestions Configuration
 bindkey "^ " autosuggest-accept
 bindkey "^H" autosuggest-clear
-#bindkey "^M" autosuggest-execute
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
 
 # FZF Keybindings and Completions
@@ -126,7 +119,6 @@ alias grepx="grep -C 2"
 
 # Recursive grep utility: `grepr [File Pattern] [Pattern]`
 function grepr() {
-    # grep -r --include $1 "$2" .
     grep -r --include $1 $2 .
 }
 
