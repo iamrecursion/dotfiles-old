@@ -118,8 +118,8 @@ alias grepc="grep -color=auto"
 alias grepx="grep -C 2"
 
 # Recursive grep utility: `grepr [File Pattern] [Pattern]`
-function grepr() {
-    grep -r --include $1 $2 .
+function rgr() {
+    rg -r --include $1 $2 .
 }
 
 # Navigation Aliases
