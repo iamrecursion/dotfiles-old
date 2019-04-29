@@ -33,7 +33,7 @@ Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
 Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()} }
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
