@@ -617,20 +617,20 @@ call denite#custom#map(
             \)
 
 call denite#custom#var('file/rec', 'command',
-            \ ['rg', '--files', '--glob', '!.git'])
+            \ ['rg', '--follow', '--hidden', '--files', '--glob', '!.git'])
+
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
-            \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
+            \ ['--follow', '--hidden', '--vimgrep', '--no-heading', '-S'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
-nnoremap <C-e> :Denite buffer<CR>
-nnoremap <leader>e :Denite buffer<CR>
 nnoremap <C-p> :Denite file/rec <CR>
-nnoremap <C-o> :Denite buffer line register<CR>
+nnoremap <C-e> :Denite buffer<CR>
 nnoremap <C-i> :Denite grep <CR>
+nnoremap <C-o> :Denite buffer line register<CR>
 
 " Neomake Configuration
 call neomake#configure#automake('rnw', 250)
