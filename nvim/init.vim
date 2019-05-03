@@ -316,7 +316,6 @@ nn <silent> <leader><leader>l :CocList<CR>
 
 nn <silent> <leader><leader>crs :call CocActionAsync('rename')<CR>
 nn <silent> <leader><leader>css :call CocActionAsync('sourceStat')<CR>
-nn <silent> <leader><leader>cld :call CocActionAsync('diagnosticList')<CR>
 nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
 nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
 nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
