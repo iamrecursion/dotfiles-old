@@ -1,17 +1,6 @@
 " Vim-Plug configuration
 let g:plug_shallow=0
 
-" Setup Commands
-function! BuildYCM(info)
-    " info is a dictionary with 3 fields
-    " - name:   name of the plugin
-    " - status: 'installed', 'updated', or 'unchanged'
-    " - force:  set on PlugInstall! or PlugUpdate!
-    if a:info.status == 'installed' || a:info.force
-        !./install.py --system-libclang --system-boost --all
-    endif
-endfunction
-
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
