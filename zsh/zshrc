@@ -9,12 +9,29 @@ file_being_sourced=$?
 #autoload -Uz compinit
 #compinit End of lines added by compinstall
 
+# Get Operating System =======================================================
+
+platform=""
+
+detect_platform () {
+    if [[ "${OSTYPE}" == "linux-gnu" ]]; then
+        platform="linux"
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        platform="macos"
+    else
+        >&2 echo "Unknown platform";
+        return 1;
+    fi
+}
+
 # Locale =====================================================================
 
-export LANG='en_GB.UTF-8'
-export LANGUAGE='en_GB.UTF-8'
-export LC_ALL='en_GB.UTF-8'
-export LC_MESSAGES='en_GB.UTF-8'
+if [[ "${platform}" == "linux" ]]; then
+    export LANG='en_GB.UTF-8'
+    export LANGUAGE='en_GB.UTF-8'
+    export LC_ALL='en_GB.UTF-8'
+    export LC_MESSAGES='en_GB.UTF-8'
+fi
 
 # ZPlug ======================================================================
 
@@ -92,7 +109,7 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 # Timezone (Only Set on Linux)
-if [ `uname -s` = "Linux" ]; then
+if [[ "${platform}" == "linux" ]]; then
     export TZ="Europe/London"
 fi
 
@@ -100,10 +117,8 @@ fi
 export EDITOR=nvim
 export PAGER="less -R"
 
-# Vim Configuration
-alias vimrc="vim ~/.dotfiles/vim/vimrc"
+# Neovim Configuration
 alias nvimrc="nvim ~/.dotfiles/nvim/init.vim"
-alias vi="vim"
 alias nvi="nvim"
 
 # Tmux Configuration
@@ -111,18 +126,9 @@ alias tmuxconf="nvim ~/.dotfiles/tmux/tmux.conf"
 
 # Generic Utility Aliases
 alias nettest="ping 8.8.8.8"
+alias dnstest="ping google.com"
 alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
 alias reload="source ~/.dotfiles/zsh/zshrc"
-
-# Grep Aliases
-alias grep="grep -inT"
-alias grepc="grep -color=auto"
-alias grepx="grep -C 2"
-
-# Recursive grep utility: `grepr [File Pattern] [Pattern]`
-function rgr() {
-    rg -r --include $1 $2 .
-}
 
 # Navigation Aliases
 alias ll="ls -lh --color=auto --group-directories-first"
@@ -154,18 +160,28 @@ function mkcd() {
 }
 
 # PATH Changes
-export PATH=/home/ara/.local/bin:$PATH
-export PATH=/home/ara/bin:$PATH
+# local_bin_dir="~/.local/bin"
+#
+# echo $local_bin_dir
+#
+# if [[ -d ~/.local/bin ]]; then
+    # echo "Woo!"
+# else
+    # echo "Oh no!"
+# fi
+
 export PATH=/home/ara/.gem/ruby/2.6.0/bin:$PATH
-
-luna_manager_dir="/home/ara/development/luna/luna-manager/executables"
-
-if [[ -d $luna_manager_dir ]]; then
-    export PATH=$luna_manager_dir:$PATH
-fi
+export PATH=$PATH:/home/ara/.cargo/bin
+export PATH=$PATH:/home/ara/.cabal/bin
+export PATH=$PATH:/home/ara/.cabal/lib
+export PATH=/home/ara/.local/bin:$PATH
 
 # Dircolors
-eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
+if [[ "${PLATFORM}" == "macos" ]]; then
+    eval `gdircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
+else
+    eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
+fi
 
 # Input Control
 autoload zkbd

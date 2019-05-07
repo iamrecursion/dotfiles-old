@@ -1,0 +1,33 @@
+[user]
+    name = ##git_name##
+    email = ##git_email##
+    signingkey = ##git_signingkey##
+
+[core]
+    editor = nvim
+    pager = less
+
+[mergetool "vimdiff"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[merge]
+    tool = vimdiff
+
+[mergetool]
+    prompt = true
+
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[alias]
+    logg = log --graph --all --decorate --oneline
+
+[commit]
+    gpgsign = true
+
+[gpg]
+    program = gpg
+
