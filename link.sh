@@ -40,12 +40,6 @@ echo "$status_prefix Linking ZSH configuration"
 
 ln -sf $DIR/zsh/zshrc $HOME/.zshrc
 
-# Bash Stuff
-echo "$status_prefix Linking Bash configuration"
-
-ln -sf $DIR/bash/bashrc $HOME/.bashrc
-ln -sf $DIR/bash/bash_profile $HOME/.bash_profile
-
 # Neovim Stuff
 echo "$status_prefix Linking Neovim configuration"
 
@@ -68,17 +62,6 @@ fi
 
 if [ ! -e "$nvim_plugs_dir/autoload" ]; then
     ln -sf "$DIR/nvim/autoload" "$nvim_plugs_dir/autoload"
-fi
-
-# Vim Stuff
-echo "$status_prefix Linking Vim configuration"
-
-ln -sf "$DIR/vim/vimrc" "$HOME/.vimrc"
-
-vim_dir="$HOME/.vim"
-
-if [ ! -e "$vim_dir" ]; then
-    ln -s "$DIR/vim/vimplug" "$vim_dir"
 fi
 
 # Tmux Stuff

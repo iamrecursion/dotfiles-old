@@ -39,9 +39,7 @@ Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'Olical/vim-enmasse'
-Plug 'parsonsmatt/intero-neovim',
-            \{ 'do': 'stack build intero; stack install hdevtools',
-            \'for': 'haskell' }
+Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdcommenter'
