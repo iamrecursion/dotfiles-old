@@ -30,6 +30,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kassio/neoterm'
+Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
 Plug 'neoclide/coc-neco'
