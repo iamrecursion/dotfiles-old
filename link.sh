@@ -94,7 +94,7 @@ dependencies for the various plugins. These include:
   - stack
 
 For IDE functionality in neovim, you will likely need to install the various
-language servers. These are listed in `nvim/init.vim` in the section entitled
+language servers. These are listed in \`nvim/init.vim\` in the section entitled
 'Coc.nvim Configuration'. Nvim will still work without these installed, but none
 of the IDE functionality will be available.
 EOM
