@@ -180,6 +180,9 @@ install () {
     link_gdb || exit 1
 
     create_gitconfig || exit 1
+
+    # TODO Create Manager for Chunkwrm Config (Mac Only)
+    # TODO Create Manager for Hammerspoon config (Mac Only)
 }
 
 link_zsh () {

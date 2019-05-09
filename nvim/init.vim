@@ -1,7 +1,11 @@
-" Vim-Plug configuration
+
+" Vim-Plug configuration ======================================================
+
 let g:plug_shallow=0
 
 call plug#begin('~/.local/share/nvim/plugged')
+
+" These plugins require: Python 3, Ruby, and Node.js providers for Neovim
 
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
@@ -23,7 +27,7 @@ Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
 Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()} }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build() } }
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
