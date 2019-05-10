@@ -87,13 +87,6 @@ set wrap
  set t_Co=16
  syntax enable
 
-" Font
-if has('unix')
-    set guifont=InconsolataGo\ Nerd\ Font\ Mono\ 12
-else
-    set guifont=InconsolataGo_Nerd_Font_Mono:h12
-endif
-
 " Splits Control
 set splitbelow
 set splitright
@@ -160,7 +153,14 @@ highlight colorcolumn ctermbg=0
 
 " Python Support
 let g:loaded_python_provider = 1 " Disable Py2
-let g:python3_host_prog = '/usr/bin/python'
+
+if has('mac')
+    let g:python3_host_prog = '/usr/local/bin/python3'
+elseif has('unix')
+    let g:python3_host_prog = '/usr/bin/python3'
+else
+    let g:python3_host_prog = 'C:\development\python\bin\python'
+endif
 
 " Search Configuration
 set incsearch
@@ -208,15 +208,7 @@ nnoremap <A-l> <C-w>l
 
 " USEFUL FUNCTIONS ============================================================
 
-" Fixing swapfile issues in VMs with slow memory updates
-function! FixSwap()
-    set noswapfile
-    set swapfile
-endfunction
-
-command! FixSwap call FixSwap()
-
-" Reload Vim Configuration
+" Reload Vim Configuration While Editing
 command! Reload :so %
 
 " Prevent visual paste from overwriting paste buffer
@@ -257,7 +249,7 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-nnoremap <F12> :call <SID>StripTrailingWhitespaces() <CR>
+nnoremap <leader><leader>ws :call <SID>StripTrailingWhitespaces() <CR>
 
 let blacklist = ['markdown', 'ruby', 'perl', 'javascript']
 
@@ -292,7 +284,7 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " Coc.nvim Configuration
 "
 " Needs Node and Yarn installed.
-" Installed Language Servers (Most from AUR)
+" Installed Language Servers (Most from AUR or Brew)
 " - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
 " - [CCLS](https://github.com/MaskRay/ccls/)
 " - [Bash Language Server](https://github.com/mads-hartmann/bash-language-server)
@@ -496,50 +488,6 @@ call expand_region#custom_text_objects({
       \ 'aB' :1,
       \ })
 
-" YouCompleteMe Configuration
-let g:ycm_global_ycm_extra_conf='~/.dotfiles/tool_config/.ycm_extra_conf.py'
-let g:ycm_server_log_level = 'debug'
-let g:ycm_server_keep_logfiles = 0
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_collect_identifiers_from_tag_files = 0
-let g:ycm_server_use_vim_stdout = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_goto_buffer_command = 'horizontal-split'
-let g:ycm_filetype_whitelist = { '*':1 }
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_open_loclist_on_ycm_diags = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_error_symbol = '❯'
-let g:ycm_warning_symbol = '!'
-let g:ycm_register_as_syntastic_checker = 1
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_enable_diagnostic_highlighting = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_open_loclist_on_ycm_diags = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_filepath_completion_use_working_dir = 1
-let g:ycm_disable_for_files_larger_than_kb = 3000
-let g:ycm_auto_start_csharp_server = 1
-let g:ycm_auto_stop_csharp_server = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_max_diagnostics_to_display = 50
-let g:ycm_key_detailed_diagnostics = '<leader>yd'
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_use_utilsnips_completer = 0
-
-nnoremap <leader>ycc :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>ycd :YcmDiags<CR>
-
-nnoremap <leader>ycf :YcmCompleter FixIt<CR>
-nnoremap <leader>ycg :YcmCompleter GoTo<CR>
-nnoremap <leader>yct :YcmCompleter GetType<CR>
-nnoremap <leader>yci :YcmCompleter GetDoc<CR>
-
 " Haskell-Vim Configuration
 let g:haskell_enable_quantification = 1
 let g:haskell_enable_recursivedo = 1
@@ -648,24 +596,6 @@ let g:neomake_info_sign = {
 
 let g:neomake_haskell_enabled_makers = ['']
 
-" Vim-Hindent Configuration
-let g:hindent_on_save = 0
-au FileType haskell nnoremap <silent> <leader>hi :Hindent<CR>
-
-" Vim-Stylish Configuration
-let g:stylishask_on_save = 0
-au FileType haskell nnoremap <silent> <leader>hs :Stylishask<CR>
-
-" GHCMod Vim Configuration
-au FileType haskell nmap <leader>hc :GhcModSplitFunCase<CR>
-au FileType haskell nmap <leader>hg :GhcModSigCodegen<CR>
-
-" Hlint-Refactor Configuration
-let g:hlintRefactor#disableDefaultKeybindings = 1
-
-au FileType haskell nmap <leader>lo :call ApplyOneSuggestion()<CR>
-au FileType haskell nmap <leader>la :call ApplyAllSuggestions()<CR>
-
 " Neoterm Configuration
 let g:neoterm_default_mod = ':botright'
 
@@ -695,5 +625,5 @@ autocmd User ProjectionistActivate :Pcd
 " Vim-Markdown Configuration
 let g:vim_markdown_folding_disabled = 1
 
-au FileType markdown set conceallevel=2
+au FileType markdown set conceallevel=0
 

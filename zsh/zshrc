@@ -160,21 +160,41 @@ function mkcd() {
 }
 
 # PATH Changes
-# local_bin_dir="~/.local/bin"
-#
-# echo $local_bin_dir
-#
-# if [[ -d ~/.local/bin ]]; then
-    # echo "Woo!"
-# else
-    # echo "Oh no!"
-# fi
+ruby_version=`ruby -v | awk '{split($2, res, "."); print res[1] "." res[2] }'`.0
+ruby_gem_path=~/.gem/ruby/$ruby_version/bin
+if [[ -d $ruby_gem_path ]];then
+    export PATH=$ruby_gem_path:$PATH
+fi
 
-export PATH=/home/ara/.gem/ruby/2.6.0/bin:$PATH
-export PATH=$PATH:/home/ara/.cargo/bin
-export PATH=$PATH:/home/ara/.cabal/bin
-export PATH=$PATH:/home/ara/.cabal/lib
-export PATH=/home/ara/.local/bin:$PATH
+cargo_bin_path=~/.cargo/bin
+if [[ -d $cargo_bin_path ]]; then
+    export PATH=$cargo_bin_path:$PATH
+fi
+
+cabal_bin_path=~/.cabal/bin
+if [[ -d $cabal_bin_path ]]; then
+    export PATH=$cabal_bin_path:$PATH
+fi
+
+cabal_lib_path=~/.cabal/lib
+if [[ -d $cabal_lib_path ]]; then
+    export PATH=$cabal_lib_path:$PATH
+fi
+
+usr_local_bin_dir=/usr/local/bin
+if [[ -d $usr_local_bin_dir ]]; then
+    export PATH=$usr_local_bin_dir:$PATH
+fi
+
+local_bin_dir=~/.local/bin
+if [[ -d $local_bin_dir ]]; then
+    export PATH=$local_bin_dir:$PATH
+fi
+
+nix_profile_script=~/.nix-profile/etc/profile.d/nix.sh
+if [[ -f $nix_profile_script ]]; then
+    source $nix_profile_script
+fi
 
 # Dircolors
 if [[ "${PLATFORM}" == "macos" ]]; then
