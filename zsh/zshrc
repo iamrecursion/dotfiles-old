@@ -240,7 +240,25 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+# MacOS Library Override
+if [[ ${platform} == "macos" ]]; then
+    libffi_name="libffi.pc"
+
+    local_path=`locate $libffi_name | grep local`
+    dirname_local_path=`dirname $local_path`
+
+    if [[ $PKG_CONFIG_PATH != *$dirname_local_path* ]]; then
+        export PKG_CONFIG_PATH=$dirname_local_path:$PKG_CONFIG_PATH
+    fi
+fi
+
 # Setup SSH Agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 eval $(keychain --eval ~/.ssh/ara_adkins_personal)
+
+# Configure GPG Agent
+
+if [[ ${platform} == "macos" ]]; then
+    export GPG_TTY="tty"
+fi
 
