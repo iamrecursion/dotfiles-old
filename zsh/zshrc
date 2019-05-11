@@ -16,13 +16,14 @@ platform=""
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
         platform="linux"
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
+    elif [[ "${OSTYPE}" == "darwin"* ]]; then
         platform="macos"
     else
         >&2 echo "Unknown platform";
         return 1;
     fi
 }
+detect_platform
 
 # Locale =====================================================================
 
@@ -96,17 +97,11 @@ export ENHANCD_DOT_ARG=0
 zmodload zsh/terminfo
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # ZSH Autosuggestions Configuration
 bindkey "^ " autosuggest-accept
 bindkey "^H" autosuggest-clear
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
-
-# FZF Keybindings and Completions
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
 
 # Timezone (Only Set on Linux)
 if [[ "${platform}" == "linux" ]]; then
@@ -131,12 +126,21 @@ alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
 alias reload="source ~/.dotfiles/zsh/zshrc"
 
 # Navigation Aliases
-alias ll="ls -lh --color=auto --group-directories-first"
-alias lll="ls -lah --color=auto --group-directories-first"
-alias lld="ls -lah -d ./ --color=auto --group-directories-first"
+if [[ ${platform} == "macos" ]]; then
+    alias ls="gls -F --color=auto --group-directories-first";
+elif [[ ${platform} == "linux" ]]; then
+    alias ls="gls -F --color=auto --group-directories-first";
+fi
+
+alias ll="ls -lh"
+alias lll="ls -lah"
 alias cdh="cd ~/"
 alias cdo="cd ~/OneDrive"
 alias u="cd .."
+
+if [[ ${platform} == "macos" ]]; then
+    alias cdc="cd ~/iCloudDrive"
+fi
 
 # Git Aliases
 alias gd="git diff"
@@ -159,35 +163,38 @@ function mkcd() {
     cd $1
 }
 
+# Check Ruby Version
+
+
 # PATH Changes
 ruby_version=`ruby -v | awk '{split($2, res, "."); print res[1] "." res[2] }'`.0
 ruby_gem_path=~/.gem/ruby/$ruby_version/bin
-if [[ -d $ruby_gem_path ]];then
+if [[ -d $ruby_gem_path ]] && [[ $PATH != *$ruby_gem_path* ]];then
     export PATH=$ruby_gem_path:$PATH
 fi
 
 cargo_bin_path=~/.cargo/bin
-if [[ -d $cargo_bin_path ]]; then
+if [[ -d $cargo_bin_path ]] && [[ $PATH != *$cargo_bin_path* ]]; then
     export PATH=$cargo_bin_path:$PATH
 fi
 
 cabal_bin_path=~/.cabal/bin
-if [[ -d $cabal_bin_path ]]; then
+if [[ -d $cabal_bin_path ]] && [[ $PATH != *$cabal_bin_path* ]]; then
     export PATH=$cabal_bin_path:$PATH
 fi
 
 cabal_lib_path=~/.cabal/lib
-if [[ -d $cabal_lib_path ]]; then
+if [[ -d $cabal_lib_path ]] && [[ $PATH != *$cabal_lib_path* ]]; then
     export PATH=$cabal_lib_path:$PATH
 fi
 
 usr_local_bin_dir=/usr/local/bin
-if [[ -d $usr_local_bin_dir ]]; then
+if [[ -d $usr_local_bin_dir ]] && [[ $PATH != *$usr_local_bin_dir* ]]; then
     export PATH=$usr_local_bin_dir:$PATH
 fi
 
 local_bin_dir=~/.local/bin
-if [[ -d $local_bin_dir ]]; then
+if [[ -d $local_bin_dir ]] && [[ $PATH != *$local_bin_dir* ]]; then
     export PATH=$local_bin_dir:$PATH
 fi
 
@@ -197,7 +204,7 @@ if [[ -f $nix_profile_script ]]; then
 fi
 
 # Dircolors
-if [[ "${PLATFORM}" == "macos" ]]; then
+if [[ "${platform}" == "macos" ]]; then
     eval `gdircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
 else
     eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`

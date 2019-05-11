@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Current Platform
 platform=""
@@ -148,29 +148,29 @@ postinstall () {
     git remote set-url origin git@github.com:iamrecursion/dotfiles.git;
     cd ${HOME} > /dev/null || return;
 
-# cat << EOM
-#
-# ================================= PLEASE READ =================================
-#
-# If using TMUX, please start it and execute 'C-a' + 'I' to install plugins.
-#
-# If using zsh, please source '~/.zshrc' and execute 'zplug install'.
-#
-# If using nvim or vim, please open the respective editor and run ':PlugInstall'
-# to install the plugin configuration. This step will likely require system
-# dependencies for the various plugins. These include:
-#
-  # - libboost
-  # - libclang
-  # - rustc
-  # - ghc
-  # - stack
-#
-# For IDE functionality in neovim, you will likely need to install the various
-# language servers. These are listed in \`nvim/init.vim\` in the section entitled
-# 'Coc.nvim Configuration'. Nvim will still work without these installed, but none
-# of the IDE functionality will be available.
-# EOM
+cat << EOM
+
+================================= PLEASE READ =================================
+
+If using TMUX, please start it and execute 'C-a' + 'I' to install plugins.
+
+If using zsh, please source '~/.zshrc' and execute 'zplug install'.
+
+If using nvim or vim, please open the respective editor and run ':PlugInstall'
+to install the plugin configuration. This step will likely require system
+dependencies for the various plugins. These include:
+
+  - libboost
+  - libclang
+  - rustc
+  - ghc
+  - stack
+
+For IDE functionality in neovim, you will likely need to install the various
+language servers. These are listed in \`nvim/init.vim\` in the section entitled
+'Coc.nvim Configuration'. Nvim will still work without these installed, but none
+of the IDE functionality will be available.
+EOM
 }
 
 install () {
@@ -178,15 +178,26 @@ install () {
     link_neovim || exit 1
     link_tmux || exit 1
     link_gdb || exit 1
+    link_hammerspoon || exit 1
 
     create_gitconfig || exit 1
 
     # TODO Create Manager for Chunkwrm Config (Mac Only)
-    # TODO Create Manager for Hammerspoon config (Mac Only)
+}
+
+link_hammerspoon () {
+    hammerspoon_dir="$HOME/.hammerspoon"
+    hammerspoon_src="$DIR/hammerspoon"
+
+    if [[ ${platform} == "macos" ]]; then
+        echo "$status_prefix Linking Hammerspoon Configuration"
+
+        ln -sf $hammerspoon_src $hammerspoon_dir
+    fi
 }
 
 link_zsh () {
-    echo "$status_prefix Linking ZSH configuration"
+    echo "$status_prefix Linking ZSH Configuration"
 
     ln -sf $DIR/zsh/zshrc $HOME/.zshrc
 
@@ -194,7 +205,7 @@ link_zsh () {
 }
 
 link_neovim () {
-    echo "$status_prefix Linking Neovim configuration"
+    echo "$status_prefix Linking Neovim Configuration"
 
     nvimrc_dir="$HOME/.config/nvim"
     nvim_plugs_dir="$HOME/.local/share/nvim/site"
@@ -239,16 +250,31 @@ link_gdb () {
 create_gitconfig () {
     target_file="$HOME/.gitconfig"
 
+    echo "$status_prefix Creating Git Configuration"
+
     cp "$DIR/git/gitconfig" "${target_file}"
 
-    response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
-    sed -i "s/##git_name##/${response}/g" $target_file
+    if [[ ${platform} == "macos" ]]; then
+        response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
+        gsed -i "s/##git_name##/${response}/g" $target_file
 
-    response=$(confirm_string "Enter git user.email" "$(git config --get user.email)")
-    sed -i "s/##git_email##/${response}/g" $target_file
+        response=$(confirm_string "Enter git user.email" "$(git config --get user.email)")
+        gsed -i "s/##git_email##/${response}/g" $target_file
 
-    response=$(confirm_string "Enter git user.signingkey" "$(git config --get user.email)")
-    sed -i "s/##git_signingkey##/${response}/g" $target_file
+        response=$(confirm_string "Enter git user.signingkey" "$(git config --get user.email)")
+        gsed -i "s/##git_signingkey##/${response}/g" $target_file
+    elif [[ ${platform} == "linux" ]]; then
+        response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
+        sed -i "s/##git_name##/${response}/g" $target_file
+
+        response=$(confirm_string "Enter git user.email" "$(git config --get user.email)")
+        sed -i "s/##git_email##/${response}/g" $target_file
+
+        response=$(confirm_string "Enter git user.signingkey" "$(git config --get user.email)")
+        sed -i "s/##git_signingkey##/${response}/g" $target_file
+    else
+        echo "Unknown platform ${platform}. Cannot execute sed."
+    fi
 
     return 0
 }
@@ -283,8 +309,9 @@ main () {
 # Run
 
 if (( ${BASH_VERSION%%.*} < 4 )) ; then
-    >&2 echo "Requires bash version 4.0.0 or higher, you've got ${BASH_VERSION}"
-    return 1
+    >&2 echo "Requires bash version 4.0.0 or higher, you've got ${BASH_VERSION} in /bin/bash"
+    >&2 echo "You may have a newer version elsewhere. Use it to run this script directly."
+    exit 1
 fi
 
 main

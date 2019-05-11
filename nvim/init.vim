@@ -290,6 +290,9 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " - [Bash Language Server](https://github.com/mads-hartmann/bash-language-server)
 " - coc-rls (coc extension)
 " - coc-python (coc extension)
+" - coc-dictionary (coc extension)
+" - coc-emoji (coc extension)
+" - coc-syntax (coc extension)
 
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
