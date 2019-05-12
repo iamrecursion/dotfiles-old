@@ -293,6 +293,7 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " - coc-dictionary (coc extension)
 " - coc-emoji (coc extension)
 " - coc-syntax (coc extension)
+" - coc-lists (coc extension)
 
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -598,6 +599,7 @@ let g:neomake_info_sign = {
     \ }
 
 let g:neomake_haskell_enabled_makers = ['']
+let g:neomake_python_enabled_makers = ['']
 
 " Neoterm Configuration
 let g:neoterm_default_mod = ':botright'
