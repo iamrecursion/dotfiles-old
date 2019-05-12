@@ -167,17 +167,6 @@ function mkcd() {
 
 
 # PATH Changes
-py_version=`python3 --version | awk '{split($2, r, "."); print r[1] "." r[2]}'`
-
-if [[ ${platform} == "macos" ]]; then
-    py_bin_path=~/Library/Python/$py_version/bin
-
-    if [[ -d $py_bin_path ]] && [[ $PATH != *$py_bin_path* ]]; then
-        export PATH=$py_bin_path:$PATH
-    fi
-fi
-
-
 ruby_version=`ruby -v | awk '{split($2, res, "."); print res[1] "." res[2] }'`.0
 ruby_gem_path=~/.gem/ruby/$ruby_version/bin
 if [[ -d $ruby_gem_path ]] && [[ $PATH != *$ruby_gem_path* ]];then
@@ -202,6 +191,16 @@ fi
 usr_local_bin_dir=/usr/local/bin
 if [[ -d $usr_local_bin_dir ]] && [[ $PATH != *$usr_local_bin_dir* ]]; then
     export PATH=$usr_local_bin_dir:$PATH
+fi
+
+py_version=`python3 --version | awk '{split($2, r, "."); print r[1] "." r[2]}'`
+
+if [[ ${platform} == "macos" ]]; then
+    py_bin_path=~/Library/Python/$py_version/bin
+
+    if [[ -d $py_bin_path ]] && [[ $PATH != *$py_bin_path* ]]; then
+        export PATH=$py_bin_path:$PATH
+    fi
 fi
 
 local_bin_dir=~/.local/bin
