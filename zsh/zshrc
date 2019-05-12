@@ -240,7 +240,7 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-# MacOS Library Override
+# MacOS Library Overrides
 if [[ ${platform} == "macos" ]]; then
     libffi_name="libffi.pc"
 
