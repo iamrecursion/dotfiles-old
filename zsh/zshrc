@@ -193,6 +193,12 @@ if [[ -d $usr_local_bin_dir ]] && [[ $PATH != *$usr_local_bin_dir* ]]; then
     export PATH=$usr_local_bin_dir:$PATH
 fi
 
+iterm2_integration=${HOME}/.iterm2_shell_integration.zsh
+
+if [[ -e $iterm2_integration ]]; then
+    source $iterm2_integration;
+fi
+
 py_version=`python3 --version | awk '{split($2, r, "."); print r[1] "." r[2]}'`
 
 if [[ ${platform} == "macos" ]]; then
