@@ -125,6 +125,12 @@ alias dnstest="ping google.com"
 alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
 alias reload="source ~/.dotfiles/zsh/zshrc"
 
+# MacOS Specific Utility Aliases
+if [[ ${platform} == "macos" ]]; then
+    alias resetcam="sudo killall VDCAssistant"
+    alias resetcam!="sudo killall VDCAssistant"
+fi
+
 # Navigation Aliases
 if [[ ${platform} == "macos" ]]; then
     alias ls="gls -F --color=auto --group-directories-first";
