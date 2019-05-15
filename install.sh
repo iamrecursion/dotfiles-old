@@ -276,6 +276,12 @@ create_gitconfig () {
         echo "Unknown platform ${platform}. Cannot execute sed."
     fi
 
+    # Global Gitignore
+    ignore_source_file="${DIR}/git/gitignore_global"
+    ignore_target_file="${HOME}/.gitignore_global"
+
+    ln -sf $ignore_source_file $ignore_target_file
+
     return 0
 }
 

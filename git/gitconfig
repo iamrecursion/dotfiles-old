@@ -6,6 +6,7 @@
 [core]
     editor = nvim
     pager = less
+    excludesfile = ~/.gitignore_global
 
 [mergetool "vimdiff"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
