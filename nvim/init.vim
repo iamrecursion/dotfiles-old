@@ -64,7 +64,6 @@ call plug#end()
 " Basic Nvim Configuration
 filetype plugin indent on
 imap <S-Tab> <BS>
-set ai
 set autoindent
 set cursorcolumn
 set cursorline
