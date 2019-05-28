@@ -284,15 +284,27 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 "
 " Needs Node and Yarn installed.
 " Installed Language Servers (Most from AUR or Brew)
-" - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
 " - [CCLS](https://github.com/MaskRay/ccls/)
-" - [Bash Language Server](https://github.com/mads-hartmann/bash-language-server)
-" - coc-rls (coc extension)
-" - coc-python (coc extension)
-" - coc-dictionary (coc extension)
-" - coc-emoji (coc extension)
-" - coc-syntax (coc extension)
-" - coc-lists (coc extension)
+" - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
+" - [coc-lua](https://github.com/Alloyed/lua-lsp)
+" - coc-calc
+" - coc-dictionary
+" - coc-emoji
+" - coc-fsharp
+" - coc-git
+" - coc-github
+" - coc-java
+" - coc-json
+" - coc-json
+" - coc-lists
+" - coc-python
+" - coc-rls
+" - coc-sh
+" - coc-svg
+" - coc-syntax
+" - coc-tsserver
+" - coc-vimlsp
+" - coc-yaml
 
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
