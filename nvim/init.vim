@@ -117,7 +117,7 @@ set timeout timeoutlen=1000
 
 " Listings Configuration
 nnoremap <F9> :set list!<CR>
-set listchars=eol:¬,trail:·,tab:»·,precedes:«,extends:»
+set listchars=eol:¬,trail:·,tab:⇥·,precedes:«,extends:»
 
 " Spellchecking Configuration
 set spell spelllang=en_gb
