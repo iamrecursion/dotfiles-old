@@ -13,11 +13,12 @@ Plug 'alvan/vim-closetag'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'danro/rename.vim'
+Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
-Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch.vim'
 Plug 'idanarye/vim-vebugger'
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
@@ -277,6 +278,9 @@ autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
 " Assembly
 autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
+
+" JSONC
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " VIM PLUGIN CONFIGURATION ====================================================
 
@@ -642,4 +646,11 @@ autocmd User ProjectionistActivate :Pcd
 let g:vim_markdown_folding_disabled = 1
 
 au FileType markdown set conceallevel=0
+
+" Vissort Configuration
+let g:vissort_option="i"
+
+" Vim-Scala Configuration
+let g:scala_scaladoc_indent = 1
+au BufRead,BufNewFile *.sbt set filetype=scala
 

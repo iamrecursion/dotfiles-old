@@ -3,7 +3,7 @@
       "ccls": {
         "command": "ccls",
         "filetypes": ["c", "cpp", "objc", "objcpp"],
-        "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+        "rootPatterns": [".ccls", "compile_commands.json", ".git/"],
         "initializationOptions": {
            "cache": {
              "directory": "/tmp/ccls"
@@ -16,6 +16,12 @@
         "filetypes": ["hs", "lhs", "haskell"],
         "initializationOptions": {}
       },
+      "metals": {
+          "command": "metals-vim",
+          "rootPatterns": ["build-sbt"],
+          "filetypes": ["scala", "sbt"],
+          "initializationOptions": {}
+      }
     }
 }
 
