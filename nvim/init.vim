@@ -290,8 +290,8 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " - coc-calc
 " - coc-dictionary
 " - coc-emoji
-" - coc-fsharp
-" - coc-git
+" - coc-fsharp (requires mono)
+" - coc-git (requires git)
 " - coc-github
 " - coc-java
 " - coc-json

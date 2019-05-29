@@ -44,17 +44,17 @@ confirm() {
     while true; do
 
         # Ask the question (not using "read -p" as it uses stderr not stdout)
-        echo -n "$prompt [$pdefault] "
+        echo -n "${prompt} [${pdefault}] "
 
         # Read the answer (use /dev/tty in case stdin is redirected from
         # somewhere else)
         read -r reply </dev/tty
 
         # Default?
-        [ -z "${reply// }" ] && reply=$default
+        [ -z "${reply// }" ] && reply=${default}
 
         # Check if the reply is valid
-        case "$reply" in
+        case "${reply}" in
             Y*|y*) return 0 ;;
             N*|n*) return 1 ;;
         esac
@@ -71,7 +71,7 @@ confirm_string() {
     [[ -n "${default// }" ]] && pdefault=" [${default}]" || pdefault=""
 
     # Ask the question
-    read -r -p "$prompt$pdefault " reply
+    read -r -p "${prompt}${pdefault} " reply
 
     # Empty reply?
     echo "${reply:-$default}"
@@ -104,7 +104,7 @@ ERR
         elif [ -n "$(command -v cyg-get)" ]; then
             cyg-get ${@}
         else
-            >&2 echo $error
+            >&2 echo ${error}
             return 1
         fi
 
@@ -117,11 +117,11 @@ ERR
 assert_compatibility() {
 
 error= << ERR
-"Requires git version 1.7.0 or higher, you've got $(git --version | awk '{print $3}')"
+"Requires git 1.7.0 or higher, you've got $(git --version | awk '{print $3}')"
 ERR
 
     if [[ ! $(git --version | awk '{print $3}') > 1.7.0 ]]; then
-        >&2 echo $error
+        >&2 echo ${error}
         return 1
     fi
 }
@@ -134,15 +134,15 @@ cat << STATUS
 STATUS
 
     # Cloning Submodules
-    echo "$status_prefix Cloning Submodules"
+    echo "${status_prefix} Cloning Submodules"
 
-    cd $DIR;
+    cd ${DIR};
     git submodule update --init --recursive;
-    cd $HOME;
+    cd ${HOME};
 }
 
 postinstall () {
-    echo "$status_prefix Rewriting Master URL to Use SSH"
+    echo "${status_prefix} Rewriting Master URL to Use SSH"
 
     cd ${DIR} > /dev/null || return;
     git remote set-url origin git@github.com:iamrecursion/dotfiles.git;
@@ -160,8 +160,6 @@ If using nvim or vim, please open the respective editor and run ':PlugInstall'
 to install the plugin configuration. This step will likely require system
 dependencies for the various plugins. These include:
 
-  - libboost
-  - libclang
   - rustc
   - ghc
   - stack
@@ -179,99 +177,116 @@ install () {
     link_tmux || exit 1
     link_gdb || exit 1
     link_hammerspoon || exit 1
+    link_karabiner || exit 1
 
     create_gitconfig || exit 1
+}
 
-    # TODO Create Manager for Chunkwrm Config (Mac Only)
+link_karabiner () {
+    file_name="karabiner.json"
+    karabiner_tgt="${HOME}/.config/karabiner"
+    karabiner_src="${DIR}/karabiner/${file_name}"
+
+    if [[ ${platform} == "macos" ]]; then
+        echo "${status_prefix} Linking Karabiner Configuration";
+
+        if [[ ! -d ${karabiner_tgt} ]]; then
+            mkdir -p ${karabiner_tgt};
+        fi
+
+        ln -sf "${karabiner_src}" "${karabiner_tgt}/${file_name}"
+    fi
 }
 
 link_hammerspoon () {
-    hammerspoon_dir="$HOME/.hammerspoon"
-    hammerspoon_src="$DIR/hammerspoon"
+    hammerspoon_dir="${HOME}/.hammerspoon"
+    hammerspoon_src="${DIR}/hammerspoon"
 
     if [[ ${platform} == "macos" ]]; then
-        echo "$status_prefix Linking Hammerspoon Configuration"
+        echo "${status_prefix} Linking Hammerspoon Configuration"
 
-        ln -sf $hammerspoon_src $hammerspoon_dir
+        ln -sf ${hammerspoon_src} ${hammerspoon_dir}
     fi
 }
 
 link_zsh () {
-    echo "$status_prefix Linking ZSH Configuration"
+    echo "${status_prefix} Linking ZSH Configuration"
 
-    ln -sf $DIR/zsh/zshrc $HOME/.zshrc
+    ln -sf ${DIR}/zsh/zshrc ${HOME}/.zshrc
 
     return 0
 }
 
 link_neovim () {
-    echo "$status_prefix Linking Neovim Configuration"
+    echo "${status_prefix} Linking Neovim Configuration"
 
-    nvimrc_dir="$HOME/.config/nvim"
-    nvim_plugs_dir="$HOME/.local/share/nvim/site"
+    nvimrc_dir="${HOME}/.config/nvim"
+    nvim_plugs_dir="${HOME}/.local/share/nvim/site"
 
-    if [ ! -d  "$nvimrc_dir" ]; then
-        echo "$status_prefix Creating directory "$nvimrc_dir" for Nvim \
-    configuration";
-        mkdir -p "$nvimrc_dir"
+    if [ ! -d  "${nvimrc_dir}" ]; then
+        echo "${status_prefix} Creating "${nvimrc_dir}" for Nvim \
+            configuration";
+        mkdir -p "${nvimrc_dir}"
     fi
 
-    ln -sf "$DIR/nvim/init.vim" "$nvimrc_dir/init.vim"
-    ln -sf "$DIR/nvim/coc-settings.json" "$nvimrc_dir/coc-settings.json"
+    ln -sf "${DIR}/nvim/init.vim" "${nvimrc_dir}/init.vim"
+    ln -sf "${DIR}/nvim/coc-settings.json" "${nvimrc_dir}/coc-settings.json"
 
-    if [ ! -d "$nvim_plugs_dir" ]; then
-        echo "$status_prefix Creating directory "$nvim_plugs_dir" for plugins";
-        mkdir -p "$nvim_plugs_dir"
+    if [ ! -d "${nvim_plugs_dir}" ]; then
+        echo "${status_prefix} Creating "${nvim_plugs_dir}" for plugins";
+        mkdir -p "${nvim_plugs_dir}"
     fi
 
-    if [ ! -e "$nvim_plugs_dir/autoload" ]; then
-        ln -sf "$DIR/nvim/autoload" "$nvim_plugs_dir/autoload"
+    if [ ! -e "${nvim_plugs_dir}/autoload" ]; then
+        ln -sf "${DIR}/nvim/autoload" "${nvim_plugs_dir}/autoload"
     fi
 
     return 0
 }
 
 link_tmux () {
-    echo "$status_prefix Linking Tmux configuration"
+    echo "${status_prefix} Linking Tmux configuration"
 
-    ln -sf "$DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+    ln -sf "${DIR}/tmux/tmux.conf" "${HOME}/.tmux.conf"
 
     return 0
 }
 
 link_gdb () {
-    echo "$status_prefix Linking GDB Configuration"
+    echo "${status_prefix} Linking GDB Configuration"
 
-    ln -sf "$DIR/tools/gdbinit" "$HOME/.gdbinit"
+    ln -sf "${DIR}/tools/gdbinit" "${HOME}/.gdbinit"
 
     return 0
 }
 
 create_gitconfig () {
-    target_file="$HOME/.gitconfig"
+    target_file="${HOME}/.gitconfig"
 
-    echo "$status_prefix Creating Git Configuration"
+    confirm "Create gitconfig?" || return 0
 
-    cp "$DIR/git/gitconfig" "${target_file}"
+    echo "${status_prefix} Creating Git Configuration"
+
+    cp "${DIR}/git/gitconfig" "${target_file}"
 
     if [[ ${platform} == "macos" ]]; then
         response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
-        gsed -i "s/##git_name##/${response}/g" $target_file
+        gsed -i "s/##git_name##/${response}/g" ${target_file}
 
         response=$(confirm_string "Enter git user.email" "$(git config --get user.email)")
-        gsed -i "s/##git_email##/${response}/g" $target_file
+        gsed -i "s/##git_email##/${response}/g" ${target_file}
 
         response=$(confirm_string "Enter git user.signingkey" "$(git config --get user.email)")
-        gsed -i "s/##git_signingkey##/${response}/g" $target_file
+        gsed -i "s/##git_signingkey##/${response}/g" ${target_file}
     elif [[ ${platform} == "linux" ]]; then
         response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
-        sed -i "s/##git_name##/${response}/g" $target_file
+        sed -i "s/##git_name##/${response}/g" ${target_file}
 
         response=$(confirm_string "Enter git user.email" "$(git config --get user.email)")
-        sed -i "s/##git_email##/${response}/g" $target_file
+        sed -i "s/##git_email##/${response}/g" ${target_file}
 
         response=$(confirm_string "Enter git user.signingkey" "$(git config --get user.email)")
-        sed -i "s/##git_signingkey##/${response}/g" $target_file
+        sed -i "s/##git_signingkey##/${response}/g" ${target_file}
     else
         echo "Unknown platform ${platform}. Cannot execute sed."
     fi
@@ -280,7 +295,7 @@ create_gitconfig () {
     ignore_source_file="${DIR}/git/gitignore_global"
     ignore_target_file="${HOME}/.gitignore_global"
 
-    ln -sf $ignore_source_file $ignore_target_file
+    ln -sf ${ignore_source_file} ${ignore_target_file}
 
     return 0
 }
@@ -291,17 +306,17 @@ main () {
     # Getting Script Directory
     SOURCE="${BASH_SOURCE[0]}"
 
-    while [ -h "$SOURCE" ]; do # resolve $SOURCE until file is no longer a link
-      DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-      SOURCE="$(readlink "$SOURCE")"
-      [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # resolve relative symlinks
+    while [ -h "${SOURCE}" ]; do # resolve $SOURCE until file no longer a link
+      DIR="$( cd -P "$( dirname "${SOURCE}" )" >/dev/null 2>&1 && pwd )"
+      SOURCE="$(readlink "${SOURCE}")"
+      [[ ${SOURCE} != /* ]] && SOURCE="${DIR}/${SOURCE}" # resolve rel symlinks
     done
 
-    DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+    DIR="$( cd -P "$( dirname "${SOURCE}" )" >/dev/null 2>&1 && pwd )"
 
     # Install Setup
     detect_platform || exit 1
-    confirm "Install dotfiles onto $platform platform?"|| exit
+    confirm "Install dotfiles onto ${platform} platform?"|| exit
     install_system_package "${system_deps}" || exit 1
     assert_compatibility || exit 1
     preinstall
