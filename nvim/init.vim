@@ -121,12 +121,15 @@ nnoremap <F9> :set list!<CR>
 set listchars=eol:¬,trail:·,tab:⇥·,precedes:«,extends:»
 
 " Spellchecking Configuration
-set spell spelllang=en_gb
+set spell
+set spelllang=en_gb
 
 " Undo Configuration
 if has("persistent_undo")
     set undofile
-    set undolevels=1000
+    set undolevels=10000
+
+    " Allows undoing of reloading a file
     set undoreload=10000
 endif
 
