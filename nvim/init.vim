@@ -66,7 +66,6 @@ call plug#end()
 filetype plugin indent on
 imap <S-Tab> <BS>
 set autoindent
-set cursorcolumn
 set cursorline
 set expandtab
 set number
