@@ -225,6 +225,11 @@ if [[ -f $nix_profile_script ]]; then
     source $nix_profile_script
 fi
 
+opam_command="opam"
+if type "$opam_command" > /dev/null; then
+    eval $(opam config env)
+fi
+
 # Dircolors
 if [[ "${platform}" == "macos" ]]; then
     eval `gdircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
