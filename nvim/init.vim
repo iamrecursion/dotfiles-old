@@ -341,7 +341,7 @@ let g:coc_status_info_sign = '❯'
 let g:coc_status_message_sign = '❯'
 
 " Vim Tmux Navigator Configuration
-let g:tmux_navigator_save_on_switch = 1
+let g:tmux_navigator_save_on_switch = 2
 let g:tmux_nagigator_no_mappings = 1
 
 nnoremap <silent> <C-h> :TmuxNavigateLeft <CR>

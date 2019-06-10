@@ -272,13 +272,10 @@ bindkey '^Z' fancy-ctrl-z
 
 # MacOS Library Overrides
 if [[ ${platform} == "macos" ]]; then
-    libffi_name="libffi.pc"
+    libffi_path="/usr/local/opt/libffi/lib/pkgconfig/libffi.pc"
 
-    local_path=`locate $libffi_name | grep local`
-    dirname_local_path=`dirname $local_path`
-
-    if [[ $PKG_CONFIG_PATH != *$dirname_local_path* ]]; then
-        export PKG_CONFIG_PATH=$dirname_local_path:$PKG_CONFIG_PATH
+    if [[ $PKG_CONFIG_PATH != *$libffi_path* ]]; then
+        export PKG_CONFIG_PATH=$libffi_path:$PKG_CONFIG_PATH
     fi
 fi
 
