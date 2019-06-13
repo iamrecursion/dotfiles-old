@@ -4,3 +4,11 @@
 
 .projections.json
 
+#####################
+## IDE Integration ##
+#####################
+
+*@neomake*
+.metals
+.idea
+
