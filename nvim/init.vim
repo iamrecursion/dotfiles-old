@@ -80,11 +80,11 @@ set tabstop=4
 set wrap
 
 " Colour Schemes for Vim
- colorscheme solarized
- let g:solarized_termtrans=1
- set background=dark
- set t_Co=16
- syntax enable
+colorscheme solarized
+let g:solarized_termtrans=1
+set background=dark
+set t_Co=16
+syntax enable
 
 " Splits Control
 set splitbelow
