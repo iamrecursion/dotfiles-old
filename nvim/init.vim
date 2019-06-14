@@ -301,7 +301,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " - coc-github
 " - coc-java
 " - coc-json
-" - coc-json
 " - coc-lists
 " - coc-python
 " - coc-rls
