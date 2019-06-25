@@ -38,7 +38,7 @@ fi
 
 source ~/.dotfiles/modules/zplug/init.zsh
 
-# Load Plugins (Handling some Crashes)
+# Load Plugins (Handling some potential Crashes)
 zplug "zsh-users/zsh-syntax-highlighting", defer:1, \
     if:"[[ $file_being_sourced != 0 ]]"
 zplug "zsh-users/zsh-history-substring-search", \
