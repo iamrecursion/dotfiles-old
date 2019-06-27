@@ -8,14 +8,18 @@ applications that I use every day in the terminal, and works in a cross-platform
 manner between MacOS and Linux. It provides configuration for the following:
 
 - `git`: A sensible gitconfig where user name, email and GPG key can be set at
-  install time.
+  install time, as well as a sensible global gitignore. The gitconfig is set up
+  to work with this gitignore.
 - `hammerspoon`: A config with a few useful utilities (MacOS only).
+- `karabiner`: A simple configuration that remaps `Ctrl` and `Fn`, and also
+  makes caps lock behave as `Esc` when pressed and `Ctrl` when held.
 - `neovim`: A detailed configuration containing years-worth of work to get the
   fluid editing of vim with comprehensive IDE features for Haskell, C++, Python,
-  and a variety of other languages.
-- `tmux`: A configuration that makes using tmux truly intuitive.
+  Scala, Rust, and a variety of other languages.
+- `tmux`: A configuration that makes using tmux truly intuitive, and also allows
+  for seamless interoperation with Neovim.
 - `zsh`: A configuration that makes my favourite shell even better and more
-  fluid to use.
+  fluid to use, including a custom theme with a _useful_ prompt clock.
 
 All of this configuration is, of course, incredibly personal, so I don't expect
 anybody to use it without making changes. Nevertheless, if you find yourself
@@ -48,4 +52,8 @@ their final locations.
 
 NB: This will overwrite any existing configuration that exists at the target
 paths, so if you want to try these out please back up your configuration.
+
+## Credits
+This repository and readme makes use of the [Dofiles Logo](https://github.com/jglovier/dotfiles-logo)
+kindly created and provided by [Joel Glovier](https://github.com/jglovier).
 
