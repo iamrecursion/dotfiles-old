@@ -28,7 +28,7 @@ Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
 Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build() } }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -294,6 +294,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " - [CCLS](https://github.com/MaskRay/ccls/)
 " - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
 " - [coc-lua](https://github.com/Alloyed/lua-lsp)
+" - [metals](https://scalameta.org/metals/)
 " - coc-calc
 " - coc-dictionary
 " - coc-emoji
