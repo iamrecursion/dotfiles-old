@@ -243,6 +243,11 @@ if type "jenv" > /dev/null; then
     eval "$(jenv init -)"
 fi
 
+igv_path_mac=~/Applications/idealgraphvisualizer/bin
+if [[ -d $igv_path_mac ]] && [[ $PATH != *$igv_path_mac* ]]; then
+    export PATH=$igv_path_mac:$PATH
+fi
+
 # Dircolors
 if [[ "${platform}" == "macos" ]]; then
     eval `gdircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
