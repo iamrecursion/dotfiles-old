@@ -105,6 +105,8 @@ bindkey -M vicmd 'j' history-substring-search-down
 bindkey "^ " autosuggest-accept
 bindkey "^H" autosuggest-clear
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Timezone (Only Set on Linux)
 if [[ "${platform}" == "linux" ]]; then
@@ -243,9 +245,14 @@ if type "jenv" > /dev/null; then
     eval "$(jenv init -)"
 fi
 
-igv_path_mac=~/Applications/idealgraphvisualizer/bin
-if [[ -d $igv_path_mac ]] && [[ $PATH != *$igv_path_mac* ]]; then
-    export PATH=$igv_path_mac:$PATH
+igv_path_mac=~/Applications/idealgraphvisualizer/bin/idealgraphvisualizer
+if [[ -f $igv_path_mac ]]; then
+    alias igv=$igv_path_mac
+fi
+
+jvisualvm_path_mac=/Library/Java/JavaVirtualMachines/graalvm-ee-19.1.0/Contents/Home/bin/jvisualvm
+if [[ -f $jvisualvm_path_mac ]]; then
+    alias jvisualvm=$jvisualvm_path_mac
 fi
 
 # Dircolors
