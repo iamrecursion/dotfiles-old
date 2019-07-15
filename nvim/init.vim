@@ -312,33 +312,33 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " - coc-vimlsp
 " - coc-yaml
 
-set hidden
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" set hidden
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"
+" nn <silent> J :call CocActionAsync('doHover')<CR>
+"
+" nn <silent> <leader><leader>l :CocList<CR>
+"
+" nn <silent> <leader><leader>crs :call CocActionAsync('rename')<CR>
+" nn <silent> <leader><leader>css :call CocActionAsync('sourceStat')<CR>
+" nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
+" nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
+" nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
+" nn <silent> <leader><leader>csl :call CocActionAsync('documentSymbols')<CR>
+" nn <silent> <leader><leader>ccf :call CocActionAsync('formatSelected')<CR>
+" nn <silent> <leader><leader>cca :call CocActionAsync('codeAction')<CR>
+" nn <silent> <leader><leader>cla :call CocActionAsync('codeLensAction')<CR>
+" nn <silent> <leader><leader>clc :call CocActionAsync('commands')<CR>
+" nn <silent> <leader><leader>crc :call CocActionAsync('runCommand')<CR>
 
-nn <silent> J :call CocActionAsync('doHover')<CR>
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-nn <silent> <leader><leader>l :CocList<CR>
-
-nn <silent> <leader><leader>crs :call CocActionAsync('rename')<CR>
-nn <silent> <leader><leader>css :call CocActionAsync('sourceStat')<CR>
-nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
-nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
-nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
-nn <silent> <leader><leader>csl :call CocActionAsync('documentSymbols')<CR>
-nn <silent> <leader><leader>ccf :call CocActionAsync('formatSelected')<CR>
-nn <silent> <leader><leader>cca :call CocActionAsync('codeAction')<CR>
-nn <silent> <leader><leader>cla :call CocActionAsync('codeLensAction')<CR>
-nn <silent> <leader><leader>clc :call CocActionAsync('commands')<CR>
-nn <silent> <leader><leader>crc :call CocActionAsync('runCommand')<CR>
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-let g:coc_start_at_startup = 1
-let g:coc_status_error_sign = '❯'
-let g:coc_status_warning_sign = '❯'
-let g:coc_status_info_sign = '❯'
-let g:coc_status_message_sign = '❯'
+" let g:coc_start_at_startup = 1
+" let g:coc_status_error_sign = '❯'
+" let g:coc_status_warning_sign = '❯'
+" let g:coc_status_info_sign = '❯'
+" let g:coc_status_message_sign = '❯'
 
 " Vim Tmux Navigator Configuration
 let g:tmux_navigator_save_on_switch = 2
