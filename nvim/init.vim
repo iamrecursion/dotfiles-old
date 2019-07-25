@@ -3,11 +3,17 @@
 
 let g:plug_shallow=0
 
+function! CondPlugin(cond, ...)
+    " Allows for conditional use of plugins
+    " e.g. Plug 'benekastah/neomake', Cond(has('nvim'), { 'on': 'Neomake' })
+    let opts = get(a:000, 0, {})
+    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " These plugins require: Python 3, Ruby, and Node.js providers for Neovim
 
-Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
 Plug 'christoomey/vim-sort-motion'
@@ -23,10 +29,12 @@ Plug 'idanarye/vim-vebugger'
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
 Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
+Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc-neco'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
 Plug 'neomake/neomake'
@@ -154,6 +162,7 @@ let &colorcolumn=join([81,101],",")
 highlight colorcolumn ctermbg=0
 
 " Python Support
+set pyx=3
 let g:loaded_python_provider = 1 " Disable Py2
 
 if has('mac')
@@ -312,33 +321,33 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " - coc-vimlsp
 " - coc-yaml
 
-" set hidden
-" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-"
-" nn <silent> J :call CocActionAsync('doHover')<CR>
-"
-" nn <silent> <leader><leader>l :CocList<CR>
-"
-" nn <silent> <leader><leader>crs :call CocActionAsync('rename')<CR>
-" nn <silent> <leader><leader>css :call CocActionAsync('sourceStat')<CR>
-" nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
-" nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
-" nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
-" nn <silent> <leader><leader>csl :call CocActionAsync('documentSymbols')<CR>
-" nn <silent> <leader><leader>ccf :call CocActionAsync('formatSelected')<CR>
-" nn <silent> <leader><leader>cca :call CocActionAsync('codeAction')<CR>
-" nn <silent> <leader><leader>cla :call CocActionAsync('codeLensAction')<CR>
-" nn <silent> <leader><leader>clc :call CocActionAsync('commands')<CR>
-" nn <silent> <leader><leader>crc :call CocActionAsync('runCommand')<CR>
+set hidden
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-" autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+nn <silent> J :call CocActionAsync('doHover')<CR>
 
-" let g:coc_start_at_startup = 1
-" let g:coc_status_error_sign = '❯'
-" let g:coc_status_warning_sign = '❯'
-" let g:coc_status_info_sign = '❯'
-" let g:coc_status_message_sign = '❯'
+nn <silent> <leader><leader>l :CocList<CR>
+
+nn <silent> <leader><leader>crs :call CocActionAsync('rename')<CR>
+nn <silent> <leader><leader>css :call CocActionAsync('sourceStat')<CR>
+nn <silent> <leader><leader>cjd :call CocActionAsync('jumpDefinition')<CR>
+nn <silent> <leader><leader>cjc :call CocActionAsync('jumpDeclaration')<CR>
+nn <silent> <leader><leader>cji :call CocActionAsync('jumpImplementation')<CR>
+nn <silent> <leader><leader>csl :call CocActionAsync('documentSymbols')<CR>
+nn <silent> <leader><leader>ccf :call CocActionAsync('formatSelected')<CR>
+nn <silent> <leader><leader>cca :call CocActionAsync('codeAction')<CR>
+nn <silent> <leader><leader>cla :call CocActionAsync('codeLensAction')<CR>
+nn <silent> <leader><leader>clc :call CocActionAsync('commands')<CR>
+nn <silent> <leader><leader>crc :call CocActionAsync('runCommand')<CR>
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+let g:coc_start_at_startup = 1
+let g:coc_status_error_sign = '❯'
+let g:coc_status_warning_sign = '❯'
+let g:coc_status_info_sign = '❯'
+let g:coc_status_message_sign = '❯'
 
 " Vim Tmux Navigator Configuration
 let g:tmux_navigator_save_on_switch = 2
@@ -655,4 +664,10 @@ let g:vissort_option="i"
 " Vim-Scala Configuration
 let g:scala_scaladoc_indent = 1
 au BufRead,BufNewFile *.sbt set filetype=scala
+
+" Signify Configuration
+let g:signify_vcs_list = ["git", "hg"]
+let g:signify_realtime = 1
+
+highlight SignColumn ctermbg=0 cterm=NONE guibg=NONE gui=NONE
 

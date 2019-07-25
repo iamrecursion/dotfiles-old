@@ -13,11 +13,14 @@ file_being_sourced=$?
 
 platform=""
 
+platform_macos="macos"
+platform_linux="linux"
+
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
-        platform="linux"
+        platform=${platform_linux}
     elif [[ "${OSTYPE}" == "darwin"* ]]; then
-        platform="macos"
+        platform=${platform_macos}
     else
         >&2 echo "Unknown platform";
         return 1;
@@ -27,7 +30,7 @@ detect_platform
 
 # Locale =====================================================================
 
-if [[ "${platform}" == "linux" ]]; then
+if [[ "${platform}" == "${platform_linux}" ]]; then
     export LANG='en_GB.UTF-8'
     export LANGUAGE='en_GB.UTF-8'
     export LC_ALL='en_GB.UTF-8'
@@ -109,7 +112,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Timezone (Only Set on Linux)
-if [[ "${platform}" == "linux" ]]; then
+if [[ "${platform}" == "${platform_linux}" ]]; then
     export TZ="Europe/London"
 fi
 
@@ -131,15 +134,15 @@ alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
 alias reload="source ~/.dotfiles/zsh/zshrc"
 
 # MacOS Specific Utility Aliases
-if [[ ${platform} == "macos" ]]; then
+if [[ ${platform} == "${platform_macos}" ]]; then
     alias resetcam="sudo killall VDCAssistant"
     alias resetcam!="sudo killall VDCAssistant"
 fi
 
 # Navigation Aliases
-if [[ ${platform} == "macos" ]]; then
+if [[ ${platform} == "${platform_macos}" ]]; then
     alias ls="gls -F --color=auto --group-directories-first";
-elif [[ ${platform} == "linux" ]]; then
+elif [[ ${platform} == "${platform_linux}" ]]; then
     alias ls="gls -F --color=auto --group-directories-first";
 fi
 
@@ -149,7 +152,7 @@ alias cdh="cd ~/"
 alias cdo="cd ~/OneDrive"
 alias u="cd .."
 
-if [[ ${platform} == "macos" ]]; then
+if [[ ${platform} == "${platform_macos}" ]]; then
     alias cdc="cd ~/iCloudDrive"
 fi
 
@@ -245,14 +248,16 @@ if type "jenv" > /dev/null; then
     eval "$(jenv init -)"
 fi
 
-igv_path_mac=~/Applications/idealgraphvisualizer/bin/idealgraphvisualizer
-if [[ -f $igv_path_mac ]]; then
-    alias igv=$igv_path_mac
+igv_path=~/Applications/idealgraphvisualizer/bin/idealgraphvisualizer
+if [[ -f $igv_path ]]; then
+    alias igv=$igv_path
 fi
 
-jvisualvm_path_mac=/Library/Java/JavaVirtualMachines/graalvm-ee-19.1.0/Contents/Home/bin/jvisualvm
-if [[ -f $jvisualvm_path_mac ]]; then
-    alias jvisualvm=$jvisualvm_path_mac
+if [[ "${platform}" == "${platform_macos}" ]]; then
+    jvisualvm_path_mac=/Library/Java/JavaVirtualMachines/graalvm-ee*/Contents/Home/bin/jvisualvm
+    if [[ -f $jvisualvm_path_mac ]]; then
+        alias jvisualvm=$jvisualvm_path_mac
+    fi
 fi
 
 # Dircolors
