@@ -84,13 +84,15 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 # Matching Configuration
-setopt autocd       # Allows typing a directory name to cd to it
-setopt extendedglob # Allows non (ba)sh compatible globbing
-setopt nomatch      # Show failed glob warnings
-setopt notify       # Notify users on glob errors
+setopt autocd             # Allows typing a directory name to cd to it
+setopt extendedglob       # Allows non (ba)sh compatible globbing
+setopt nomatch            # Show failed glob warnings
+setopt notify             # Notify users on glob errors
+setopt inc_append_history # Dynamically append to history
 
 # No Beep
-unsetopt appendhistory beep
+unsetopt appendhistory
+unsetopt beep
 
 # Keymap
 bindkey -v
