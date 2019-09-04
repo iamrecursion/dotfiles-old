@@ -31,6 +31,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
+Plug 'lervag/vimtex'
 Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
@@ -45,6 +46,7 @@ Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -301,25 +303,34 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " Installed Language Servers (Most from AUR or Brew)
 " - [CCLS](https://github.com/MaskRay/ccls/)
 " - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
-" - [coc-lua](https://github.com/Alloyed/lua-lsp)
 " - [metals](https://scalameta.org/metals/)
-" - coc-calc
-" - coc-dictionary
-" - coc-emoji
-" - coc-fsharp (requires mono)
-" - coc-git (requires git)
-" - coc-github
-" - coc-java
-" - coc-json
-" - coc-lists
-" - coc-python
-" - coc-rls
-" - coc-sh
-" - coc-svg
-" - coc-syntax
-" - coc-tsserver
-" - coc-vimlsp
-" - coc-yaml
+
+call coc#add_extension('coc-calc')
+call coc#add_extension('coc-dictionary')
+call coc#add_extension('coc-emoji')
+call coc#add_extension('coc-fsharp')
+call coc#add_extension('coc-git')
+call coc#add_extension('coc-github')
+call coc#add_extension('coc-gitignore')
+call coc#add_extension('coc-highlight')
+call coc#add_extension('coc-html')
+call coc#add_extension('coc-java')
+call coc#add_extension('coc-json')
+call coc#add_extension('coc-lists')
+call coc#add_extension('coc-lua')
+call coc#add_extension('coc-marketplace')
+call coc#add_extension('coc-omnisharp')
+call coc#add_extension('coc-python')
+call coc#add_extension('coc-rls')
+call coc#add_extension('coc-sh')
+call coc#add_extension('coc-sql')
+call coc#add_extension('coc-svg')
+call coc#add_extension('coc-syntax')
+call coc#add_extension('coc-texlab')
+call coc#add_extension('coc-tsserver')
+call coc#add_extension('coc-vimlsp')
+call coc#add_extension('coc-xml')
+call coc#add_extension('coc-yaml')
 
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -361,7 +372,7 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious <CR>
 
 " Vim Airline Configuration
 set laststatus=2
-let g:airline_theme='solarized' " badwolf, solarized, molokai are all nice
+let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1

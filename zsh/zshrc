@@ -237,17 +237,19 @@ fi
 
 opam_command="opam"
 if type "$opam_command" > /dev/null; then
-    eval $(opam config env)
+    opam_path_ext=${HOME}/.opam/default/bin
+
+    if [[ $PATH != *${opam_path_ext}* ]]; then
+        eval "$(opam config env)"
+    fi
 fi
 
 if type "jenv" > /dev/null; then
-    jenv_loc=${HOME}/.jenv/bin
+    jenv_shims_dir=${HOME}/.jenv/shims
 
-    if [[ -d ${jenv_loc} ]]; then
-        export PATH=${jenv_loc}:$PATH
+    if [[ $PATH != *${jenv_shims_dir}* ]]; then
+        eval "$(jenv init -)"
     fi
-
-    eval "$(jenv init -)"
 fi
 
 igv_path=~/Applications/idealgraphvisualizer/bin/idealgraphvisualizer
