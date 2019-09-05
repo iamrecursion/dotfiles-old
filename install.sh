@@ -14,12 +14,14 @@ system_deps=""
 status_prefix="INFO >>";
 
 # Functions
+platform_linux="linux"
+platform_macos="macos"
 
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
-        platform="linux"
+        platform=${platform_linux}
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        platform="macos"
+        platform=${platform_macos}
     else
         >&2 echo "Unknown platform";
         return 1;
@@ -84,7 +86,7 @@ error= << ERR
 "Installing system packages currently not compatible with your package manager.
 ERR
 
-    if [[ "${platform}" == "linux" ]] ; then
+    if [[ "${platform}" == "${platform_linux}" ]] ; then
         if [ -n "$(command -v yay)" ]; then
             yay -Syu && yay -S ${@}
         elif [ -n "$(command -v pacman)" ]; then
@@ -96,9 +98,9 @@ ERR
             return 1
         fi
 
-    elif [[ "${platform}" == "macos" ]]; then
+    elif [[ "${platform}" == "${platform_macos}" ]]; then
         if [ -n "$(command -v brew)" ]; then
-            apt-cyg update && apt-cyg install ${@}
+            brew update && brew install ${@}
         elif [ -n "$(command -v cyg-apt)" ]; then
             cyg-apt update && cyg-apt install ${@}
         elif [ -n "$(command -v cyg-get)" ]; then
@@ -178,8 +180,18 @@ install () {
     link_gdb || exit 1
     link_hammerspoon || exit 1
     link_karabiner || exit 1
+    link_intellij || exit 1
 
     create_gitconfig || exit 1
+}
+
+link_intellij () {
+    source_file="${DIR}/intellij/ideavimrc"
+    target_file="${HOME}/.ideavimrc"
+
+    echo "${status_prefix} Linking IntelliJ Configuration"
+
+    ln -sf "${source_file}" "${target_file}"
 }
 
 link_karabiner () {
@@ -187,7 +199,7 @@ link_karabiner () {
     karabiner_tgt="${HOME}/.config/karabiner"
     karabiner_src="${DIR}/karabiner/${file_name}"
 
-    if [[ ${platform} == "macos" ]]; then
+    if [[ "${platform}" == "${platform_macos}" ]]; then
         echo "${status_prefix} Linking Karabiner Configuration";
 
         if [[ ! -d ${karabiner_tgt} ]]; then
@@ -202,7 +214,7 @@ link_hammerspoon () {
     hammerspoon_dir="${HOME}/.hammerspoon"
     hammerspoon_src="${DIR}/hammerspoon"
 
-    if [[ ${platform} == "macos" ]]; then
+    if [[ ${platform} == "${platform_macos}" ]]; then
         echo "${status_prefix} Linking Hammerspoon Configuration"
 
         ln -sf ${hammerspoon_src} ${hammerspoon_dir}
@@ -269,7 +281,7 @@ create_gitconfig () {
 
     cp "${DIR}/git/gitconfig" "${target_file}"
 
-    if [[ ${platform} == "macos" ]]; then
+    if [[ ${platform} == "${platform_macos}" ]]; then
         response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
         gsed -i "s/##git_name##/${response}/g" ${target_file}
 
@@ -278,7 +290,7 @@ create_gitconfig () {
 
         response=$(confirm_string "Enter git user.signingkey" "$(git config --get user.email)")
         gsed -i "s/##git_signingkey##/${response}/g" ${target_file}
-    elif [[ ${platform} == "linux" ]]; then
+    elif [[ ${platform} == "${platform_linux}" ]]; then
         response=$(confirm_string "Enter git user.name" "$(git config --get user.name)")
         sed -i "s/##git_name##/${response}/g" ${target_file}
 

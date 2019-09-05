@@ -178,6 +178,8 @@ endif
 " Search Configuration
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
 nnoremap <leader><space> :nohlsearch<CR>
 command! H let @/=""
 nmap <space> zz
@@ -418,12 +420,6 @@ let g:intero_use_neomake = 1
 let g:intero_window_size = 15
 let g:intero_ghci_options = '-fobject-code'
 
-" let g:intero_backend = {
-        " \ 'command': 'stack repl',
-        " \ 'options': '-Wall',
-        " \ 'cwd': expand('%:p:h')
-        " \ }
-
 function! InteroAutoReload()
     if g:intero_started
         :InteroReload
@@ -541,6 +537,23 @@ let g:haskell_backpack = 1
 let g:haskell_indent_disable = 1
 
 " Denite.vim Configuration
+autocmd filetype denite call s:denite_my_mappings()
+
+function! s:denite_my_mappings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
 augroup deniteresize
   autocmd!
   autocmd VimResized,VimEnter * call denite#custom#option('default',
@@ -548,53 +561,6 @@ augroup deniteresize
 augroup end
 
 call denite#custom#option('default', {'winheight': winheight(0)/4})
-
-call denite#custom#option('default', {
-            \ 'prompt': '❯'
-            \ })
-
-call denite#custom#map(
-            \'insert',
-            \'<Esc>',
-            \'<denite:enter_mode:normal>',
-            \'noremap'
-            \)
-call denite#custom#map(
-            \'normal',
-            \'<Esc>',
-            \'<NOP>',
-            \'noremap'
-            \)
-call denite#custom#map(
-            \'insert',
-            \'<C-v>',
-            \'<denite:do_action:vsplit>',
-            \'noremap'
-            \)
-call denite#custom#map(
-            \'normal',
-            \'<C-v>',
-            \'<denite:do_action:vsplit>',
-            \'noremap'
-            \)
-call denite#custom#map(
-            \'normal',
-            \'dw',
-            \'<denite:delete_word_after_caret>',
-            \'noremap'
-            \)
-call denite#custom#map(
-            \ 'insert',
-            \ '<C-j>',
-            \ '<denite:move_to_next_line>',
-            \ 'noremap'
-            \)
-call denite#custom#map(
-            \ 'insert',
-            \ '<C-k>',
-            \ '<denite:move_to_previous_line>',
-            \ 'noremap'
-            \)
 
 call denite#custom#var('file/rec', 'command',
             \ ['rg', '--follow', '--hidden', '--files', '--glob', '!.git'])
@@ -610,7 +576,7 @@ call denite#custom#var('grep', 'final_opts', [])
 nnoremap <C-p> :Denite file/rec <CR>
 nnoremap <C-e> :Denite buffer<CR>
 nnoremap <C-i> :Denite grep <CR>
-nnoremap <C-o> :Denite buffer line register<CR>
+nnoremap <C-o> :Denite line register<CR>
 
 " Neomake Configuration
 call neomake#configure#automake('rnw', 250)
