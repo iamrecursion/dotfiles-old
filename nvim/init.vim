@@ -33,7 +33,7 @@ Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
 Plug 'lervag/vimtex'
 Plug 'LnL7/vim-nix'
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc-neco'
