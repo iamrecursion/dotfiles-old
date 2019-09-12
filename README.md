@@ -11,6 +11,8 @@ manner between MacOS and Linux. It provides configuration for the following:
   install time, as well as a sensible global gitignore. The gitconfig is set up
   to work with this gitignore.
 - `hammerspoon`: A config with a few useful utilities (MacOS only).
+- `intellij`: A config for [IdeaVim](https://github.com/JetBrains/ideavim) to
+  provide some sensible default configuration for editing.
 - `karabiner`: A simple configuration that remaps `Ctrl` and `Fn`, and also
   makes caps lock behave as `Esc` when pressed and `Ctrl` when held.
 - `neovim`: A detailed configuration containing years-worth of work to get the
