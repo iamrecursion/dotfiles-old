@@ -112,7 +112,7 @@ endif
 
 " Improvements to Pasting
 vnoremap <silent> y y`]
-vnoremap <silent> p p']
+vnoremap <silent> p p`]
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
