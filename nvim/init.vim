@@ -180,6 +180,7 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set inccommand=nosplit
 nnoremap <leader><space> :nohlsearch<CR>
 command! H let @/=""
 nmap <space> zz
