@@ -12,3 +12,9 @@
 .metals
 .idea
 
+##################
+## System Files ##
+##################
+
+.DS_Store
+
