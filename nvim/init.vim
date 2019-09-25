@@ -333,6 +333,7 @@ call coc#add_extension('coc-svg')
 call coc#add_extension('coc-syntax')
 call coc#add_extension('coc-texlab')
 call coc#add_extension('coc-tsserver')
+call coc#add_extension('coc-utils')
 call coc#add_extension('coc-vimlsp')
 call coc#add_extension('coc-vimtex')
 call coc#add_extension('coc-xml')
@@ -651,4 +652,7 @@ let g:signify_vcs_list = ["git", "hg"]
 let g:signify_realtime = 1
 
 highlight SignColumn ctermbg=0 cterm=NONE guibg=NONE gui=NONE
+
+" Vimtex Configuration
+let g:vimtex_compiler_progname = 'nvr'
 
