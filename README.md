@@ -14,7 +14,8 @@ manner between MacOS and Linux. It provides configuration for the following:
 - `intellij`: A config for [IdeaVim](https://github.com/JetBrains/ideavim) to
   provide some sensible default configuration for editing.
 - `karabiner`: A simple configuration that remaps `Ctrl` and `Fn`, and also
-  makes caps lock behave as `Esc` when pressed and `Ctrl` when held.
+  makes caps lock behave as `Esc` when pressed and `Ctrl` when held (MacOS 
+  only),
 - `neovim`: A detailed configuration containing years-worth of work to get the
   fluid editing of vim with comprehensive IDE features for Haskell, C++, Python,
   Scala, Rust, and a variety of other languages.
