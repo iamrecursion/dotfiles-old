@@ -26,3 +26,6 @@ nnoremap <C-l> <C-w>l
 " Leader Configuration
 let mapleader=","
 
+" IntelliJ Only
+set ideajoin
+
