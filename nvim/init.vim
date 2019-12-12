@@ -342,7 +342,7 @@ call coc#add_extension('coc-yaml')
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-nn <silent> J :call CocActionAsync('doHover')<CR>
+nn <silent> H :call CocActionAsync('doHover')<CR>
 
 nn <silent> <leader><leader>l :CocList<CR>
 
