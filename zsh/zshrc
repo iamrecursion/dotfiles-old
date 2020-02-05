@@ -15,6 +15,7 @@ platform=""
 
 platform_macos="macos"
 platform_linux="linux"
+platform_wsl="wsl"
 
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
