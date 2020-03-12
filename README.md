@@ -41,7 +41,7 @@ will need the above listed programs installed to make use of the configuration.
    git clone https://github.com/iamrecursion/dotfiles ~/.dotfiles
    ```
 2. Execute the install script. You may need to explicitly tell it which bash to
-   use if you fail the compatibility check.
+   use if you fail the compatibility check (common on MacOS).
 
    ```
    ~/.dotfiles/install.sh
