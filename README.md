@@ -59,4 +59,3 @@ paths, so if you want to try these out please back up your configuration.
 ## Credits
 This repository and readme makes use of the [Dofiles Logo](https://github.com/jglovier/dotfiles-logo)
 kindly created and provided by [Joel Glovier](https://github.com/jglovier).
-
