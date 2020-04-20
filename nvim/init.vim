@@ -44,8 +44,8 @@ Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'Olical/vim-enmasse'
 Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim'
@@ -288,6 +288,9 @@ endfunction
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 " FILETYPE SPECIFIC OPTIONS ===================================================
+
+" Make
+autocmd FileType typescript set expandtab shiftwidth=2 softtabstop=2
 
 " Make
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
