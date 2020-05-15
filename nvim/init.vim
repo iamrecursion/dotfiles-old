@@ -31,6 +31,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
+Plug 'kustosz/vim-enso-syntax'
 Plug 'lervag/vimtex'
 Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
