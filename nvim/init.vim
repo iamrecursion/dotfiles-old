@@ -126,9 +126,9 @@ let mapleader=","
 set timeout timeoutlen=1000
 
 " Listings Configuration
-nnoremap <F9> :set list!<CR>
-nnoremap <leader><leader>l :set list!<CR>
-set listchars=eol:¬,trail:·,tab:⇥·,precedes:«,extends:»
+set list
+set showbreak=↪\
+set listchars=tab:\ \ ,trail:·,precedes:«,extends:»,nbsp:␣
 
 " Spellchecking Configuration
 set spell
