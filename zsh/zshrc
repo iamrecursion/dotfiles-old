@@ -43,13 +43,11 @@ fi
 source ~/.dotfiles/modules/zplug/init.zsh
 
 # Load Plugins (Handling some potential Crashes)
-zplug "zsh-users/zsh-syntax-highlighting", defer:1, \
-    if:"[[ $file_being_sourced != 0 ]]"
+zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search", \
     use:"./zsh-history-substring-search.zsh", \
-    on:"zsh-users/zsh-syntax-highlighting", if:"[[ $file_being_sourced != 0 ]]"
-zplug "~/.dotfiles/modules/zsh-autosuggestions", from:local, \
-    use:"./zsh-autosuggestions.zsh", defer:2
+    on:"zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/compleat", from:oh-my-zsh
@@ -65,7 +63,7 @@ zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
 zplug "robbyrussell/oh-my-zsh", use:"./lib/*.zsh"
 
 # Load Theme
-zplug "~/.dotfiles/themes/", from:local, use:"recursion_pure.zsh-theme", defer:3
+zplug "~/.dotfiles/themes/", from:local, use:"recursion_pure.zsh-theme"
 
 # Install Plugins
 if ! zplug check --verbose; then
@@ -130,11 +128,13 @@ alias nvi="nvim"
 # Tmux Configuration
 alias tmuxconf="nvim ~/.dotfiles/tmux/tmux.conf"
 
+# ZSH Configuration
+alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
+alias reload="source ~/.dotfiles/zsh/zshrc"
+
 # Generic Utility Aliases
 alias nettest="ping 8.8.8.8"
 alias dnstest="ping google.com"
-alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
-alias reload="source ~/.dotfiles/zsh/zshrc"
 
 # MacOS Specific Utility Aliases
 if [[ ${platform} == "${platform_macos}" ]]; then
@@ -160,8 +160,6 @@ if [[ ${platform} == "${platform_macos}" ]]; then
 fi
 
 # Git Aliases
-alias gd="git diff"
-alias gdt="git difftool"
 alias gb="git branch -va"
 
 # Time Enhancement
@@ -179,9 +177,6 @@ function mkcd() {
     mkdir -p $1;
     cd $1
 }
-
-# Check Ruby Version
-
 
 # PATH Changes
 ruby_version=`ruby -v | awk '{split($2, res, "."); print res[1] "." res[2] }'`.0
@@ -245,10 +240,11 @@ if type "$opam_command" > /dev/null; then
     fi
 fi
 
-if type "jenv" > /dev/null; then
-    jenv_shims_dir=${HOME}/.jenv/shims
+jenv_bin_dir=~/.jenv/bin
+if hash jenv 2>/dev/null; then
+    if [[ $PATH != *${jenv_bin_dir}* ]]; then
+        export PATH=${jenv_bin_dir}:$PATH
 
-    if [[ $PATH != *${jenv_shims_dir}* ]]; then
         eval "$(jenv init -)"
     fi
 fi
