@@ -14,7 +14,7 @@ repository:
   has_projects: false
   has_downloads: true
 
-  default_branch: trunk
+  default_branch: main
 
   allow_squash_merge: true
   allow_merge_commit: false
