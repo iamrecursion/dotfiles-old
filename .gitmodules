@@ -13,6 +13,3 @@
 [submodule "modules/zplug"]
 	path = modules/zplug
 	url = https://github.com/zplug/zplug
-[submodule "modules/zsh-autosuggestions"]
-	path = modules/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
