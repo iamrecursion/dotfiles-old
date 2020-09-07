@@ -660,4 +660,5 @@ highlight SignColumn ctermbg=0 cterm=NONE guibg=NONE gui=NONE
 
 " Vimtex Configuration
 let g:vimtex_compiler_progname = 'nvr'
+let g:tex_flavor = 'latex'
 

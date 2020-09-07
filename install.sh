@@ -20,6 +20,8 @@ platform_macos="macos"
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
         platform=${platform_linux}
+    elif [[ "${OSTYPE}" == "linux-musl" ]]; then
+        platform=${platform_linux}
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         platform=${platform_macos}
     else

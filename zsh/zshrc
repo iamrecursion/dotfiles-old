@@ -20,6 +20,8 @@ platform_wsl="wsl"
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
         platform=${platform_linux}
+    elif [[ "${OSTYPE}" == "linux-musl" ]]; then
+        platform=${platform_linux}
     elif [[ "${OSTYPE}" == "darwin"* ]]; then
         platform=${platform_macos}
     else
@@ -146,7 +148,7 @@ fi
 if [[ ${platform} == "${platform_macos}" ]]; then
     alias ls="gls -F --color=auto --group-directories-first";
 elif [[ ${platform} == "${platform_linux}" ]]; then
-    alias ls="gls -F --color=auto --group-directories-first";
+    alias ls="ls -F --color=auto --group-directories-first";
 fi
 
 alias ll="ls -lh"
@@ -277,6 +279,11 @@ else
     eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
 fi
 
+# GPG Configuration
+if [[ "${platform}" = "linux" ]]; then
+    export GPG_TTY=$(tty)
+fi
+
 # Input Control
 autoload zkbd
 [[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
@@ -327,7 +334,6 @@ if [[ ${platform} == "macos" ]]; then
 fi
 
 # Useful Dev Tooling
-autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
@@ -345,6 +351,10 @@ load-nvmrc() {
     nvm use default
   fi
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
 
+if hash nvm 2>/dev/null; then
+    echo "HAS NVM"
+    # autoload -U add-zsh-hook
+    # add-zsh-hook chpwd load-nvmrc
+    # load-nvmrc
+fi
