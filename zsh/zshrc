@@ -15,7 +15,6 @@ platform=""
 
 platform_macos="macos"
 platform_linux="linux"
-platform_wsl="wsl"
 
 detect_platform () {
     if [[ "${OSTYPE}" == "linux-gnu" ]]; then
@@ -30,6 +29,19 @@ detect_platform () {
     fi
 }
 detect_platform
+
+# Check for WSL ==============================================================
+
+is_wsl=""
+
+detect_wsl () {
+    if [[ `uname -a` == *"microsoft"* ]]; then
+        is_wsl=true
+    else
+        is_wsl=false
+    fi
+}
+detect_wsl
 
 # Locale =====================================================================
 
@@ -119,6 +131,12 @@ if [[ "${platform}" == "${platform_linux}" ]]; then
     export TZ="Europe/London"
 fi
 
+# Environment Setup
+if [[ ${is_wsl} = true ]]; then
+    export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+    export LIBGL_ALWAYS_INDIRECT=1
+fi
+
 # Basic Tool Setup
 export EDITOR=nvim
 export PAGER="less -R"
@@ -144,6 +162,13 @@ if [[ ${platform} == "${platform_macos}" ]]; then
     alias resetcam!="sudo killall VDCAssistant"
 fi
 
+# WSL-Specific Utility Aliases
+if [[ ${is_wsl} = true ]]; then
+    alias cdo=cd "/mnt/d/Users/Ara Adkins/OneDrive"
+else
+    alias cdo=cd ~/OneDrive
+fi
+
 # Navigation Aliases
 if [[ ${platform} == "${platform_macos}" ]]; then
     alias ls="gls -F --color=auto --group-directories-first";
@@ -154,7 +179,6 @@ fi
 alias ll="ls -lh"
 alias lll="ls -lah"
 alias cdh="cd ~/"
-alias cdo="cd ~/OneDrive"
 alias u="cd .."
 
 if [[ ${platform} == "${platform_macos}" ]]; then
@@ -284,7 +308,7 @@ else
 fi
 
 # GPG Configuration
-if [[ "${platform}" = "linux" ]]; then
+if [[ "${platform}" = "${platform_linux}" ]]; then
     export GPG_TTY=$(tty)
 fi
 

@@ -12,7 +12,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-command! H let @/=""
+command H noh
 nmap <space> zz
 nmap n nzz
 nmap N Nzz

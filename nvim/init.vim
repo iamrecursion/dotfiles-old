@@ -33,6 +33,7 @@ Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
 Plug 'kustosz/vim-enso-syntax'
 Plug 'lervag/vimtex'
+Plug 'lifepillar/vim-solarized8'
 Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
@@ -90,11 +91,26 @@ set tabstop=4
 set wrap
 
 " Colour Schemes for Vim
-colorscheme solarized
-let g:solarized_termtrans=1
+set termguicolors
 set background=dark
-set t_Co=16
+colorscheme solarized8
+let g:solarized_termtrans=1
+let g:solarized_visibility="low"
+let g:solarized_diffmode="low"
+let g:solarized_statusline="low"
 syntax enable
+
+" Highlights
+highlight CocErrorSign guifg=#dc322f
+highlight CocWarningSign guifg=#cb4b16
+highlight CocInfoSign guifg=#b58900
+highlight CocHintSign guifg=#6c71c4
+
+highlight ColorColumn guibg=#073642
+highlight CursorLine guibg=#073642
+
+" Rulers
+let &colorcolumn=join([81,101],",")
 
 " Splits Control
 set splitbelow
@@ -160,10 +176,6 @@ nnoremap tn  :tabnew<CR>
 nnoremap tm  :tabm<Space>
 nnoremap tq  :tabclose<CR>
 
-" Rulers
-let &colorcolumn=join([81,101],",")
-highlight colorcolumn ctermbg=0
-
 " Python Support
 set pyx=3
 let g:loaded_python_provider = 1 " Disable Py2
@@ -183,7 +195,7 @@ set ignorecase
 set smartcase
 set inccommand=nosplit
 nnoremap <leader><space> :nohlsearch<CR>
-command! H let @/=""
+command! H :noh
 nmap <space> zz
 nmap n nzz
 nmap N Nzz
