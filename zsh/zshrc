@@ -91,10 +91,8 @@ zplug load
 
 # Input Control ===============================================================
 
-# Unset `DISPLAY` for predictable naming
-if [[ -n "$DISPLAY" ]]; then
-    unset DISPLAY
-fi
+DISPLAY_SAVE=$DISPLAY;
+unset DISPLAY;
 
 autoload zkbd
 [[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
@@ -111,6 +109,8 @@ source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
 [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+
+export DISPLAY=$DISPLAY_SAVE
 
 # Additional Configuration ===================================================
 
