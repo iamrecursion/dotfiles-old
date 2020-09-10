@@ -2,14 +2,14 @@
 [[ $ZSH_EVAL_CONTEXT == 'toplevel:file' ]];
 file_being_sourced=$?
 
-# Compinstall ================================================================
+# Compinstall =================================================================
 
 # The following lines were added by compinstall
 #zstyle :compinstall filename '/home/ara/.zshrc'
 #autoload -Uz compinit
 #compinit End of lines added by compinstall
 
-# Get Operating System =======================================================
+# Get Operating System ========================================================
 
 platform=""
 
@@ -30,7 +30,7 @@ detect_platform () {
 }
 detect_platform
 
-# Check for WSL ==============================================================
+# Check for WSL ===============================================================
 
 is_wsl=""
 
@@ -43,7 +43,7 @@ detect_wsl () {
 }
 detect_wsl
 
-# Locale =====================================================================
+# Locale ======================================================================
 
 if [[ "${platform}" == "${platform_linux}" ]]; then
     export LANG='en_GB.UTF-8'
@@ -52,7 +52,7 @@ if [[ "${platform}" == "${platform_linux}" ]]; then
     export LC_MESSAGES='en_GB.UTF-8'
 fi
 
-# ZPlug ======================================================================
+# ZPlug =======================================================================
 
 source ~/.dotfiles/modules/zplug/init.zsh
 
@@ -88,6 +88,29 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+
+# Input Control ===============================================================
+
+# Unset `DISPLAY` for predictable naming
+if [[ -n "$DISPLAY" ]]; then
+    unset DISPLAY
+fi
+
+autoload zkbd
+[[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
+source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+
+[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
 # Additional Configuration ===================================================
 
@@ -311,23 +334,6 @@ fi
 if [[ "${platform}" = "${platform_linux}" ]]; then
     export GPG_TTY=$(tty)
 fi
-
-# Input Control
-autoload zkbd
-[[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
-source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
-
-[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
 # Fancy Ctrl+Z
 fancy-ctrl-z () {
