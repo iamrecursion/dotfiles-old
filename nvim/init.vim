@@ -512,7 +512,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " Nerdtree Configuration
-nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap T :NERDTreeToggle<CR>
 
 " Nerdtree Tabs Configuration
 let g:nerdtree_tabs_open_on_console_startup = 0
