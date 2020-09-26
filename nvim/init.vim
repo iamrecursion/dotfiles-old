@@ -364,12 +364,11 @@ nn <silent> <leader>l :CocList<CR>
 
 " Code Information
 nmap <silent> H :call CocActionAsync('doHover')<CR>
-nmap <silent> <leader>d :call <SID>show_documentation()<CR>
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 " Diagnostics Navigation
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> g[ <Plug>(coc-diagnostic-prev)
 nmap <silent> g] <Plug>(coc-diagnostic-next)
 
 " Go-To Code Navigation
@@ -427,14 +426,14 @@ let g:airline#extentions#tabline#fnamemod=":t"
 " Vim-Easymotion Configuration ===============================================
 nmap s <Plug>(easymotion-s)
 
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <Leader>ef <Plug>(easymotion-bd-f)
+nmap <Leader>ef <Plug>(easymotion-overwin-f)
 
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <Leader>eL <Plug>(easymotion-bd-jk)
+nmap <Leader>eL <Plug>(easymotion-overwin-line)
 
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+map  <Leader>ew <Plug>(easymotion-bd-w)
+nmap <Leader>ew <Plug>(easymotion-overwin-w)
 
 " Incsearch Configuration ====================================================
 map /  <Plug>(incsearch-forward)
@@ -663,7 +662,7 @@ let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_nerdtree = 1
 
 " Vebugger Configuration =====================================================
-let g:vebugger_leader='<leader>d'
+let g:vebugger_leader='<leader>D'
 
 " Projectionist Configuration ================================================
 autocmd User ProjectionistActivate :Pcd

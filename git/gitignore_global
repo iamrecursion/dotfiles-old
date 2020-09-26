@@ -3,6 +3,7 @@
 #############
 
 .projections.json
+Session.vim
 
 #####################
 ## IDE Integration ##
