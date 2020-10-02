@@ -388,7 +388,7 @@ load-nvmrc() {
 
 if hash nvm 2>/dev/null; then
     echo "HAS NVM"
-    # autoload -U add-zsh-hook
-    # add-zsh-hook chpwd load-nvmrc
-    # load-nvmrc
+    autoload -U add-zsh-hook
+    add-zsh-hook chpwd load-nvmrc
+    load-nvmrc
 fi
