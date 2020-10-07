@@ -80,10 +80,12 @@ zplug "robbyrussell/oh-my-zsh", use:"./lib/*.zsh"
 zplug "~/.dotfiles/themes/", from:local, use:"recursion_pure.zsh-theme"
 
 # Install Plugins
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
+if [[ ! -v INTELLIJ_ENVIRONMENT_READER ]]; then
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
     fi
 fi
 
@@ -91,26 +93,28 @@ zplug load
 
 # Input Control ===============================================================
 
-DISPLAY_SAVE=$DISPLAY;
-unset DISPLAY;
+if [[ ! -v INTELLIJ_ENVIRONMENT_READER ]]; then
+    DISPLAY_SAVE=$DISPLAY;
+    unset DISPLAY;
 
-autoload zkbd
-[[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
-source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+    autoload zkbd
+    [[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
+    source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
 
-[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+    [[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+    [[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+    [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+    [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+    [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+    [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+    [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+    [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+    [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
+    [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+    [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
-export DISPLAY=$DISPLAY_SAVE
+    export DISPLAY=$DISPLAY_SAVE
+fi
 
 # Additional Configuration ===================================================
 
@@ -359,7 +363,9 @@ fi
 
 # Setup SSH Agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-eval $(keychain --eval ~/.ssh/ara_adkins_personal)
+if [[ ! -v INTELLIJ_ENVIRONMENT_READER ]]; then
+    eval $(keychain --eval ~/.ssh/ara_adkins_personal)
+fi
 
 # Configure GPG Agent
 
@@ -386,9 +392,9 @@ load-nvmrc() {
   fi
 }
 
-if hash nvm 2>/dev/null; then
-    echo "HAS NVM"
+if type "nvm" &> /dev/null; then
     autoload -U add-zsh-hook
     add-zsh-hook chpwd load-nvmrc
     load-nvmrc
 fi
+
