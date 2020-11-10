@@ -142,7 +142,7 @@ prompt_pure_preprompt_render() {
 
 	# set color for git branch/dirty status, change color if dirty checking has been delayed
 	local git_color=242
-	[[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=red
+	[[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=magenta
 
     # TODO Fix this and switch on the prompt length to decide how many extra dirs to display.
     FOO="%~"
@@ -151,8 +151,6 @@ prompt_pure_preprompt_render() {
 
 	# construct preprompt, beginning with path
     local preprompt="%F{blue}%(5~|%-1~/…/%50<…<%3~|%4~)%f"
-    #local preprompt="%F{blue}%(5~|%-1~/…/%3~|%4~)"
-    #local preprompt="%F{blue}%~%f"
 	# git info
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
@@ -379,9 +377,9 @@ prompt_pure_setup() {
 	[[ $UID -eq 0 ]] && prompt_pure_username=' %F{white}%n%f%F{242}@%m%f'
 
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
+	PROMPT="%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 
-    RPROMPT="%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❮} %F{blue}%*"
+    RPROMPT="%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❮} %F{blue}%*"
 }
 
 reset_prompt_and_accept_line() {
