@@ -314,6 +314,9 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 " JSONC
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" Enso
+autocmd FileType enso set nospell
+
 " VIM PLUGIN CONFIGURATION ===================================================
 
 " Coc.nvim Configuration =====================================================
