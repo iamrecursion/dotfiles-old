@@ -28,7 +28,6 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'idanarye/vim-vebugger'
 Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
 Plug 'kustosz/vim-enso-syntax'
@@ -47,9 +46,7 @@ Plug 'Olical/vim-enmasse'
 Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'preservim/nerdcommenter'
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-expand-region'
@@ -280,11 +277,6 @@ endfun
 
 nnoremap <leader><leader>ws :call <SID>StripTrailingWhitespaces() <CR>
 
-let blacklist = ['markdown', 'ruby', 'perl', 'javascript']
-
-autocmd BufWritePre * if index(blacklist, &ft) < 0 |
-            \:call <SID>StripTrailingWhitespaces()
-
 " Visual Range Selection by Typing
 command! -range Vis call setpos('.', [0,<line1>,0,0]) |
             \ exe "normal V" |
@@ -331,6 +323,7 @@ autocmd FileType enso set nospell
 call coc#add_extension('coc-calc')
 call coc#add_extension('coc-dictionary')
 call coc#add_extension('coc-emoji')
+call coc#add_extension('coc-explorer')
 call coc#add_extension('coc-fsharp')
 call coc#add_extension('coc-git')
 call coc#add_extension('coc-github')
@@ -359,11 +352,20 @@ call coc#add_extension('coc-vimlsp')
 call coc#add_extension('coc-vimtex')
 call coc#add_extension('coc-xml')
 call coc#add_extension('coc-yaml')
+call coc#add_extension('coc-yank')
 
 " Basic Configuration
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 nn <silent> <leader>l :CocList<CR>
+nn <silent> <C-p> :CocList files<CR>
+nn <silent> <C-e> :CocList buffers<CR>
+nn <silent> <C-i> :CocList grep<CR>
+nn <silent> <C-o> :CocList lines<CR>
+nn <silent> T :CocCommand explorer<CR>
+nn <silent> Y :<C-u>CocList -A --normal yank<CR>
+nn <silent> <C-y> :CocCommand yank.clean<CR>
+" REMEMBER: Use <C-o> to enter normal mode.
 
 " Code Information
 nmap <silent> H :call CocActionAsync('doHover')<CR>
@@ -535,9 +537,6 @@ let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" Nerdtree Configuration =====================================================
-nnoremap T :NERDTreeToggle<CR>
-
 " Nerdtree Tabs Configuration ================================================
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
@@ -581,42 +580,6 @@ let g:haskell_enable_static_pointers = 1
 let g:haskell_backpack = 1
 
 let g:haskell_indent_disable = 1
-
-" Denite.vim Configuration ===================================================
-autocmd filetype denite call s:denite_my_mappings()
-
-function! s:denite_my_mappings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-
-call denite#custom#option('default', {'winheight': winheight(0)/4})
-
-call denite#custom#var('file/rec', 'command',
-    \ ['rg', '--files', '--glob', '!.git', '--color', 'never', '--hidden'])
-
-call denite#custom#var('grep', 'command', ['rg'])
-call denite#custom#var('grep', 'default_opts',
-    \ ['--follow', '--hidden', '--vimgrep', '--no-heading', '-S'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-
-nnoremap <C-p> :Denite file/rec <CR>
-nnoremap <C-e> :Denite buffer <CR>
-nnoremap <C-i> :Denite grep <CR>
-nnoremap <C-o> :Denite line register <CR>
 
 " Neomake Configuration ======================================================
 call neomake#configure#automake('rnw', 250)
