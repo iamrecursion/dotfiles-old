@@ -84,19 +84,19 @@ confirm_string() {
 install_system_package() {
     [[ -z "${*// }" ]] && return 0
 
-error= << ERR
+error=<< ERR
 "Installing system packages currently not compatible with your package manager.
 ERR
 
     if [[ "${platform}" == "${platform_linux}" ]] ; then
         if [ -n "$(command -v yay)" ]; then
-            yay -Syu && yay -S ${@}
+            yay -Syu && yay -S "${@}"
         elif [ -n "$(command -v pacman)" ]; then
-            sudo pacman -Syu && sudo pacman -S ${@}
+            sudo pacman -Syu && sudo pacman -S "${@}"
         elif [ -n "$(command -v apt-get)" ]; then
-            sudo apt-get update -qq && sudo apt-get install ${@} -y
+            sudo apt-get update -qq && sudo apt-get install "${@}" -y
         else
-            >&2 echo $error
+            >&2 echo "$error"
             return 1
         fi
 

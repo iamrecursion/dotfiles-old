@@ -1,37 +1,188 @@
 {
-  "diagnostic.errorSign": "❯",
-  "diagnostic.warningSign": "❯",
-  "diagnostic.infoSign": "❯",
-  "diagnostic.hintSign": "❯",
-  "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/"],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
+    // CoC Itself
+    "suggest.noselect": false,
+    "diagnostic.errorSign": "❯",
+    "diagnostic.warningSign": "❯",
+    "diagnostic.infoSign": "❯",
+    "diagnostic.hintSign": "❯",
+    // Additional Language Servers
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "args": [
+                "--lsp"
+            ],
+            "rootPatterns": [
+                "*.cabal",
+                "stack.yaml",
+                "cabal.project",
+                "package.yaml",
+                "hie.yaml"
+            ],
+            "filetypes": [
+                "haskell",
+                "lhaskell"
+            ]
         }
-      }
     },
-  "haskell": {
-      "command": "hie-wrapper",
-      "rootPatterns": [
-        "stack.yaml",
-        "cabal.config",
-        "package.yaml"
-      ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
-      "initializationOptions": {
-        "languageServerHaskell": {
-          "hlintOn": true
+    // Pyright Configuration
+    "python.pythonPath": "/usr/local/bin/python3",
+    "python.linting.enabled": true,
+    "python.analysis.typeCheckingMode": "strict",
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintPath": "~/.pyenv/shims/pylint",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "~/.pyenv/shims/black",
+    "pyright.trace.server": "verbose",
+    // Diagnostic Languageserver
+    "diagnostic-languageserver.enable": true,
+    "diagnostic-languageserver.filetypes": {
+        "sh": "shellcheck"
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+        "python": "black",
+        "js": "prettier"
+    },
+    "diagnostic-languageserver.linters": {
+        "shellcheck": {
+            "command": "shellcheck",
+            "debounce": 100,
+            "args": [
+                "--format",
+                "json",
+                "-"
+            ],
+            "sourceName": "shellcheck",
+            "parseJson": {
+                "line": "line",
+                "column": "column",
+                "endLine": "endLine",
+                "endColumn": "endColumn",
+                "message": "${message} [${code}]",
+                "security": "level"
+            },
+            "securities": {
+                "error": "error",
+                "warning": "warning",
+                "info": "info",
+                "style": "hint"
+            }
+        },
+        "pylint": {
+            "sourceName": "pylint",
+            "command": "pylint",
+            "args": [
+                "--output-format",
+                "text",
+                "--score",
+                "no",
+                "--msg-template",
+                "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+                "%file"
+            ],
+            "formatPattern": [
+                "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "security": 3,
+                    "message": 4
+                }
+            ],
+            "rootPatterns": [
+                ".git",
+                "pyproject.toml",
+                "setup.py"
+            ],
+            "securities": {
+                "informational": "hint",
+                "refactor": "info",
+                "convention": "info",
+                "warning": "warning",
+                "error": "error",
+                "fatal": "error"
+            },
+            "offsetColumn": 1,
+            "formatLines": 1
+        },
+        "mypy": {
+            "sourceName": "mypy",
+            "command": "mypy",
+            "args": [
+                "--no-color-output",
+                "--no-error-summary",
+                "--show-column-numbers",
+                "--follow-imports=silent",
+                "%file"
+            ],
+            "formatPattern": [
+                "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "security": 3,
+                    "message": 4
+                }
+            ],
+            "securities": {
+                "error": "error"
+            }
         }
-      }
+    },
+    "diagnostic-languageserver.formatters": {
+        "black": {
+            "command": "black",
+            "args": [
+                "--quiet",
+                "-"
+            ]
+        },
+        "prettier": {
+            "command": "prettier", // installed globally, or "./node_modules/.bin/prettier" for local install
+            "args": [
+                "--stdin",
+                "--stdin-filepath",
+                "%filepath"
+            ],
+            "rootPatterns": [
+                ".prettierrc",
+                ".prettierrc.json",
+                ".prettierrc.toml",
+                ".prettierrc.json",
+                ".prettierrc.yml",
+                ".prettierrc.yaml",
+                ".prettierrc.json5",
+                ".prettierrc.js",
+                ".prettierrc.cjs",
+                "prettier.config.js",
+                "prettier.config.cjs"
+            ]
+        },
+        "isort": {
+            "command": "isort",
+            "args": [
+                "--quiet",
+                "-"
+            ]
+        }
     }
-  }
 }
-

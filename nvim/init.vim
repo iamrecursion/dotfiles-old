@@ -1,7 +1,7 @@
 
 " Vim-Plug configuration =====================================================
 
-let g:plug_shallow=0
+let plug_shallow=0
 
 function! CondPlugin(cond, ...)
     " Allows for conditional use of plugins
@@ -14,11 +14,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " These plugins require: Python 3, Ruby, and Node.js providers for Neovim
 
-Plug 'altercation/vim-colors-solarized'
 Plug 'alvan/vim-closetag'
+Plug 'cespare/vim-toml'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'danro/rename.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
@@ -26,7 +25,6 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'idanarye/vim-vebugger'
-Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-plug'
 Plug 'kassio/neoterm'
@@ -35,23 +33,15 @@ Plug 'lervag/vimtex'
 Plug 'lifepillar/vim-solarized8'
 Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
-Plug 'mhinz/vim-signify'
-Plug 'neoclide/coc-neco'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
-Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'Olical/vim-enmasse'
-Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'preservim/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/neco-vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'terryma/vim-expand-region'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
@@ -60,7 +50,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/AdvancedSorters'
 Plug 'vim-scripts/vim-task-org'
-Plug 'vimwiki/vimwiki'
 Plug 'yaroot/vissort'
 
 " Non-Alphabetical as Load-Order Dependent
@@ -74,7 +63,6 @@ call plug#end()
 filetype plugin indent on
 imap <S-Tab> <BS>
 set autoindent
-set cursorline
 set expandtab
 set number
 set pumheight=10
@@ -86,6 +74,17 @@ set softtabstop=4
 set sw=4
 set tabstop=4
 set wrap
+set hidden
+
+" Shorter update time provides a noticeably better user experience.
+set updatetime=100
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Enable the sign column always to prevent flickering.
+" Can be set as `signcolumn=number` after nvim 0.5.0.
+set signcolumn=yes
 
 " Colour Schemes for Vim
 set termguicolors
@@ -102,6 +101,10 @@ highlight CocErrorSign guifg=#dc322f
 highlight CocWarningSign guifg=#cb4b16
 highlight CocInfoSign guifg=#b58900
 highlight CocHintSign guifg=#6c71c4
+
+highlight CocHighlightText guibg=#073642 guifg=#93a1a1
+highlight CocHighlightRead guibg=#073642 guifg=#93a1a1
+highlight CocHighlightWrite guibg=#073642 guifg=#93a1a1
 
 highlight ColorColumn guibg=#073642
 highlight CursorLine guibg=#073642
@@ -175,9 +178,13 @@ nnoremap tq  :tabclose<CR>
 
 " Python Support
 set pyx=3
-let g:loaded_python_provider = 1 " Disable Py2
+let g:loaded_python_provider = 0 " Disable Py2
 
-if has('mac')
+let pyenv_root = trim(system("pyenv root")) . "/versions/neovim"
+
+if !empty(glob(pyenv_root))
+    let g:python3_host_prog = pyenv_root . "/bin/python3"
+elseif has('mac')
     let g:python3_host_prog = '/usr/local/bin/python3'
 elseif has('unix')
     let g:python3_host_prog = '/usr/bin/python3'
@@ -191,9 +198,8 @@ set hlsearch
 set ignorecase
 set smartcase
 set inccommand=nosplit
-nnoremap <leader><space> :nohlsearch<CR>
-command! H :noh
 nmap <space> zz
+command! H noh
 nmap n nzz
 nmap N Nzz
 
@@ -209,15 +215,15 @@ set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\
             \%{v:servername}
 
 " Terminal Mode Changes
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
+" tnoremap <C-h> <C-\><C-n><C-w>h
+" tnoremap <C-j> <C-\><C-n><C-w>j
+" tnoremap <C-k> <C-\><C-n><C-w>k
+" tnoremap <C-l> <C-\><C-n><C-w>l
 
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
 
-command! -nargs=* T split | terminal <args>
-command! -nargs=* VT vsplit | terminal <args>
+" command! -nargs=* T split | terminal <args>
+" command! -nargs=* VT vsplit | terminal <args>
 
 " General Navigation Commands
 inoremap <A-h> <C-\><C-N><C-w>h
@@ -282,8 +288,6 @@ command! -range Vis call setpos('.', [0,<line1>,0,0]) |
             \ exe "normal V" |
             \ call setpos('.', [0,<line2>,0,0])
 
-command! Ses :source Session.vim
-
 " Visual Macro Application
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
@@ -316,11 +320,11 @@ autocmd FileType enso set nospell
 " Needs Node and Yarn installed.
 " Installed Language Servers (Most from AUR or Brew)
 " - [CCLS](https://github.com/MaskRay/ccls/)
-" - [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine)
-" - [metals](https://scalameta.org/metals/)
+" - [Haskell Language Server](https://github.com/haskell/haskell-language-server)
 
 " Plugins
 call coc#add_extension('coc-calc')
+call coc#add_extension('coc-diagnostic')
 call coc#add_extension('coc-dictionary')
 call coc#add_extension('coc-emoji')
 call coc#add_extension('coc-explorer')
@@ -339,33 +343,53 @@ call coc#add_extension('coc-metals')
 call coc#add_extension('coc-omnisharp')
 call coc#add_extension('coc-powershell')
 call coc#add_extension('coc-project')
-call coc#add_extension('coc-python')
+call coc#add_extension('coc-pyright')
 call coc#add_extension('coc-rust-analyzer')
-call coc#add_extension('coc-sh')
 call coc#add_extension('coc-sql')
 call coc#add_extension('coc-svg')
 call coc#add_extension('coc-syntax')
 call coc#add_extension('coc-texlab')
 call coc#add_extension('coc-tsserver')
-call coc#add_extension('coc-utils')
 call coc#add_extension('coc-vimlsp')
 call coc#add_extension('coc-vimtex')
 call coc#add_extension('coc-xml')
 call coc#add_extension('coc-yaml')
 call coc#add_extension('coc-yank')
 
-" Basic Configuration
-set hidden
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" Navigation
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-y>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Trigger the Suggestions Menu
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Basic Popups
 nn <silent> <leader>l :CocList<CR>
 nn <silent> <C-p> :CocList files<CR>
 nn <silent> <C-e> :CocList buffers<CR>
 nn <silent> <C-i> :CocList grep<CR>
 nn <silent> <C-o> :CocList lines<CR>
+nn <silent> <C-c> :CocList commands<CR>
+nn <silent> <C-s> :CocList symbols<CR>
 nn <silent> T :CocCommand explorer<CR>
 nn <silent> Y :<C-u>CocList -A --normal yank<CR>
 nn <silent> <C-y> :CocCommand yank.clean<CR>
 " REMEMBER: Use <C-o> to enter normal mode.
+
+" Scrolling the Popup Menu
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Code Information
 nmap <silent> H :call CocActionAsync('doHover')<CR>
@@ -387,7 +411,7 @@ nmap <silent> gl <Plug>(coc-open-link)
 " Formatting
 nmap <silent> <leader>f <Plug>(coc-format)
 nmap <silent> <leader>fs <Plug>(coc-format-selected)
-vmap <silent> <leader>fs <Plug>(coc-format-selected)
+xmap <silent> <leader>fs <Plug>(coc-format-selected)
 
 " Refactoring
 nmap <leader>rn <Plug>(coc-rename)
@@ -400,6 +424,20 @@ nmap <leader>as <Plug>(coc-codeaction-selected)
 vmap <leader>as <Plug>(coc-codeaction-selected)
 nmap <leader>cl <Plug>(coc-codelens-action)
 nmap <leader>qf <Plug>(coc-fix-current)
+
+" Text Object Navigation
+xmap <leader>if <Plug>(coc-funcobj-i)
+omap <leader>if <Plug>(coc-funcobj-i)
+xmap <leader>af <Plug>(coc-funcobj-a)
+omap <leader>af <Plug>(coc-funcobj-a)
+xmap <leader>ic <Plug>(coc-classobj-i)
+omap <leader>ic <Plug>(coc-classobj-i)
+xmap <leader>ac <Plug>(coc-classobj-a)
+omap <leader>ac <Plug>(coc-classobj-a)
+
+" Range Selection
+nmap <silent> <leader>rs <Plug>(coc-range-select)
+xmap <silent> <leader>rs <Plug>(coc-range-select)
 
 " Startup Config
 let g:coc_start_at_startup = 1
@@ -461,57 +499,6 @@ map f/ <Plug>(incsearch-fuzzy-/)
 map f? <Plug>(incsearch-fuzzy-?)
 map fg/ <Plug>(incsearch-fuzzy-stay)
 
-" Intero Neovim Configuration ================================================
-let g:intero_type_on_hover = 0
-let g:intero_start_immediately = 0
-let g:intero_use_neomake = 1
-let g:intero_window_size = 15
-let g:intero_ghci_options = '-fobject-code'
-
-function! InteroAutoReload()
-    if g:intero_started
-        :InteroReload
-    endif
-endfunction
-
-augroup InteroMaps
-    au!
-
-    " Process Management
-    au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-    au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-    " Open intero/GHCi split horizontally
-    au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-
-    " Open intero/GHCi split vertically
-    au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-    au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-
-    " Automatically reload on save
-    au BufWritePost *.hs :call InteroAutoReload()
-    au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-
-    " Load individual modules
-    au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-    au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-    " Type-related information
-    " Heads up! These next two differ from the rest.
-    au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-    au FileType haskell map <silent> <leader>T <Plug>InteroType
-    au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-    au FileType haskell nnoremap <silent> <leader>ii :InteroInfo<CR>
-
-    " Navigation
-    au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-    au FileType haskell nnoremap <silent> <leader>ie :InteroEval<CR>
-
-    " Managing targets
-    " Prompts you to enter targets (no silent):
-    au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-augroup END
-
 " Fugitive Configuration =====================================================
 nnoremap <space>ga :Git add %:p<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
@@ -530,35 +517,27 @@ nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 
 " Gitgutter Configuration ====================================================
-let g:gitgitter_max_signs = 5000
+" let g:gitgitter_max_signs = 5000
 
 " Nerdcommenter Configuration ================================================
-let g:NERDSpaceDelims = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-
-" Nerdtree Tabs Configuration ================================================
-let g:nerdtree_tabs_open_on_console_startup = 0
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:nerdtree_tabs_meaningful_tab_names = 1
-let g:nerdtree_tabs_autoclose = 1
-let g:nerdtree_tabs_synchronize_view = 1
-let g:nerdtree_tabs_startup_cd = 1
+" let g:NERDSpaceDelims = 1
+" let g:NERDCommentEmptyLines = 1
+" let g:NERDTrimTrailingWhitespace = 1
 
 " Undotree Configuration =====================================================
-nnoremap U :UndotreeToggle<CR>
-nnoremap UE :earlier<CR>
-nnoremap UL :later<CR>
-
-let g:undotree_WindowLayout = 1
-let g:undotree_DiffpanelHeight = 15
+" nnoremap U :UndotreeToggle<CR>
+" nnoremap UE :earlier<CR>
+" nnoremap UL :later<CR>
+"
+" let g:undotree_WindowLayout = 1
+" let g:undotree_DiffpanelHeight = 15
 
 " Vim-Task-Org Configuration =================================================
-let g:vtoAuthorName = 'Ara Adkins'
-let g:vtoTokenList = [":BUG:", ":FIXME:", ":TODO:", ":TRICKY:", ":WARNING:",
-            \"TODO", "FIXME", "BUG", "TRICKY", "WARNING", "BUG:", "FIXME:",
-            \"TODO:", "TRICKY:", "WARNING:"]
-let g:vtoDateFormat = "%y-%m-%d %T"
+" let g:vtoAuthorName = 'Ara Adkins'
+" let g:vtoTokenList = [":BUG:", ":FIXME:", ":TODO:", ":TRICKY:", ":WARNING:",
+"             \"TODO", "FIXME", "BUG", "TRICKY", "WARNING", "BUG:", "FIXME:",
+"             \"TODO:", "TRICKY:", "WARNING:"]
+" let g:vtoDateFormat = "%y-%m-%d %T"
 
 " Vim Expand Region Configuration ============================================
 vmap v <Plug>(expand_region_expand)
@@ -581,32 +560,6 @@ let g:haskell_backpack = 1
 
 let g:haskell_indent_disable = 1
 
-" Neomake Configuration ======================================================
-call neomake#configure#automake('rnw', 250)
-
-let g:neomake_error_sign = {
-    \ 'text': '❯',
-    \ 'texthl': 'helpSpecial',
-    \ }
-
-let g:neomake_warning_sign = {
-    \ 'text': '❯',
-    \ 'texthl': 'vimCommand',
-    \ }
-
-let g:neomake_message_sign = {
-    \ 'text': '❯',
-    \ 'texthl': 'helpOption',
-    \ }
-
-let g:neomake_info_sign = {
-    \ 'text': '❯',
-    \ 'texthl': 'vimIsCommand',
-    \ }
-
-let g:neomake_haskell_enabled_makers = ['']
-let g:neomake_python_enabled_makers = ['']
-
 " Neoterm Configuration ======================================================
 let g:neoterm_default_mod = ':botright'
 
@@ -614,18 +567,11 @@ nmap gx <Plug>(neoterm-repl-send)
 xmap gx <Plug>(neoterm-repl-send)
 nmap gxx <Plug>(neoterm-repl-send-line)
 
-" Neovim Remote Configuration ================================================
-if has('nvim')
-  let $VISUAL = 'nvr -cc split --remote-wait'
-endif
-
 " Vim-Devicons Configuration =================================================
 let g:webdevicons_enable = 1
 
-let g:webdevicons_enable_denite = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
-let g:webdevicons_enable_nerdtree = 1
 
 " Vebugger Configuration =====================================================
 let g:vebugger_leader='<leader>D'
@@ -635,6 +581,10 @@ autocmd User ProjectionistActivate :Pcd
 
 " Vim-Markdown Configuration =================================================
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_strikethrough = 1
 
 au FileType markdown set conceallevel=0
 
@@ -644,12 +594,6 @@ let g:vissort_option="i"
 " Vim-Scala Configuration ====================================================
 let g:scala_scaladoc_indent = 1
 au BufRead,BufNewFile *.sbt set filetype=scala
-
-" Signify Configuration ======================================================
-let g:signify_vcs_list = ["git", "hg"]
-let g:signify_realtime = 1
-
-highlight SignColumn ctermbg=0 cterm=NONE guibg=NONE gui=NONE
 
 " Vimtex Configuration =======================================================
 let g:vimtex_compiler_progname = 'nvr'

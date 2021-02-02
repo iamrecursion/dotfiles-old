@@ -232,9 +232,14 @@ function mkcd() {
 }
 
 # PATH Changes
+ruby_homebrew_path=/usr/local/opt/ruby/bin
+if [[ -d $ruby_homebrew_path ]] && [[ PATH != *$ruby_homebrew_path* ]]; then
+    export PATH=$ruby_homebrew_path:$PATH
+fi
+
 ruby_version=`ruby -v | awk '{split($2, res, "."); print res[1] "." res[2] }'`.0
 ruby_gem_path=~/.gem/ruby/$ruby_version/bin
-if [[ -d $ruby_gem_path ]] && [[ $PATH != *$ruby_gem_path* ]];then
+if [[ -d $ruby_gem_path ]] && [[ $PATH != *$ruby_gem_path* ]]; then
     export PATH=$ruby_gem_path:$PATH
 fi
 
@@ -262,6 +267,10 @@ iterm2_integration=${HOME}/.iterm2_shell_integration.zsh
 
 if [[ -e $iterm2_integration ]]; then
     source $iterm2_integration;
+fi
+
+if which pyenv-virtualenv-init > /dev/null; then
+    eval "$(pyenv virtualenv-init -)";
 fi
 
 py_version=`python3 --version | awk '{split($2, r, "."); print r[1] "." r[2]}'`
@@ -305,6 +314,8 @@ fi
 if hash pyenv 2>/dev/null; then
     eval "$(pyenv init -)"
 fi
+
+[ -f "/Users/ara/.ghcup/env" ] && source "/Users/ara/.ghcup/env"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 if [[ -d $NVM_DIR ]]; then
@@ -397,4 +408,3 @@ if type "nvm" &> /dev/null; then
     add-zsh-hook chpwd load-nvmrc
     load-nvmrc
 fi
-
