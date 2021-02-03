@@ -342,7 +342,6 @@ call coc#add_extension('coc-marketplace')
 call coc#add_extension('coc-metals')
 call coc#add_extension('coc-omnisharp')
 call coc#add_extension('coc-powershell')
-call coc#add_extension('coc-project')
 call coc#add_extension('coc-pyright')
 call coc#add_extension('coc-rust-analyzer')
 call coc#add_extension('coc-sql')
@@ -516,28 +515,25 @@ nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
 nnoremap <space>gpl :Dispatch! git pull<CR>
 
-" Gitgutter Configuration ====================================================
-" let g:gitgitter_max_signs = 5000
-
 " Nerdcommenter Configuration ================================================
-" let g:NERDSpaceDelims = 1
-" let g:NERDCommentEmptyLines = 1
-" let g:NERDTrimTrailingWhitespace = 1
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 " Undotree Configuration =====================================================
-" nnoremap U :UndotreeToggle<CR>
-" nnoremap UE :earlier<CR>
-" nnoremap UL :later<CR>
-"
-" let g:undotree_WindowLayout = 1
-" let g:undotree_DiffpanelHeight = 15
+nnoremap U :UndotreeToggle<CR>
+nnoremap UE :earlier<CR>
+nnoremap UL :later<CR>
+
+let g:undotree_WindowLayout = 1
+let g:undotree_DiffpanelHeight = 15
 
 " Vim-Task-Org Configuration =================================================
-" let g:vtoAuthorName = 'Ara Adkins'
-" let g:vtoTokenList = [":BUG:", ":FIXME:", ":TODO:", ":TRICKY:", ":WARNING:",
-"             \"TODO", "FIXME", "BUG", "TRICKY", "WARNING", "BUG:", "FIXME:",
-"             \"TODO:", "TRICKY:", "WARNING:"]
-" let g:vtoDateFormat = "%y-%m-%d %T"
+let g:vtoAuthorName = 'Ara Adkins'
+let g:vtoTokenList = [":BUG:", ":FIXME:", ":TODO:", ":TRICKY:", ":WARNING:",
+            \"TODO", "FIXME", "BUG", "TRICKY", "WARNING", "BUG:", "FIXME:",
+            \"TODO:", "TRICKY:", "WARNING:"]
+let g:vtoDateFormat = "%y-%m-%d %T"
 
 " Vim Expand Region Configuration ============================================
 vmap v <Plug>(expand_region_expand)

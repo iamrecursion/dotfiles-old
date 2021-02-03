@@ -1,6 +1,11 @@
 {
     // CoC Itself
     "suggest.noselect": false,
+    "workspace.workspaceFolderCheckCwd": true,
+    "coc.preferences.rootPatterns": [
+        ".projections.json",
+        ".git"
+    ],
     "diagnostic.errorSign": "❯",
     "diagnostic.warningSign": "❯",
     "diagnostic.infoSign": "❯",
