@@ -215,15 +215,15 @@ set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\
             \%{v:servername}
 
 " Terminal Mode Changes
-" tnoremap <C-h> <C-\><C-n><C-w>h
-" tnoremap <C-j> <C-\><C-n><C-w>j
-" tnoremap <C-k> <C-\><C-n><C-w>k
-" tnoremap <C-l> <C-\><C-n><C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
-" tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
-" command! -nargs=* T split | terminal <args>
-" command! -nargs=* VT vsplit | terminal <args>
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
 
 " General Navigation Commands
 inoremap <A-h> <C-\><C-N><C-w>h
@@ -366,6 +366,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+inoremap <expr> <CR> pumvisible() ? "\<C-e>\<CR>" : "\<CR>"
+
 " Trigger the Suggestions Menu
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -375,7 +377,7 @@ nn <silent> <C-p> :CocList files<CR>
 nn <silent> <C-e> :CocList buffers<CR>
 nn <silent> <C-i> :CocList grep<CR>
 nn <silent> <C-o> :CocList lines<CR>
-nn <silent> <C-c> :CocList commands<CR>
+nn <silent> <C-m> :CocList commands<CR>
 nn <silent> <C-s> :CocList symbols<CR>
 nn <silent> T :CocCommand explorer<CR>
 nn <silent> Y :<C-u>CocList -A --normal yank<CR>
