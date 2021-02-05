@@ -375,7 +375,7 @@ fi
 # Setup SSH Agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 if [[ ! -v INTELLIJ_ENVIRONMENT_READER ]]; then
-    eval $(keychain --eval ~/.ssh/ara_adkins_personal)
+    eval $(keychain --quiet --eval ~/.ssh/ara_adkins_personal)
 fi
 
 # Configure GPG Agent
