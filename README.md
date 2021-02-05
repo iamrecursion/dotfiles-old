@@ -57,5 +57,5 @@ NB: This will overwrite any existing configuration that exists at the target
 paths, so if you want to try these out please back up your configuration.
 
 ## Credits
-This repository and readme makes use of the [Dofiles Logo](https://github.com/jglovier/dotfiles-logo)
+This repository and readme makes use of the [Dotfiles Logo](https://github.com/jglovier/dotfiles-logo)
 kindly created and provided by [Joel Glovier](https://github.com/jglovier).
