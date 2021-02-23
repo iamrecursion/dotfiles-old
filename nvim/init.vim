@@ -377,7 +377,6 @@ nn <silent> <C-p> :CocList files<CR>
 nn <silent> <C-e> :CocList buffers<CR>
 nn <silent> <C-i> :CocList grep<CR>
 nn <silent> <C-o> :CocList lines<CR>
-nn <silent> <C-m> :CocList commands<CR>
 nn <silent> <C-s> :CocList symbols<CR>
 nn <silent> T :CocCommand explorer<CR>
 nn <silent> Y :<C-u>CocList -A --normal yank<CR>
