@@ -209,7 +209,7 @@ alias cdh="cd ~/"
 alias u="cd .."
 
 if [[ ${platform} == "${platform_macos}" ]]; then
-    alias cdc="cd ~/iCloudDrive"
+    alias cdc="cd ~/CloudDrive"
 fi
 
 # Git Aliases
@@ -269,6 +269,13 @@ if [[ -e $iterm2_integration ]]; then
     source $iterm2_integration;
 fi
 
+if hash pyenv 2>/dev/null; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
+
 if which pyenv-virtualenv-init > /dev/null; then
     eval "$(pyenv virtualenv-init -)";
 fi
@@ -309,10 +316,6 @@ if hash jenv 2>/dev/null; then
 
         eval "$(jenv init -)"
     fi
-fi
-
-if hash pyenv 2>/dev/null; then
-    eval "$(pyenv init -)"
 fi
 
 [ -f "/Users/ara/.ghcup/env" ] && source "/Users/ara/.ghcup/env"
