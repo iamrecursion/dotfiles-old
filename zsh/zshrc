@@ -91,6 +91,10 @@ fi
 
 zplug load
 
+# Integrated Extensions =======================================================
+
+autoload -U zmv
+
 # Input Control ===============================================================
 
 if [[ ! -v INTELLIJ_ENVIRONMENT_READER ]]; then
