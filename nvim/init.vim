@@ -32,8 +32,8 @@ Plug 'kustosz/vim-enso-syntax'
 Plug 'lervag/vimtex'
 Plug 'lifepillar/vim-solarized8'
 Plug 'LnL7/vim-nix'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile' }
+Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'branch' : 'release'}
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'Olical/vim-enmasse'
@@ -323,37 +323,41 @@ autocmd FileType enso set nospell
 " - [Haskell Language Server](https://github.com/haskell/haskell-language-server)
 
 " Plugins
-call coc#add_extension('coc-calc')
-call coc#add_extension('coc-diagnostic')
-call coc#add_extension('coc-dictionary')
-call coc#add_extension('coc-emoji')
-call coc#add_extension('coc-explorer')
-call coc#add_extension('coc-fsharp')
-call coc#add_extension('coc-git')
-call coc#add_extension('coc-github')
-call coc#add_extension('coc-gitignore')
-call coc#add_extension('coc-highlight')
-call coc#add_extension('coc-html')
-call coc#add_extension('coc-java')
-call coc#add_extension('coc-json')
-call coc#add_extension('coc-lists')
-call coc#add_extension('coc-lua')
-call coc#add_extension('coc-marketplace')
-call coc#add_extension('coc-metals')
-call coc#add_extension('coc-omnisharp')
-call coc#add_extension('coc-powershell')
-call coc#add_extension('coc-pyright')
-call coc#add_extension('coc-rust-analyzer')
-call coc#add_extension('coc-sql')
-call coc#add_extension('coc-svg')
-call coc#add_extension('coc-syntax')
-call coc#add_extension('coc-texlab')
-call coc#add_extension('coc-tsserver')
-call coc#add_extension('coc-vimlsp')
-call coc#add_extension('coc-vimtex')
-call coc#add_extension('coc-xml')
-call coc#add_extension('coc-yaml')
-call coc#add_extension('coc-yank')
+lua << EOF
+vim.g.coc_global_extensions = {
+    'coc-calc',
+    'coc-diagnostic',
+    'coc-dictionary',
+    'coc-emoji',
+    'coc-explorer',
+    'coc-fsharp',
+    'coc-git',
+    'coc-github',
+    'coc-gitignore',
+    'coc-highlight',
+    'coc-html',
+    'coc-java',
+    'coc-json',
+    'coc-lists',
+    'coc-lua',
+    'coc-marketplace',
+    'coc-metals',
+    'coc-omnisharp',
+    'coc-powershell',
+    'coc-pyright',
+    'coc-rust-analyzer',
+    'coc-sql',
+    'coc-svg',
+    'coc-syntax',
+    'coc-texlab',
+    'coc-tsserver',
+    'coc-vimlsp',
+    'coc-vimtex',
+    'coc-xml',
+    'coc-yaml',
+    'coc-yank',
+}
+EOF
 
 " Navigation
 inoremap <silent><expr> <TAB>
