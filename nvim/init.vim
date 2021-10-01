@@ -176,6 +176,12 @@ nnoremap tn  :tabnew<CR>
 nnoremap tm  :tabm<Space>
 nnoremap tq  :tabclose<CR>
 
+" Perl Support
+let g:loaded_perl_provider = 0 " Disable perl
+
+" Ruby Support
+let g:loaded_ruby_provider = 0 " Disable ruby
+
 " Python Support
 set pyx=3
 let g:loaded_python_provider = 0 " Disable Py2
@@ -185,7 +191,14 @@ let pyenv_root = trim(system("pyenv root")) . "/versions/neovim"
 if !empty(glob(pyenv_root))
     let g:python3_host_prog = pyenv_root . "/bin/python3"
 elseif has('mac')
-    let g:python3_host_prog = '/usr/local/bin/python3'
+    let intel_py_path = "/usr/local/bin/python3"
+    let apple_py_path = "/opt/homebrew/bin/python3"
+
+    if filereadable(intel_py_path)
+        let g:python3_host_prog = intel_py_path
+    elseif filereadable(apple_py_path)
+        let g:python3_host_prog = apple_py_path
+    endif
 elseif has('unix')
     let g:python3_host_prog = '/usr/bin/python3'
 else
