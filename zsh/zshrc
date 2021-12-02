@@ -241,14 +241,9 @@ if [[ -d $cargo_bin_path ]] && [[ $PATH != *$cargo_bin_path* ]]; then
     export PATH=$cargo_bin_path:$PATH
 fi
 
-cabal_bin_path=~/.cabal/bin
-if [[ -d $cabal_bin_path ]] && [[ $PATH != *$cabal_bin_path* ]]; then
-    export PATH=$cabal_bin_path:$PATH
-fi
-
-cabal_lib_path=~/.cabal/lib
-if [[ -d $cabal_lib_path ]] && [[ $PATH != *$cabal_lib_path* ]]; then
-    export PATH=$cabal_lib_path:$PATH
+ghcup_bin_path=~/.ghcup/bin
+if [[ -d $ghcup_bin_path ]] && [[ $PATH != *$ghcup_bin_path* ]]; then
+    export PATH=$ghcup_bin_path:$PATH
 fi
 
 usr_local_bin_dir=/usr/local/bin

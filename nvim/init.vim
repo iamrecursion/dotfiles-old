@@ -20,6 +20,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
+Plug 'edwinb/idris2-vim'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -35,6 +36,7 @@ Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch' : 'release'}
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'Olical/vim-enmasse'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -327,6 +329,29 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd FileType enso set nospell
 
 " VIM PLUGIN CONFIGURATION ===================================================
+
+" nvim-treesitter Configuration ==============================================
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = "maintained",
+    sync_install = false,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false
+    },
+    incremental_selection = {
+        enable = true
+    },
+    indent = {
+        enable = true
+    }
+}
+EOF
+
+set foldlevel=99
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " Coc.nvim Configuration =====================================================
 "
