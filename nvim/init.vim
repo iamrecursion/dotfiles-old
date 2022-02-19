@@ -364,6 +364,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 lua << EOF
 vim.g.coc_global_extensions = {
     'coc-calc',
+    'coc-clangd',
     'coc-diagnostic',
     'coc-dictionary',
     'coc-emoji',
@@ -384,6 +385,7 @@ vim.g.coc_global_extensions = {
     'coc-powershell',
     'coc-pyright',
     'coc-rust-analyzer',
+    'coc-solargraph',
     'coc-sql',
     'coc-svg',
     'coc-syntax',
@@ -394,6 +396,7 @@ vim.g.coc_global_extensions = {
     'coc-xml',
     'coc-yaml',
     'coc-yank',
+    'coc-zig',
 }
 EOF
 

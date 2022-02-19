@@ -12,25 +12,6 @@
     "diagnostic.hintSign": "❯",
     // Additional Language Servers
     "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": [
-                "c",
-                "cpp",
-                "objc",
-                "objcpp"
-            ],
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".git/"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                }
-            }
-        },
         "haskell": {
             "command": "haskell-language-server-wrapper",
             "args": [
@@ -55,7 +36,6 @@
     "python.analysis.typeCheckingMode": "strict",
     "python.linting.pylintEnabled": true,
     "python.linting.pylintPath": "~/.pyenv/shims/pylint",
-    "python.linting.pylintUseMinimalCheckers": false,
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "~/.pyenv/shims/black",
     "pyright.trace.server": "verbose",
