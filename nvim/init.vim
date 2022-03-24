@@ -161,6 +161,12 @@ if has("persistent_undo")
     set undoreload=10000
 endif
 
+" Work with visual lines
+nmap j gj
+nmap k gk
+nmap ^ g0
+nmap $ g$
+
 " Buffer Navigation Configuration
 nmap <leader>bn :enew<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
