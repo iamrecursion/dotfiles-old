@@ -389,6 +389,7 @@ vim.g.coc_global_extensions = {
     'coc-metals',
     'coc-omnisharp',
     'coc-powershell',
+    'coc-prettier',
     'coc-pyright',
     'coc-rust-analyzer',
     'coc-solargraph',
