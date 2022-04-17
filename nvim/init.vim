@@ -34,12 +34,12 @@ Plug 'lervag/vimtex'
 Plug 'lifepillar/vim-solarized8'
 Plug 'LnL7/vim-nix'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'branch' : 'release'}
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'Olical/vim-enmasse'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'preservim/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-expand-region'
@@ -340,7 +340,63 @@ autocmd FileType enso set nospell
 
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained",
+    ensure_installed = {
+        'bash',
+        'bibtex',
+        'c',
+        'c_sharp',
+        'clojure',
+        'cmake',
+        'comment',
+        'commonlisp',
+        'cooklang',
+        'cpp',
+        'css',
+        'cuda',
+        'dot',
+        'erlang',
+        'glsl',
+        'go',
+        'graphql',
+        'haskell',
+        'help',
+        'hjson',
+        'hocon',
+        'html',
+        'http',
+        'java',
+        'javascript',
+        'jsdoc',
+        'json',
+        'json5',
+        'jsonc',
+        'julia',
+        'kotlin',
+        'latex',
+        'llvm',
+        'lua',
+        'make',
+        'markdown',
+        'ninja',
+        'nix',
+        'ocaml',
+        'perl',
+        'python',
+        'r',
+        'regex',
+        'rst',
+        'ruby',
+        'rust',
+        'scala',
+        'scheme',
+        'swift',
+        'toml',
+        'typescript',
+        'verilog',
+        'vim',
+        'yaml',
+        'zig',
+        },
     sync_install = false,
     highlight = {
         enable = true,
@@ -404,6 +460,9 @@ vim.g.coc_global_extensions = {
     'coc-yaml',
     'coc-yank',
     'coc-zig',
+    'coc-toml',
+    'coc-julia',
+    'coc-hls',
 }
 EOF
 
