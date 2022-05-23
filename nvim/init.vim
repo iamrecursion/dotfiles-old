@@ -409,6 +409,15 @@ require'nvim-treesitter.configs'.setup {
         enable = false
     }
 }
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.idris2 = {
+  install_info = {
+    url = "~/Development/neovim/tree-sitter-idris2", -- local path or git repo
+    files = {"src/parser.c"},
+  },
+  filetype = "idr", -- if filetype does not match the parser name
+}
 EOF
 
 set foldlevel=99
@@ -486,7 +495,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nn <silent> <leader>l :CocList<CR>
 nn <silent> <C-p> :CocList files<CR>
 nn <silent> <C-e> :CocList buffers<CR>
-nn <silent> <C-i> :CocList grep<CR>
+nn <silent> <C-g> :CocList grep<CR>
 nn <silent> <C-o> :CocList lines<CR>
 nn <silent> <C-s> :CocList symbols<CR>
 nn <silent> T :CocCommand explorer<CR>
