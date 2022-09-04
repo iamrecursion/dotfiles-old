@@ -63,7 +63,6 @@ call plug#end()
 
 " Basic Nvim Configuration
 filetype plugin indent on
-imap <S-Tab> <BS>
 set autoindent
 set expandtab
 set number
@@ -476,20 +475,30 @@ vim.g.coc_global_extensions = {
 EOF
 
 " Navigation
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-y>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+set completeopt=menu,menuone,preview,noselect,noinsert
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+function! CheckBackspace() abort
+    let l:col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#confirm() :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
 
 inoremap <expr> <CR> pumvisible() ? "\<C-e>\<CR>" : "\<CR>"
 
 " Trigger the Suggestions Menu
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-Space> coc#refresh()
+
+" Scrolling the Popup Menu
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Basic Popups
 nn <silent> <leader>l :CocList<CR>
@@ -502,14 +511,6 @@ nn <silent> T :CocCommand explorer<CR>
 nn <silent> Y :<C-u>CocList -A --normal yank<CR>
 nn <silent> <C-y> :CocCommand yank.clean<CR>
 " REMEMBER: Use <C-o> to enter normal mode.
-
-" Scrolling the Popup Menu
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Code Information
 nmap <silent> H :call CocActionAsync('doHover')<CR>
@@ -567,6 +568,9 @@ let g:coc_status_error_sign = '❯'
 let g:coc_status_warning_sign = '❯'
 let g:coc_status_info_sign = '❯'
 let g:coc_status_message_sign = '❯'
+
+" Fix Colours
+highlight! link CocMenuSel PmenuSel
 
 " Vim Tmux Navigator Configuration ===========================================
 let g:tmux_navigator_save_on_switch = 2

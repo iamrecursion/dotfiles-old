@@ -7,7 +7,7 @@
         ".git",
         "package.json"
     ],
-    "coc.preferences.formatOnSaveFiletypes": ["css", "typescript", "javascript"],
+    // "coc.preferences.formatOnSaveFiletypes": ["css", "typescript", "javascript"],
     "prettier.formatterPriority": 1,
     "diagnostic.errorSign": "❯",
     "diagnostic.warningSign": "❯",
