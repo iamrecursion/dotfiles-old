@@ -647,8 +647,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Undotree Configuration =====================================================
 nnoremap U :UndotreeToggle<CR>
-nnoremap UE :earlier<CR>
-nnoremap UL :later<CR>
 
 let g:undotree_WindowLayout = 1
 let g:undotree_DiffpanelHeight = 15
