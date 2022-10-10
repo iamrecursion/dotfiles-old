@@ -70,7 +70,7 @@ zplug "hchbaw/zce.zsh", from:github, use:"./zce.zsh"
 zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
 zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
 zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
-zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
+# zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
 
 # Load OMZ
 zplug "robbyrussell/oh-my-zsh", use:"./lib/*.zsh"
@@ -143,6 +143,7 @@ KEYTIMEOUT=1
 
 # Enhancd Configuration
 export ENHANCD_DOT_ARG=0
+export ENHANCD_COMPLETION_KEYBIND=
 
 # History Substring Search Keybindings
 zmodload zsh/terminfo
@@ -374,22 +375,13 @@ if [[ ${platform} == "macos" ]]; then
 fi
 
 # Setup SSH Agent
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-if [[ ! -v INTELLIJ_ENVIRONMENT_READER ]]; then
-    ara_key_path=~/.ssh/ara_adkins_personal
-    ino_key_path=~/.ssh/ino_makani_personal
-
-    if [[ -e $ara_key_path ]]; then
-        eval $(keychain --quiet --eval $ara_key_path)
-    fi
-
-    if [[ -e $ino_key_path ]]; then
-        eval $(keychain --quiet --eval $ino_key_path)
-    fi
+export SSH_AUTH_SOCK="/Users/ara/.gnupg/S.gpg-agent.ssh"
+GPG_CONF="/usr/local/MacGPG2/bin/gpgconf"
+if [[ -e $GPG_CONF ]]; then
+    $GPG_CONF --launch gpg-agent
 fi
 
 # Configure GPG Agent
-
 if [[ ${platform} == "macos" ]]; then
     export GPG_TTY="tty"
 fi

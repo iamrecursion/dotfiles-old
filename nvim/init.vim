@@ -19,8 +19,8 @@ Plug 'cespare/vim-toml'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'derekwyatt/vim-scala'
-Plug 'easymotion/vim-easymotion'
 Plug 'edwinb/idris2-vim'
+Plug 'ggandor/leap.nvim'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -717,4 +717,9 @@ au BufRead,BufNewFile *.sbt set filetype=scala
 " Vimtex Configuration =======================================================
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = 'latex'
+
+" Leap Configuration =========================================================
+lua << EOF
+    require('leap').set_default_keymaps(true)
+EOF
 
