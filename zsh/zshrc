@@ -298,6 +298,11 @@ if [[ -f $nix_profile_script ]]; then
     source $nix_profile_script
 fi
 
+foundry_bin_dir=~/.foundry/bin
+if [[ -d $foundry_bin_dir ]] && [[ $PATH != *$foundry_bin_dir* ]]; then
+    export PATH=$foundry_bin_dir:$PATH;
+fi
+
 opam_command="opam"
 if type "$opam_command" > /dev/null; then
     opam_path_ext=${HOME}/.opam/default/bin
@@ -422,3 +427,5 @@ if type "nvm" &> /dev/null; then
     add-zsh-hook chpwd load-nvmrc
     load-nvmrc
 fi
+
+source /Users/ara/.docker/init-zsh.sh || true # Added by Docker Desktop
